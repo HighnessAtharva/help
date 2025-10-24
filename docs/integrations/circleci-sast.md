@@ -30,7 +30,6 @@ You can configure environment variables in two ways:
 | :------------------ | :------------------------------------------------------------- |
 | `ACCUKNOX_TOKEN`    | API token from AccuKnox                                        |
 | `ACCUKNOX_ENDPOINT` | AccuKnox API endpoint (e.g., `https://cspm.demo.accuknox.com`) |
-| `ACCUKNOX_TENANT`   | Your tenant ID from AccuKnox                                   |
 | `ACCUKNOX_LABEL`    | Logical grouping label for scan results                        |
 
 Attach the context to your scan jobs like this:
@@ -55,7 +54,7 @@ Update your `.circleci/config.yml` file to include the AccuKnox SAST scan:
 version: 2.1
 
 orbs:
-  accuknox-scan: accuknox/scan@1.0.0
+  accuknox-scan: accuknox/scan@1.0.4
 
 workflows:
   accuknox:
