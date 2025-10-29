@@ -71,6 +71,7 @@ helm upgrade --install agents oci://public.ecr.aws/k9v9d5v2/kspm-runtime \
     --set global.cis.enabled=true \                 // Enable CIS Benchmark job
     --set global.cis.toolConfig.platform="GKE" \    // Specify platform for CIS
     ```
+    In the above command joinToken is specific to this example and it will vary based on the cluster being onboarded.
 
 
 
