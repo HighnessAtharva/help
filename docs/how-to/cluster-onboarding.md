@@ -9,7 +9,7 @@ This is a detailed guide on how to onboard clusters to the AccuKnox SaaS platfor
 
 ## Go To Manage Clusters
 
-**Step 1**: Navigate to Manage Cluster from Settings Tab: From this page we can onboard the clusters running in various cloud platforms like GCP,AWS and Azure. We can onboard locally setup clusters using an cloud option. To onboard cluster select onboard now option
+**Step 1**: Navigate to Manage Cluster from Settings Tab: From this page we can onboard the clusters running in various cloud platforms like GCP, AWS and Azure. We can onboard locally setup clusters using an cloud option. To onboard cluster select onboard now option
 
 ![alt text](./images/cluster-onboarding/image-1.png)
 
@@ -23,8 +23,6 @@ This is a detailed guide on how to onboard clusters to the AccuKnox SaaS platfor
 **Step 3**: Installing AccuKnox agents
 
 We will install AccuKnox agents to connect the cluster to the AccuKnox SaaS. For agent installation, select "Runtime Visibility & Protection".
-
-
 
 1. **KubeArmor** — runtime enforcement (see above); enforces policies dynamically via LSMs.
 2. **Feeder Service** — collects KubeArmor feeds and forwards them to the AccuKnox backend.
@@ -59,6 +57,7 @@ helm upgrade --install agents oci://public.ecr.aws/k9v9d5v2/kspm-runtime \
 ```
 
 !!! info "Note"
+    **Always copy the latest command from the UI as the command may change based on the toggles selected.**
     In the above command, the following parameters are optional and depends on which jobs the user wants to enable:
     ```sh
     --set global.tenantId="19" \
