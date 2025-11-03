@@ -14,8 +14,9 @@ To set up this integration, you need to coordinate with your ServiceNow administ
 ### Prerequisites
 
 - The ServiceNow Integration requires the following: Instance URL, Instance Username and Instance Password.
-
-    - Please refer to the <a href="https://developer.servicenow.com/dev.do#!/learn/learning-plans/utah/new_to_servicenow/app_store_learnv2_buildmyfirstapp_utah_personal_developer_instances" target="_blank">ServiceNow Documentation</a> for how to create an instance and obtain the required credentials.
+- Permissions required on ServiceNow: `data_lookup_admin`, `itil_admin`, `rest_api_explorer`.
+  ![ServiceNow roles screenshot](./images/servicenow/perms.png)
+- Please refer to the <a href="https://developer.servicenow.com/dev.do#!/learn/learning-plans/utah/new_to_servicenow/app_store_learnv2_buildmyfirstapp_utah_personal_developer_instances" target="_blank">ServiceNow Documentation</a> for how to create an instance and obtain the required credentials.
 
 ### Steps for integration
 
