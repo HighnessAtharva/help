@@ -28,7 +28,7 @@ Add the following secrets in your GitHub repository under **Settings > Secrets a
 |-----------------------|------------------------------------------------------|
 | `ACCUKNOX_TOKEN`      | AccuKnox API token for authorization.                |
 | `ACCUKNOX_ENDPOINT`   | The AccuKnox API URL (e.g., `cspm.demo.accuknox.com`).|
-| `TENANT_ID`           | Your AccuKnox tenant ID.                             |
+| `ACCUKNOX_LABEL`           | The label for your scan.ID.                             |
 
 
 ### Step 3: Set Up GitHub Actions Workflow
@@ -49,24 +49,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run AccuKnox DAST Scan
-        uses: accuknox/dast-scan-action@v1.0.0
+        uses: accuknox/dast-scan-action@v1.0.1
         with:
           target_url: "http://testphp.vulnweb.com"
           accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
-          tenant_id: ${{ secrets.TENANT_ID }}
           accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
-          label: "my-dast-scan"
+          accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
           severity_threshold: "High"
           scan_type: "baseline"
 ```
 
 {% endraw %}
 
+## Inputs for AccuKnox Secret Scan Action
+
+| Input Name                | Description                                                                                                                | Optional/Required | Default Value            |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------------ |
+| `target_url`         | The web application URL to scan                                             | **Required**      | —              |
+| `accuknox_token`     | Token to authenticate with the AccuKnox Console                             | **Required**      | —              |
+| `accuknox_endpoint`  | URL of the AccuKnox Console to upload results                               | **Required**      | `cspm.demo.accuknox.com`            |
+| `accuknox_label`     | Label to tag the scan results in the AccuKnox Console                       | **Required**      | —              |
+| `severity_threshold` | Severity level (e.g., High, Medium, Low, Informational) to fail the pipeline | **Required**      | —              |
+| `scan_type`          | Type of scan to perform (`baseline` or `full-scan`)                         | Optional          | `baseline`     |
+
+
 !!!info "NOTE"
-    The `label` parameter in the workflow (`"my-dast-scan"`) helps identify the scan in AccuKnox. You can customize this label by updating the value in the YAML file. For more details on creating and managing labels, refer to the [How to Create Labels](https://help.accuknox.com/how-to/how-to-create-labels/) documentation.
+     You can customize this label by updating the value in the YAML file. For more details on creating and managing labels, refer to the [How to Create Labels](https://help.accuknox.com/how-to/how-to-create-labels/) documentation.
 
 ## Initial Workflow Without AccuKnox Scan
 
@@ -82,7 +93,7 @@ After integrating AccuKnox into your GitHub Actions workflow, the next push trig
 
 **Step 1**: After the workflow completes, navigate to the AccuKnox SaaS dashboard.
 
-**Step 2**: Go to **Issues** > **Findings** and select **DAST Findings** to see identified vulnerabilities.
+**Step 2**: Go to **Issues** > **Findings** and select **DAST 1 Findings** to see identified vulnerabilities.
 
 ![image-20240819-081522.png](./images/github-dast/2.png)
 
