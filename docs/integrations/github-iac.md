@@ -24,13 +24,11 @@ Refer to [How to Create Tokens] for details [on generating tokens](https://help.
 
 Go to your GitHub repository and configure the following secrets:
 
-- `TOKEN`: AccuKnox API token for authorization.
+- `ACCUKNOX_TOKEN`: AccuKnox API token for authorization.
 
-- `TENANT_ID`: Your AccuKnox tenant ID.
+- `ACCUKNOX_ENDPOINT`: The AccuKnox API URL (e.g., `cspm.demo.accuknox.com`).
 
-- `ENDPOINT`: The AccuKnox API URL (e.g., `cspm.demo.accuknox.com`).
-
-- `LABEL`: The label for your scan.
+- `ACCUKNOX_LABEL`: The label for your scan.
 
 To add secrets, go to **Settings > Secrets and variables > Actions > New repository secret** in your GitHub repository.
 
@@ -56,22 +54,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run IaC scan
-        uses: accuknox/iac-scan-action@v0.0.1
+        uses: accuknox/iac-scan-action@v1.0.1
         with:
-          directory: "." # Optional: Directory to scan
-          compact: true  # Optional: Minimize output
-          quiet: true    # Optional: Show only failed checks
+          soft_fail: true # Optional: Will continue after found vulnerability
+          directory: "."  # Optional: Directory to scan
+          compact: true   # Optional: Minimize output
+          quiet: true     # Optional: Show only failed checks
           output_format: json  # Optional: Format of output
           output_file_path: "./results.json" # Optional: Output file path
-          token: ${{ secrets.TOKEN }}
-          tenant_id: ${{ secrets.TENANT_ID }}
-          endpoint: ${{ secrets.ENDPOINT }}
-          label: ${{ secrets.LABEL }}
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
 ```
 {% endraw %}
+
+### Inputs for AccuKnox SAST Action
+
+| **Input Name**       | **Description**                                       | **Required** | **Default** |
+|-----------------------|-------------------------------------------------------|--------------|-------------|
+| `file`                 | Specify a single file to scan (e.g., `.tf`). Cannot be used with a directory. | Optional          | —                         |
+| `directory`            | Directory with IaC files to scan.                                            | Optional          | `.` (current directory)   |
+| `compact`              | Minimise output (e.g., hides code blocks).                                   | Optional          | —                         |
+| `quiet`                | Show only failed checks in output.                                           | Optional          | `false`                   |
+| `soft_fail`            | Prevent CI from failing on failed checks.                                   | Optional          | `false`                   |
+| `framework`            | Limit scan to a specific framework: terraform, kubernetes, etc. (lowercase) | Optional          | `all`                     |
+| `skip_framework`       | Skip scanning of a specific framework.                                       | Optional          | —                         |
+| `accuknox_token`       | API token for authenticating with AccuKnox SaaS.                             | **Required**      | —                         |
+| `accuknox_endpoint`    | URL of the AccuKnox Console to push results.                                | **Required**         | `cspm.demo.accuknox.com`  |
+| `accuknox_label`       | Label used in AccuKnox SaaS to organise and identify scan results.           | **Required**      | —                         |
+| `output_format`        | Format of the output. Supported: json, cli, etc.                            | Optional          | `cli`                     |
+| `output_file_path`     | File path to write output results to.                                       | Optional          | —                         |
+| `baseline`             | Path to a baseline file to suppress known findings.                         | Optional          | `baseline`                |
+
 
 ## **Initial CI/CD Pipeline Without AccuKnox IaC Scan**
 

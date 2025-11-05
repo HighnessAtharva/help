@@ -52,7 +52,6 @@ Here are the variables you'll need to set:
 | :---------------- | :---------------------------------------- |
 | `ACCUKNOX_TOKEN`  | API Token from AccuKnox Console           |
 | `ACCUKNOX_ENDPOINT` | AccuKnox API endpoint (e.g., `https://cspm.demo.accuknox.com`) |
-| `ACCUKNOX_TENANT` | Your tenant ID in AccuKnox                |
 | `ACCUKNOX_LABEL`  | Logical label to group scan results       |
 
 ### Option A: Using CircleCI Contexts (Recommended)
@@ -76,7 +75,7 @@ Add the `sq-sast` job to your `.circleci/config.yml` file and attach the context
 version: 2.1
 
 orbs:
-  accuknox-scan: accuknox/scan@1.0.0
+  accuknox-scan: accuknox/scan@1.0.4
 
 workflows:
   accuknox:

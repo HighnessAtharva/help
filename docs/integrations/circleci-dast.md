@@ -40,7 +40,6 @@ You can configure environment variables in two ways:
 | :------------------ | :------------------------------------------------------------- |
 | `ACCUKNOX_TOKEN`    | API token from AccuKnox                                        |
 | `ACCUKNOX_ENDPOINT` | AccuKnox API endpoint (e.g., <https://cspm.demo.accuknox.com>) |
-| `ACCUKNOX_TENANT`   | Your tenant ID from AccuKnox                                   |
 | `ACCUKNOX_LABEL`    | Logical grouping label for scan results                        |
 
 Then, attach this context to your scan jobs as shown in the configuration below.
@@ -49,7 +48,7 @@ Then, attach this context to your scan jobs as shown in the configuration below.
 - accuknox-scan/dast:
     context: dast-context
     SOFT_FAIL: true
-    TARGET_URL: "[http://testphp.vulnweb.com](http://testphp.vulnweb.com)"
+    TARGET_URL: "http://testphp.vulnweb.com"
 ```
 
 #### Option B: Project-Level Variables
@@ -67,14 +66,14 @@ To integrate DAST scanning, modify your `.circleci/config.yml` file using the Ac
 version: 2.1
 
 orbs:
-  accuknox-scan: accuknox/scan@1.0.0
+  accuknox-scan: accuknox/scan@1.0.4
 
 workflows:
   accuknox:
     jobs:
       - accuknox-scan/dast:
           context: accuknox-context
-          TARGET_URL: "[http://testphp.vulnweb.com](http://testphp.vulnweb.com)"
+          TARGET_URL: "http://testphp.vulnweb.com"
           DAST_SCAN_TYPE: "baseline"
           SEVERITY_THRESHOLD: "High"
           SOFT_FAIL: true

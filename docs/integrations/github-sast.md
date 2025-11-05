@@ -30,10 +30,11 @@ To securely store sensitive values, define the following secrets in your GitHub 
 | Secret Name         | Description                                   |
 |---------------------|-----------------------------------------------|
 | `SONAR_TOKEN`       | API token for authenticating with SonarQube. |
-| `SONAR_HOST_URL`    | URL of your SonarQube server.                |
-| `TENANT_ID`         | AccuKnox CSPM tenant ID.                     |
+| `SONAR_HOST_URL`    | URL of your SonarQube server.                |                    |
 | `ACCUKNOX_TOKEN`    | API token for authenticating with AccuKnox.  |
 | `ACCUKNOX_ENDPOINT` | URL of the AccuKnox CSPM API.                |
+| `ACCUKNOX_LABEL` | The label for your scan.               |
+
 
 **Step 3: Create GitHub Workflow**
 
@@ -53,17 +54,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run AccuKnox SAST
-        uses: accuknox/accuknox-sast@v1.0.0
+        uses: accuknox/sast-scan-action@v1.0.3
         with:
+          skip_sonar_scan: false
           sonar_token: ${{ secrets.SONAR_TOKEN }}
           sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
           accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
-          tenant_id: ${{ secrets.TENANT_ID }}
           accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
-          label: "my-sast-scan"
+          accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
           sonar_project_key: "my-project-key"
 
 ```
@@ -77,10 +78,11 @@ jobs:
 | `sonar_token`         | Personal access token for authenticating with SonarQube. | Yes          | None        |
 | `sonar_host_url`      | URL of the SonarQube server for SAST.                 | Yes          | None        |
 | `accuknox_endpoint`   | URL of AccuKnox API to upload results.               | Yes          | None        |
-| `tenant_id`           | Unique ID of the tenant for AccuKnox CSPM.           | Yes          | None        |
 | `accuknox_token`      | Token for authenticating with the AccuKnox API.      | Yes          | None        |
-| `label`               | Label for tagging results in AccuKnox SaaS.          | Yes          | None        |
+| `accuknox_label`               | Label for tagging results in AccuKnox SaaS.          | Yes          | None        |
 | `sonar_project_key`   | SonarQube project key for identifying the project.   | Yes          | None        |
+| `skip_sonar_scan`   | Skip SonarQube scan, for advanced users   | No          | false        |
+| `soft_fail`                 | Fail the pipeline if secrets are found.                                                                                    | Optional          | `false`                  |
 
 ## **How It Works**
 
@@ -98,7 +100,7 @@ jobs:
 
 **Step 1**: After the workflow completes, navigate to the AccuKnox SaaS dashboard.
 
-**Step 2**: Go to **Issues** > **Findings** and select **SAST Findings** to see identified vulnerabilities.
+S**Step 2**: Go to **Issues** > **Findings** and select **Static Code Analysis Findings** to see identified vulnerabilities.
 
 ![image-20241122-035925.png](./images/github-sast/1.png)
 

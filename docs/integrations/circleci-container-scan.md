@@ -36,7 +36,6 @@ Using contexts is the recommended approach for managing environment variables ac
 | :------------------ | :------------------------------------------------------------- |
 | `ACCUKNOX_TOKEN` | API token from AccuKnox |
 | `ACCUKNOX_ENDPOINT` | AccuKnox API endpoint (e.g., `https://cspm.demo.accuknox.com`) |
-| `ACCUKNOX_TENANT` | Your tenant ID from AccuKnox |
 | `ACCUKNOX_LABEL` | Logical grouping label for scan results |
 
 Attach this context to your scan jobs within your `.circleci/config.yml` file, like so:
@@ -66,7 +65,7 @@ Update your CircleCI configuration file (`.circleci/config.yml`) to include the 
 version: 2.1
 
 orbs:
-  accuknox-scan: accuknox/scan@1.0.2
+  accuknox-scan: accuknox/scan@1.0.4
 
 jobs:
   build-docker-image:

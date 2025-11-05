@@ -20,8 +20,6 @@ Define the following secrets in GitHub, for details on configuring the secrets/v
 
 - **ACCUKNOX_TOKEN**: AccuKnox API token for authorization.
 
-- **ACCUKNOX_TENANT**: Your AccuKnox tenant ID.F
-
 - **ACCUKNOX_ENDPOINT**: The AccuKnox API URL (e.g., [cspm.demo.accuknox.com](http://cspm.demo.accuknox.com/ "http://cspm.demo.accuknox.com/")).
 
 - **ACCUKNOX_LABEL**: The label for your scan.
@@ -47,17 +45,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Run AccuKnox SAST: Opengrep"
-        uses: accuknox/sast-scan-opengrep-action@1.0.0
+        uses: accuknox/sast-scan-opengrep-action@v1.0.1
         with:
           accuknox_endpoint: "${{ secrets.ACCUKNOX_ENDPOINT }}"
-          accuknox_tenant: "${{ secrets.ACCUKNOX_TENANT }}"
           accuknox_token: "${{ secrets.ACCUKNOX_TOKEN }}"
           accuknox_label: "${{ secrets.ACCUKNOX_LABEL }}"
-          input_soft_fail: true
-          upload_artifact: true
+          soft_fail: true
 ```
 {% endraw %}
 
@@ -67,12 +63,11 @@ jobs:
 | --------------------- | ------------------------------- | ------------ | ------------------------ |
 | **pipeline_id**       | GitHub Run ID                   | No           | `Github RunId`           |
 | **job_url**           | GitHub Job URL                  | No           | `Github Run URL`         |
-| **accuknox_endpoint** | CSPM panel URL                  | Yes          | `cspm.demo.accuknox.com` |
-| **accuknox_tenant**   | AccuKnox Tenant ID              | Yes          |                          |
-| **accuknox_token**    | AccuKnox API Token              | Yes          |                          |
-| **accuknox_label**    | Label for scan results          | Yes          |                          |
-| **input_soft_fail**   | Continue even if scan fails     | No           | `false`                  |
-| **upload_artifact**   | Upload scan results as artifact | No           | `true`                   |
+| **accuknox_endpoint** | CSPM panel URL                  | Yes          | `cspm.demo.accuknox.com` |                        |
+| **accuknox_token**    | AccuKnox API Token              | Yes          |   None                       |
+| **accuknox_label**    | Label for scan results          | Yes          |      None                    |
+| **soft_fail**   | Continue even if scan fails     | No           | `false`                  |
+
 
 ### Workflow Execution Without AccuKnox
 
