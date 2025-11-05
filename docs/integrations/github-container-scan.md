@@ -27,13 +27,11 @@ Log in to AccuKnox Navigate to Settings and select Tokens to create an AccuKnox 
 
 Store the following values as GitHub repository secrets:
 
-- `TOKEN`: AccuKnox API token.
+- `ACCUKNOX_TOKEN`: AccuKnox API token.
 
-- `TENANT_ID`: AccuKnox Tenant ID.
+- `ACCUKNOX_LABEL`: Custom label for associating scan results.
 
-- `LABEL`: Custom label for associating scan results.
-
-- `ENDPOINT`: (Optional) AccuKnox API URL (default: `cspm.demo.accuknox.com`).
+- `ACCUKNOX_ENDPOINT`: (Optional) AccuKnox API URL (default: `cspm.demo.accuknox.com`).
 
 ### **Step 3: Set Up GitHub Actions Workflow**
 
@@ -41,7 +39,7 @@ Create a workflow YAML file in your repository `.github/workflows/accuknox-scan.
 
 {% raw %}
 ```yaml
-name: AccuKnox Scan Workflow
+name: AccuKnox Container Scan Workflow
 
 on:
   push:
@@ -56,22 +54,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run AccuKnox CSPM Scan
-        uses: accuknox/container-scan-action@v0.0.1
+        uses: accuknox/container-scan-action@v1.0.1
         with:
-          token: ${{ secrets.TOKEN }}
-          tenant_id: ${{ secrets.TENANT_ID }}
-          repository_name: ${{ github.repository }}
-          label: ${{ secrets.LABEL }}
-          endpoint: ${{ secrets.ENDPOINT }}
-          dockerfile_context: Dockerfile
-          tag: ${{ github.run_id }}
-          severity: CRITICAL
-          exit_code: 1
+          soft_fail: false          
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          image: "your-image-name"
+          tag: "latest"             
+          severity: "LOW, MEDIUM, HIGH, CRITICAL, UNKNOWN"
 ```
 {% endraw %}
+
+## Inputs for AccuKnox Container Scan Action
+
+| Input Name                | Description                                                                                                                | Optional/Required | Default Value            |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------------ |
+| **accuknox_token**                 | The token for authenticating with the CSPM panel.                                                                          | Required          | None                     |                                                                                                    | Required          | None                     |
+| **accuknox_label**                 | The label created in AccuKnox SaaS.                                                                                        | Required          | None                     |
+| **accuknox_endpoint**              | The URL of the CSPM panel to push the scan results to.                                                                     | Required          | `cspm.demo.accuknox.com` |
+| **image**              | Name of the container image to scan to.                                                                     | Required          | None |
+| **tag**              | Version tag for the container image                                                                     | Optional          | None |
+| **severity**              | Severity levels to block pipeline (LOW, MEDIUM, HIGH, etc)                                                                   | Optional          | None |
+| **soft_fail**                  | Fail the pipeline if secrets are found.                                                                                    | Optional          | `false`                  |
+
 
 ## **Scenario After Integration**
 

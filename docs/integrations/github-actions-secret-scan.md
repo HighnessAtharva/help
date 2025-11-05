@@ -20,8 +20,6 @@ Define the following secrets in GitHub. For details on configuring the secrets/v
 
 - **ACCUKNOX_TOKEN**: AccuKnox API token for authorization.
 
-- **ACCUKNOX_TENANT**: Your AccuKnox tenant ID.F
-
 - **ACCUKNOX_ENDPOINT**: The AccuKnox API URL (e.g., [cspm.demo.accuknox.com](http://cspm.demo.accuknox.com/ "http://cspm.demo.accuknox.com/")).
 
 - **ACCUKNOX_LABEL**: The label for your scan.
@@ -45,17 +43,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
 
       - name: AccuKnox Secret Scan TEST
-        uses: accuknox/secret-scan-action@v1.0.1
+        uses: accuknox/secret-scan-action@v1.0.3
         with:
-          token: ${{ secrets.ACCUKNOX_TOKEN }}
-          tenant_id: ${{ secrets.ACCUKNOX_TENANT }}
-          label: "SPOC"
-          endpoint: "cspm.demo.accuknox.com"
-          fail: true
-          use_extended_ruleset: false
+          with:
+          branch: "main"                             # Optional
+          results: " "                               # Optional
+          exclude_paths: "tests/,docs/"              # Optional        
+          additional_arguments: ""                   # Optional
+          base_command: ""                           # Optional
+          output_format: json                        # Optional  
+          output_file_path: "./secret_results.json"  # Optional
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
+          soft_fail: true                            # Optional
 ```
 
 {% endraw %}
@@ -64,14 +68,12 @@ jobs:
 
 | Input Name                | Description                                                                                                                | Optional/Required | Default Value            |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------------ |
-| **token**                 | The token for authenticating with the CSPM panel.                                                                          | Required          | None                     |
-| **tenant_id**             | The ID of the tenant.                                                                                                      | Required          | None                     |
-| **label**                 | The label created in AccuKnox SaaS.                                                                                        | Required          | None                     |
-| **endpoint**              | The URL of the CSPM panel to push the scan results to.                                                                     | Required          | `cspm.demo.accuknox.com` |
-| **secret_scan_type**      | Source type for scanning (`git`, `huggingface`, `s3`).                                                                     | Required          | `git`                    |
+| **accuknox_token**                 | The token for authenticating with the CSPM panel.                                                                          | Required          | None                     |                                                                                                    | Required          | None                     |
+| **accuknox_label**                 | The label created in AccuKnox SaaS.                                                                                        | Required          | None                     |
+| **accuknox_endpoint**              | The URL of the CSPM panel to push the scan results to.                                                                     | Required          | `cspm.demo.accuknox.com` |
 | **branch**                | Branch to scan. Use branch name or `all-branches`.                                                                         | Optional          | `HEAD` branch            |
 | **exclude-paths**         | Paths to exclude from the scan.                                                                                            | Optional          | None                     |
-| **args**                  | Additional arguments to pass to the CLI.                                                                                   | Optional          | None                     |
+| **additional_arguments**                  | Additional arguments to pass to the CLI.                                                                                   | Optional          | None                     |
 | **dataset**               | Dataset name (required if `secret_scan_type` is `huggingface`).                                                            | Optional          | None                     |
 | **huggingface_token**     | Hugging Face token (required if `secret_scan_type` is `huggingface`).                                                      | Optional          | None                     |
 | **bucket_name**           | S3 bucket name (required if `secret_scan_type` is `s3`).                                                                   | Optional          | None                     |
@@ -79,8 +81,7 @@ jobs:
 | **aws_secret_access_key** | AWS Secret Access Key (required if `secret_scan_type` is `s3`).                                                            | Optional          | None                     |
 | **use_extended_ruleset**  | Enable extended regex rules for detecting sensitive data.                                                                  | Optional          | `false`                  |
 | **results**               | Specifies which result types to output: `verified`, `unknown`, `unverified`, `filtered_unverified`. Defaults to all types. | Optional          | `all`                    |
-| **fail**                  | Fail the pipeline if secrets are found.                                                                                    | Optional          | `false`                  |
-| **upload_artifact**       | Upload scan results as an artifact.                                                                                        | Optional          | `true`                   |
+| **soft_fail**                  | Fail the pipeline if secrets are found.                                                                                    | Optional          | `false`                  |
 
 ## Before Integration
 
