@@ -82,3 +82,23 @@ kubeshield-controller-manager-5dd5cbc6d4-8xg8k   1/1     Running   0          22
 ```
 
 > STATUS should be **Running**
+
+---
+
+### 🗑️ Uninstall Kubeshield
+
+Remove the Helm release:
+
+```bash
+helm uninstall kubeshield -n agents
+```
+
+Delete CRDs:
+
+```bash
+kubectl delete crd \
+  clusterscans.kubeshield.accuknox.com \
+  discoveries.kubeshield.accuknox.com \
+  imagescans.kubeshield.accuknox.com \
+  scheduleclusterscans.kubeshield.accuknox.com
+```
