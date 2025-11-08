@@ -29,7 +29,7 @@ helm install kubeshield oci://public.ecr.aws/k9v9d5v2/kubeshield-chart -n agents
   --set scan.label="{{label}}" \
   --set scan.cronTab="30 9 * * *" \
   --set scan.tenantId="{{tenantId}}" \
-  --version "v0.1.5"
+  --version "v0.1.7"
 ```
 
 Replace the parameters (`{{authToken}}`, `{{url}}`, `{{label}}`, `{{tenantId}}`, and `{{cronTab}}`) with the appropriate values.
@@ -37,7 +37,7 @@ Replace the parameters (`{{authToken}}`, `{{url}}`, `{{label}}`, `{{tenantId}}`,
 #### Sample Output
 
 ```bash
-Pulled: public.ecr.aws/k9v9d5v2/kubeshield-chart:v0.1.5
+Pulled: public.ecr.aws/k9v9d5v2/kubeshield-chart:v0.1.7
 Digest: sha256:a4c1a8948db7a24d8990b71b53184f564960b2b39dbd6cba1cd6104c12addd75
 NAME: kubeshield
 LAST DEPLOYED: Mon May  5 10:08:24 2025
