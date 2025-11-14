@@ -237,7 +237,7 @@ nav:
         - "Security on OpenShift": "getting-started/security-on-openshift.md"
         - "Health Monitoring":
           - "RINC": "how-to/RINC.md"
-
+    - "SBOM": "getting-started/sbom.md"
     - "CDR":
       - "AWS Onboarding": "getting-started/aws-cdr.md"
       - "GCP Onboarding": "getting-started/gcp-cdr.md"
