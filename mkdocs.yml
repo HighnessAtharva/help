@@ -511,6 +511,7 @@ nav:
     - "CWPP Troubleshooting": "resources/troubleshooting.md"
     - "CSPM Troubleshooting": "resources/cspm-troubleshooting.md"
     - "User Manual": "resources/accuknox-manual.md"
+    - "Vulnerability DB": "resources/vulnerability-database.md"
     - "Marketplace":
       - "RedHat Marketplace Installation Guide": "integrations/rh-playbook.md"
       - "AWS Marketplace" :
