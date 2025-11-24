@@ -401,6 +401,7 @@ nav:
       - "Remediation": "getting-started/cdr-setup.md"
     - "AI/ML Security":
       - "Use Cases": "use-cases/aiml-usecases.md"
+      - "Bifrost Integration": "use-cases/bifrost-integration.md"
       - "Categories and Probes": "use-cases/subprompts-categories.md"
       - "Runtime Security":
         - "Onboard LLM Defense App": "use-cases/llm-defense-app-onboard.md"
