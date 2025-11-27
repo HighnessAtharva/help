@@ -224,8 +224,8 @@ If you want to use your private/local registry as the exclusive source of images
 | `registry.username` | Registry User                                    | Customer |
 | `registry.password` | Registry Password                                | Customer |
 | `registry.address`  | The registry server address                      | Customer |
-| `ecr.user`          | Credential to pull images from AccuKnox registry<br>Value: `AKIA55UKWVCCBZ2YEFIY` | AccuKnox |
-| `ecr.password`      | Credential to pull images from AccuKnox registry<br>Value: `0c5UL9oHkftDRBfnrQV4Jmic/5eei4agpyxNtAkV` | AccuKnox |
+| `ecr.user`          | Credential to pull images from AccuKnox registry<br>Value: `******` | AccuKnox |
+| `ecr.password`      | Credential to pull images from AccuKnox registry<br>Value: `******` | AccuKnox |
 
 #### Upload Images Using Docker
 
