@@ -6,7 +6,9 @@ description: Documentation for SBOM onboarding, ingestion, scanning, and reporti
 # Software Bill of Materials (SBOM)
 This guide outlines how to onboard and use SBOMs in AccuKnox: generate an SBOM, upload or automate its ingestion, let the system scan and analyze dependencies, then view, compare, and report on results. Prerequisites: ability to generate SBOMs in a standard format and upload or automate their ingestion.
 
-## Create SBOM Projects
+## Create Projects
+
+From the sidebar, navigate to **SBOM → Projects**. Click "**Add Project**".
 
 ![alt text](image-9.png)
 
