@@ -8,7 +8,7 @@ This guide outlines how to onboard and use SBOMs in AccuKnox: generate an SBOM, 
 
 ## Version Compatibility Utility
 
-![alt text](image-7.png)
+![alt text](image-9.png)
 
 The SBOM Compare feature allows developers to analyze differences between two SBOMs, helping identify changes in dependencies that may introduce new risks or vulnerabilities.
 
