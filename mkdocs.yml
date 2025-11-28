@@ -262,6 +262,7 @@ nav:
     - "Create Access Keys": "how-to/create-access-keys.md"
     - "Findings Lifecycle": "how-to/findings-lifecycle.md"
     - "AI Security":
+      - "Overview": "integrations/ai-overview.md"
       - "Bifrost Integration": "integrations/bifrost-integration.md"
       # - "LiteLLM Prompt Firewall Integration": "integrations/litellm-prompt-firewall-integration.md"
     - "API Security":
@@ -271,7 +272,7 @@ nav:
         # - "Nginx Server": "integrations/api-nginx-server.md"
         # - "Azure API Management": "getting-started/api-azure.md"
         - "Kubernetes":
-          - "API Proxy": "integrations/api-k8s.md"
+          - "API Sec Proxy": "integrations/api-k8s.md"
           - "Istio": "integrations/api-istio.md"
           - "Nginx Ingress": "integrations/api-nginx.md"
     - "CI/CD":
@@ -400,6 +401,7 @@ nav:
       - "Vulnerability Management": "use-cases/vulnerability.md"
     - "CDR (Cloud Detection and Response)":
       - "Remediation": "getting-started/cdr-setup.md"
+    - "API Security": "use-cases/api-security.md"
     - "AI/ML Security":
       - "Use Cases": "use-cases/aiml-usecases.md"
       - "Categories and Probes": "use-cases/subprompts-categories.md"

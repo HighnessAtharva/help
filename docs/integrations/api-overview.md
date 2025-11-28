@@ -25,14 +25,14 @@ h2 {
 
 The **API Security** module provides deep visibility and continuous risk assessment for your APIs by analyzing live traffic, identifying unknown endpoints, and highlighting security exposures.
 
-::cards:: cols=2
+::cards:: cols=3
 
 - title: AWS API Gateway
   image: ./aws-api-gateway.png
   url: ../integrations/api-aws.md
   description: Monitor and secure APIs running on AWS API Gateway
 
-- title: Kubernetes API Proxy
+- title: K8s API Security Proxy
   image: ./k8s.png
   url: ../integrations/api-k8s.md
   description: Secure APIs in Kubernetes environments
@@ -43,9 +43,19 @@ The **API Security** module provides deep visibility and continuous risk assessm
   description: Integrate with Istio service mesh for API security
 
 - title: Nginx Ingress
-  image: ./nginx.png
+  image: ./image-13.png
   url: ../integrations/api-nginx.md
   description: Protect APIs exposed via Nginx Ingress Controller
+
+- title: Nginx Server
+  image: ./nginx.png
+  url:
+  description: Secure APIs served by Nginx web server
+
+- title: Azure API Management
+  image: ./image-12.png
+  url:
+  description: Monitor APIs managed through Azure API Management
 
 ::/cards::
 
@@ -56,4 +66,7 @@ The **API Security** module provides deep visibility and continuous risk assessm
 - **Risk Detection**: Identifies Shadow, Zombie, and Orphan APIs through continuous traffic analysis
 - **Logical Grouping**: Organize APIs for efficient tracking and management
 
-![alt text](image-7.png)
+!!! tip "**Use Cases**"
+    Proceed to the [API Security Use Case](../use-cases/api-security.md) to learn how to view your API inventory, create collections, upload OpenAPI specifications, and scan for security findings.
+
+![alt text](image-17.png)
