@@ -17,10 +17,9 @@ hide:
   }
 </style>
 
-## Onboarding AI/ML Assets from Cloud Providers
-Pick your cloud provider to get started with onboarding AI/ML assets:
+## Red Teaming Against AI Models
 
-::cards:: cols=3
+::cards:: cols=4
 
 - title: AWS
   image: ./icons/aws-vm.svg
@@ -34,8 +33,20 @@ Pick your cloud provider to get started with onboarding AI/ML assets:
   image: ./icons/gcp-vm.svg
   url: /how-to/aiml-gcp-onboard/
 
+- title: On-Prem Models
+  image: ./icons/onprem.svg
+  url:
+
 ::/cards::
 
+## LLM Prompt Security
+
+::cards:: cols=4
+
+- title: Prompt Firewall Application
+  image: ./icons/AIML.svg
+  url: /use-cases/llm-defense-app-onboard/
+  ::/cards::
 
 ## Supported Platforms and Use Cases
 

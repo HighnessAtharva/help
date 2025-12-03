@@ -197,10 +197,10 @@ nav:
         - "Offboard Cloud Account": "how-to/cloud-offboarding.md"
     - "AI/ML Security (AI-SPM)":
       - "Overview": "how-to/aiml-overview.md"
-      - "Onboard Prompt Firewall": "use-cases/llm-defense-app-onboard.md"
-      - "AWS AI/ML Onboarding": "how-to/aiml-aws-onboard.md"
-      - "Azure AI/ML Onboarding": "how-to/aiml-azure-onboard.md"
-      - "GCP AI/ML Onboarding": "how-to/aiml-gcp-onboard.md"
+      - "Prompt Firewall Onboard": "use-cases/llm-defense-app-onboard.md"
+      - "AWS AI/ML Onboard": "how-to/aiml-aws-onboard.md"
+      - "Azure AI/ML Onboard": "how-to/aiml-azure-onboard.md"
+      - "GCP AI/ML Onboard": "how-to/aiml-gcp-onboard.md"
     - "Workload Security (CWPP)":
       - "Kubernetes":
         - "Onboarding Overview": "how-to/k8s-security-onboarding.md"
@@ -407,13 +407,13 @@ nav:
       - "Use Cases": "use-cases/aiml-usecases.md"
       - "Prompt Firewall": "use-cases/prompt-firewall.md"
       - "MCP Server": "integrations/mcp-server.md"
-      - "Categories and Probes": "use-cases/subprompts-categories.md"
       - "Jupyter Notebook": "use-cases/jupyter-notebook.md"
       - "ModelArmor":
         - "Overview": "use-cases/modelarmor.md"
         - "Pickle Code Injection PoC": "use-cases/modelarmor-pickle-code.md"
         - "Adversarial Attacks on Deep Learning Models": "use-cases/modelarmor-adverserial-attacks.md"
         - "Deploy PyTorch App with ModelArmor": "use-cases/modelarmor-deploy-pytorch.md"
+      - "Categories and Probes": "use-cases/subprompts-categories.md"
     - "Cloud Security (CSPM)":
       - "Overview" : "use-cases/cspm.md"
       - "Asset Inventory": "use-cases/asset-inventory.md"

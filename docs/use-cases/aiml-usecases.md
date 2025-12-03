@@ -26,16 +26,12 @@ hide:
 ::cards:: cols=3
 
 - title: Prompt Firewall
-  image: ./icons/aidr.svg
+  image: ./icons/AIML.svg
   url: https://help.accuknox.com/use-cases/prompt-firewall/
 
 - title: MCP Server
   image: ./icons/mcp-server.svg
   url: https://help.accuknox.com/integrations/mcp-server/
-
-- title: Model, Data & Pipeline Safety
-  image: ./icons/model-safety.svg
-  url: https://help.accuknox.com/use-cases/model-safety/
 
 - title: Jupyter Notebook Security
   image: ./icons/jupyter.svg
@@ -45,10 +41,13 @@ hide:
   image: ./icons/modelarmor.svg
   url: https://help.accuknox.com/use-cases/modelarmor/
 
-- title: MCP Security (Coming Soon)
+- title: MCP Security
   image: ./icons/mcp-security.svg
   url:
 
+- title: Model, Data & Pipeline Safety
+  image: ./icons/model-safety.svg
+  url:
 ::/cards::
 
 ## Featured Videos
