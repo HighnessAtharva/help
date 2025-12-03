@@ -16,6 +16,9 @@ This guide walks you through configuring input/output policies in AccuKnox for p
     Add the **AccuKnox Prompt Firewall Proxy** to your app first.
     See: [Prompt Firewall App Onboarding](https://help.accuknox.com/use-cases/llm-defense-app-onboard/)
 
+??? note "Watch: Prompt Firewall Use Case Video"
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/l_RCQosnNJk" frameborder="0" allowfullscreen></iframe>
+
 ## Step 1: Open AI-Security Dashboard
 
 - Go to **AI/ML** tab → **Applications** → Select your app.
