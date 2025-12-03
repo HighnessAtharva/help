@@ -386,7 +386,7 @@ nav:
     - "SSO":
       - "Signup/Login via SSO": "how-to/sso.md"
       - "Azure Entra": "integrations/azure-entra-sso.md"
-      # - "Okta": "integrations/okta-sso.md"
+      - "Okta/Auth0": "integrations/okta-sso.md"
     - "Notification":
       - "Slack": "integrations/slack.md"
       - "Email": "integrations/email.md"
@@ -513,6 +513,8 @@ nav:
     - "Resources": "resources/index.md"
     - "Enterprise Architecture" : "getting-started/accuknox-arch.md"
     - "Deployment Models": "getting-started/deployment-models.md"
+    # - "Multi-Tenancy Support": "resources/multitenancy.md" # ADD THESE BACK IN LATER
+    # - "Data Usage Policy": "resources/data-usage-policy.md"  # ADD THESE BACK IN LATER
     # - "AccuKnox Agents" : "getting-started/accuknox-agents.md"
     # - "AI Usage Policy": "resources/ai-usage-policy.md"
     - "CWPP Troubleshooting": "resources/troubleshooting.md"

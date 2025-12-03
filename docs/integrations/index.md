@@ -36,7 +36,7 @@ hide:
   url: /integrations/slack/
 - title: OAuth
   image: ./icons/oauth.svg
-  url: /integrations/oauth/
+  url: /how-to/sso/
 - title: Email Backend
   image: ./icons/email-back.svg
   url: /integrations/email-backend/

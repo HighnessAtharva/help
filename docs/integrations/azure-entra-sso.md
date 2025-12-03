@@ -24,7 +24,7 @@ This guide helps you integrate Azure Entra (formerly Azure Active Directory) wit
 5. **Supported account types**: Choose **Single tenant**
 6. **Redirect URI**:
 Type: `Web`
-URI: `https://cspm.accuknox.com/oidc/callback`
+URI: `https://cspm.accuknox.com/oidc/callback/`
 ![image-20250406-163133.png](./images/azure-entra-sso/2.png)
 
 7. Click **Register**
