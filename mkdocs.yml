@@ -398,7 +398,8 @@ nav:
     - "SSO":
       - "Signup/Login via SSO": "how-to/sso.md"
       - "Azure Entra": "integrations/azure-entra-sso.md"
-      - "Okta/Auth0": "integrations/okta-sso.md"
+      - "Okta": "integrations/okta-sso.md"
+      - "Auth0": "integrations/auth0-sso.md"
     - "Notification":
       - "Slack": "integrations/slack.md"
       - "Email": "integrations/email.md"
