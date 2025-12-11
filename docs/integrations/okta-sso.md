@@ -34,6 +34,12 @@ Once the application is created, you will be on the application's **General** ta
 
 ![alt text](image-39.png)
 
+!!! info "Provide Details to AccuKnox"
+    === "SaaS Users"
+        - Share the **Client ID**, **Client Secret**, and **Okta Domain** securely with the AccuKnox support team.
+        - The team will configure the OIDC backend for your organization.
+
+   
 ## 3. Provide API Permission
 
 1. Navigate to **Security → API** in Okta.
