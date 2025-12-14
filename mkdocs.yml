@@ -459,11 +459,12 @@ nav:
         - "Cryptojacking" : "use-cases/crypto-mining.md"
         - "Hildegard" : "use-cases/hildegard.md"
       - "Container Image Scan": "use-cases/image-scan.md"
-    - "DevSecOps":
-        - "Application Security Posture Management (ASPM)": "use-cases/aspm.md"
+    - "DevSecOps (ASPM)":
+        - "ASPM Overview": "use-cases/aspm.md"
         - "IaC Scan": "use-cases/iac-scan.md"
         - "Container Scan": "use-cases/container-scan.md"
         - "SAST": "use-cases/sast-sq.md"
+        - "DAST (Authenticated)": "use-cases/dast-authenticated.md"
         - "DAST (MFA-Enabled)": "use-cases/mfa-dast.md"
         - "DAST XSS Mitigation": "use-cases/dast-xss.md"
         - "Secrets Scan": "use-cases/secret-scan-cicd-aws.md"
