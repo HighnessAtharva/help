@@ -5,47 +5,105 @@ description: Comprehensive guide for Agent-based Vulnerability and Malware Scann
 
 # Agent-Based VM Scanning for Linux
 
-This guide provides step-by-step instructions to onboard Linux Virtual Machines (VMs) for agent-based security scanning.
+This guide provides step-by-step instructions to onboard Linux Virtual Machines (VMs) for agent-based vulnerability and malware scanning using the AccuKnox VM Security agent.
 
 ## Prerequisites
 
 - Root or sudo access to the Linux VM.
 - Outbound internet connectivity to AccuKnox SaaS.
 - `curl` installed on the VM.
+- A valid AccuKnox Tenant ID and API Token.
 
 ## Installation
 
-### 1. Install Knoxctl
+### 1. Run the Installation Script
 
-Download and install the `knoxctl` CLI tool:
-
-```bash
-curl -sfL https://knoxctl.accuknox.com/install.sh | sudo sh -s -- -b /usr/bin
-```
-
-### 2. Onboard the VM
-
-Run the onboarding command to install the necessary agents. You can generate this command from the AccuKnox dashboard under **Settings > Manage Cluster > Onboard Now > VM**.
-
-Example command:
+Run the following command to download and install the agent. Replace `<REDACTED>` with your actual Artifact API Token and `CHANGEME` with your desired label.
 
 ```bash
-knoxctl onboard vm cp-node \
-  --version v0.10.7 \
-  --join-token=<YOUR_JOIN_TOKEN> \
-  --spire-host=spire.accuknox.com \
-  --pps-host=pps.accuknox.com \
-  --knox-gateway=knox-gw.accuknox.com:3000 \
-  --vm-mode="systemd" \
-  --enable-host-policy-discovery \
-  --hostViz="process,network,file,capabilities" \
-  --viz="process,network,file"
+curl https://accuknox-omni.s3.us-east-1.amazonaws.com/v0.1.2/agent-install.sh | \
+    OMNI_ARTIFACT_API_TOKEN="<REDACTED>" \
+    bash -s - \
+        --artifact-endpoint=https://cspm.accuknox.com/api/v1/artifact/ \
+        --tenant-id=000 \
+        --artifact-label=CHANGEME
 ```
 
-!!! tip
-    Replace `<YOUR_JOIN_TOKEN>` with the token provided in the dashboard.
+!!! note "Configuration Details"
+    - **Artifact API Token**: Generate this under **Settings > Tokens** in the AccuKnox dashboard.
+    - **Artifact Label**: Create a label under **Settings > Labels** to identify this VM.
+    - The installation script creates a systemd service (`omni.service`) and a daily systemd timer (`omni.timer`).
 
-## Vulnerability & Malware Scanning
+## Air-gapped Installation
 
-Once the agent is installed and the VM is onboarded, vulnerability and malware scanning capabilities are enabled based on your policy configuration. Ensure that the necessary policies are applied to your VM to start scanning.
+For environments without direct internet access, follow these steps:
 
+### 1. Download the Omni Binary
+
+Download the appropriate binary for your architecture on a machine with internet access:
+
+- **amd64**: [Download Link](https://accuknox-omni.s3.us-east-1.amazonaws.com/v0.1.2/omni-linux-amd64)
+- **arm64**: [Download Link](https://accuknox-omni.s3.us-east-1.amazonaws.com/v0.1.2/omni-linux-arm64)
+
+### 2. Install the Binary
+
+Transfer the binary to the target VM and place it in the executable path:
+
+```bash
+# Assuming the binary is in the current directory
+chmod +x omni-linux-amd64
+sudo mv omni-linux-amd64 /usr/local/bin/omni
+```
+
+### 3. Run the Installation Script
+
+Download the `agent-install.sh` script, transfer it to the VM, and run it with the necessary environment variables:
+
+```bash
+chmod +x agent-install.sh
+
+export OMNI_ARTIFACT_API_TOKEN="<REDACTED>"
+export OMNI_VULN_DB_REPOSITORY="ghcr.io/aquasecurity/trivy-db" # Replace with your private registry if needed
+export OMNI_SKIP_DOWNLOAD=1
+
+./agent-install.sh
+```
+
+## Configuration & Troubleshooting
+
+### Check Scan Status
+
+You can check the status of the agent and the scan timer using `systemctl`:
+
+```bash
+systemctl status omni.timer
+systemctl status omni.service
+journalctl -u omni
+```
+
+### Adjust Resource Usage
+
+By default, the systemd service is limited to **2G memory** and **10% CPU** utilization. If the scan is getting OOMKilled or you need to adjust these limits, set the following environment variables and re-run the installation script:
+
+```bash
+export OMNI_MAX_MEMORY=4G
+export OMNI_CPU_QUOTA=20%
+# Re-run installation script
+```
+
+### Enable Malware Scanning
+
+Malware scanning is disabled by default as it is CPU-intensive. To enable it, set the `OMNI_SKIP_MALWARE_SCAN` variable to `false` and re-run the installation script:
+
+```bash
+export OMNI_SKIP_MALWARE_SCAN=false
+# Re-run installation script
+```
+
+### Uninstall
+
+To remove the agent and related services:
+
+```bash
+/usr/local/bin/omni-uninstall.sh
+```
