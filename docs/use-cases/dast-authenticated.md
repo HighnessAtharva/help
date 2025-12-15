@@ -100,7 +100,7 @@ Clicking on the findings count will redirect you to the **Findings page** with:
 ## Frequently Asked Questions
 
 ???+ question "What is not supported for DAST auth scan?"
-    We support only Username Password flow. We don't support 2FA/MFA enabled sites (like, OTP based login etc).
+    We support only Username Password flow. This method does not support 2FA/MFA enabled sites (like, OTP based login etc).
 
 ???+ question "Why there can be findings count mismatch for same scan?"
     Scans can yield inconsistent results even when the target remains unchanged. This variability is often attributed to how the application is explored, with factors like network speed impacting the traditional and AJAX spiders.
