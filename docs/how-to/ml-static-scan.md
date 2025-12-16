@@ -7,9 +7,6 @@ description: Learn how to perform ML Model Static Scans using AccuKnox for GitHu
 
 AccuKnox provides static analysis for Machine Learning (ML) models to identify vulnerabilities, security risks, and compliance issues. This guide walks you through setting up and running ML Model Static Scans for models hosted on GitHub and Hugging Face.
 
-!!! tip "Subprompts and Probes"
-    For a detailed list of subprompts and probes that ML and LLM scans rely on, please refer to the [Subprompts Categories](https://help.accuknox.com/use-cases/subprompts-categories/) page.
-
 ??? info "Why are ML Scans Needed?"
 
     Machine Learning models are becoming integral parts of modern applications, but they also introduce new attack vectors. ML Static Scans are essential for:
@@ -70,6 +67,16 @@ Configure the **Schedule and Notification** settings:
 Click **Save** to create the collector.
 
 ## Viewing Scan Results
+
+???+ tip "Supported Model Formats"
+
+    AccuKnox currently supports scanning for the following ML model formats:
+
+    * **Pickle**: Python object serialization.
+    * **HDF5/H5**: Hierarchical Data Format used in Keras.
+    * **TensorFlow SavedModel**: TensorFlow's native serialization format.
+    * **Model Checkpoints**: Periodic snapshots of training progress.
+    * **ONNX**: An interoperable format for sharing models across different tools.
 
 Once the scan is triggered (either manually or via the schedule), AccuKnox will analyze the repository.
 

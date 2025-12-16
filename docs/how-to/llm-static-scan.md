@@ -28,31 +28,65 @@ Follow these steps to configure a scan for your LLM models.
 1. Navigate to **Settings** > **Collectors** in the AccuKnox dashboard.
 2. Click on **Add Collector**.
 3. Select **LLM-Static-Scan** from the available options.
-4. Choose your platform: **GitHub** or **Hugging Face**, depending on where your models reside.
+4. Choose your platform: **Custom Model**, **Ollama Model**, or **OpenAI Model** depending on LLM type.
 
-![Select ML Static Scan](image-2.png)
+![alt text](image-11.png)
 
 ### Step 2: Configure Repository Details
 
 Enter the required credentials and repository information.
 
-**For GitHub:**
+!!! example "Configuration Details"
 
-* **Token**: Your GitHub Personal Access Token (PAT).
-* **Repository Owner**: The username or organization name.
-* **Repository Name**: The name of the repository.
-* **Repository Branch**: The branch to scan (e.g., `main`).
+    === "Custom Models"
 
-**For Hugging Face:**
+        | Parameter              | Description |
+        |------------------------|-------------|
+        | **Endpoint URL**       | Enter the Endpoint URL for the model. Example: `https://api.example.com/v1/llm` |
+        | **Secret Token**       | Enter the Secret Key for authentication. Example: `sk-xxx` |
+        | **Model Name**         | Enter the name of the model. Example: `my-llm-model` |
+        | **Model ID**           | Enter the ID of the model to be scanned by the LLM static scan. Example: `model-12345` |
+        | **Scan Category**      | Select the list of categories to scan on the model. This is based on predefined categories. |
+        | **Request Template**   | Enter the request payload structure in JSON format. Use `$INPUT` where user input should be injected. Example:<br><br>`{ "query": "$INPUT", "history": [] }` |
+        | **Pre-defined Prompts**| Choose **Scan with Default Prompts** or **Upload Custom Prompts File**. |
 
-* **Token**: Your Hugging Face Access Token.
-* **Repository Name**: The name of the model repository (e.g., `meta-llama/Llama-2-7b`).
+        !!! info "Using Custom Prompts"
+            When uploading a custom prompts file, ensure it is in JSON format with an array of prompt strings. Example:
 
-![Configure Repository](image-3.png)
+            ```json
+            {
+              "query": "$INPUT",
+              "history": []
+            }
+            ```
+        ![alt text](image-12.png)
+
+    === "Ollama Models"
+
+        | Parameter              | Description |
+        |------------------------|-------------|
+        | **Ollama Host URL**    | Enter the Ollama Host URL. Example: `http://localhost:11434` |
+        | **Scan Category**         | Select the list of categories to scan on the model. This is based on predefined categories. |
+        | **Pre-defined Prompts**| Choose **Scan with Default Prompts** or **Upload Custom Prompts File**. |
+
+        ![alt text](image-13.png)
+
+    === "OpenAI Models"
+
+        | Parameter              | Description |
+        |------------------------|-------------|
+        | **Secret Token**       | Enter the Secret Key for authentication. Example: `sk-xxx` |
+        | **Model Name**         | Enter the name of the model. Example: `gpt-4` |
+        | **Model ID**           | Enter the ID of the model to be scanned. Example: `model-12345` |
+        | **Pre-defined Prompts**| Choose **Scan with Default Prompts** or **Upload Custom Prompts File**. |
+
+        ![alt text](image-14.png)
 
 ### Step 3: Add Identifiers
 
 Add **Labels** and **Tags** to categorize your LLM models. This helps in filtering and managing assets within the AccuKnox platform.
+
+![alt text](image-15.png)
 
 ### Step 4: Validate Connection
 
@@ -67,7 +101,11 @@ Configure the **Schedule and Notification** settings:
 
 ![Schedule Scan](image-4.png)
 
-Click **Save** to create the collector.
+Click **Save** to create the LLM collector.
+
+![alt text](image-16.png)
+
+![alt text](image-17.png)
 
 ## Viewing Scan Results
 
@@ -76,31 +114,24 @@ Once the scan is triggered (either manually or via the schedule), AccuKnox will 
 1. Go to **Issues** or the **Collectors** page.
 2. Click on the **Findings** count for your LLM Static Scan collector.
 
-![ML Findings](image-10.png)
+![alt text](image-18.png)
 
 You will be redirected to the **LLM Findings** page, which lists details such as:
-
-* **Vulnerability Name**: The specific issue detected.
-* **Model Path**: Location of the vulnerable file.
-* **Source**: The repository source.
-* **Scanner & Operator**: Tools used for detection.
-* **Last Seen**: Timestamp of the latest detection.
-
-![ML Findings List](image-6.png)
+`Scan Category`, `Probe`, `Detector`, `Goal`, `Prompt`, `Output Description`, `Risk Factor`, `Detector Safety Score`, `Category Safety Score`, `Compliance Name`, `AVID`
 
 ## Analyzing Findings
 
 Click on any finding to open the **Detailed Pane**. Here you can:
 
-* View a detailed **Description** of the vulnerability.
+* View a detailed **Description** of the vulnerablity for the LLM.
 
 * **Create Ticket**: Integrate with your ticketing system (e.g., Jira) to track remediation.
 * **Ask AI**: Use the "Ask AI" button for assisted remediation advice.
 
-![Detailed Finding View](image-7.png)
+![alt text](image-19.png)
 
-* See the recommended **Solution**.
-![Remediation Advice](image-8.png)
+See the recommended **Solution**.
+![alt text](image-20.png)
 
-* Access **Raw Information** for in-depth analysis.
-![Additional Details](image-9.png)
+Access **Output** to see what the LLM returned for the given prompt and the **Prompt** shows the exact input used for scanning along with Goal and AVID details.
+![alt text](image-21.png)
