@@ -146,16 +146,20 @@ AccuKnox AI-DR detects if a network or other AI asset is inadvertently made publ
 An alert is generated in the AccuKnox console indicating the public exposure of the AI asset.
 ![alt text](image-13.png)
 
-### Step 3: Automated Remediation Trigger
+### Step 3: Trigger and Webhook Integration
 
-An auto-remediation action is triggered via GitHub Actions to address the issue.
+A trigger is set up to initiate an automated response. The alert is forwarded using a webhook integration to the remediation workflow.
 
 See how to [**Configure and Trigger Alerts with Webhook**](https://help.accuknox.com/integrations/webhook-integration/)
 ![alt text](image-14.png)
 ![alt text](image-15.png)
+
+### Step 4: Automated Remediation
+
+An auto-remediation action is triggered via GitHub Actions (or another automation tool) to address the issue.
 ![alt text](image-16.png)
 
-### Step 4: Asset Securing
+### Step 5: Asset Securing
 
 The asset configuration is automatically updated to make it private again, resolving the security risk.
 ![alt text](image-17.png)
