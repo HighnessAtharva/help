@@ -1,11 +1,11 @@
 ---
 title: LLM Static Scans
-description: Learn how to perform LLM Static Scans using AccuKnox for GitHub and Hugging Face repositories to secure your Large Language Models.
+description: Learn how to perform LLM Static Scans using AccuKnox for OpenAI, Ollama and Custom Large Language Models.
 ---
 
 # LLM Static Scans
 
-AccuKnox provides static analysis for Large Language Models (LLM) to identify vulnerabilities, security risks, and compliance issues. This guide walks you through setting up and running LLM Static Scans for models hosted on GitHub and Hugging Face.
+AccuKnox provides static analysis for Large Language Models (LLM) to identify vulnerabilities, security risks, and compliance issues. This guide walks you through setting up and running LLM Static Scans for models hosted on OpenAI, Ollama, and Custom Large Language Models.
 
 !!! tip "Subprompts and Probes"
     For a detailed list of subprompts and probes that ML and LLM scans rely on, please refer to the [Subprompts Categories](https://help.accuknox.com/use-cases/subprompts-categories/) page.
