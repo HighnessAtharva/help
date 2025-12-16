@@ -59,19 +59,6 @@ hide:
     </div>
   </div>
 
-  <!-- AI Compliance -->
-  <div style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.06); overflow:hidden;">
-    <div style="aspect-ratio:16/9;">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rMc-fV5kzvs" title="AI Compliance" frameborder="0" allowfullscreen style="border:0;"></iframe>
-    </div>
-    <div style="padding:8px;">
-      <h4 style="margin:0 0 4px; display:flex; align-items:center; gap:6px;">
-        AI Compliance
-      </h4>
-      <p style="margin:0; font-size:0.75rem; color:#555;">Automate policy checks and ensure AI systems align with standards like EU AI Act, NIST, and ISO 42001.</p>
-    </div>
-  </div>
-
   <!-- Model Safety -->
   <div style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.06); overflow:hidden;">
     <div style="aspect-ratio:16/9;">
@@ -82,19 +69,6 @@ hide:
         Model Safety
       </h4>
       <p style="margin:0; font-size:0.75rem; color:#555;">Safeguard models from misuse and ensure responsible AI behavior through explainability and guardrails.</p>
-    </div>
-  </div>
-
-  <!-- Securing AI Factories -->
-  <div style="background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.06); overflow:hidden;">
-    <div style="aspect-ratio:16/9;">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/HzJQKl-YPAo" title="Securing AI Factories" frameborder="0" allowfullscreen style="border:0;"></iframe>
-    </div>
-    <div style="padding:8px;">
-      <h4 style="margin:0 0 4px; display:flex; align-items:center; gap:6px;">
-        Securing AI Factories
-      </h4>
-      <p style="margin:0; font-size:0.75rem; color:#555;">Implement end-to-end security for AI pipelines—from data ingestion to model deployment.</p>
     </div>
   </div>
 
