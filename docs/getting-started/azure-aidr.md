@@ -136,8 +136,18 @@ onboarding process.
 
 ![alt text](image-11.png)
 
-- **Real-time Asset Monitoring**: Continuously streams Azure Activity Logs via EventHub to monitor the creation or modification of sensitive Azure OpenAI resources.
-- **SIEM-Based Detection**: Utilizes AccuKnox SIEM with a Sigma Rule Engine to parse logs from Logstash and identify risky configurations (e.g., public network exposure) in real-time.
-- **Automated Response Trigger**: Instantly fires a webhook to the AccuKnox Control Plane upon detecting a policy violation, initiating the response workflow without human delay.
-- **Orchestrated Validation**: Executes a GitHub Action to logically verify the specific security posture of the resource (checking if "publicly accessible").
-- **Closed-Loop Remediation**: Automatically updates the Azure OpenAI configuration to "Disable network access" if vulnerabilities are found, enforcing security compliance immediately.
+### **Step 1: Detection of Public Exposure** - The system detects if a network or other AI asset is inadvertently made public.
+![alt text](image-12.png)
+
+### **Step 2: Alert Generation** - You receive an immediate notification on the AccuKnox platform regarding the policy violation.
+![alt text](image-13.png)
+
+### **Step 3: Automated Remediation Trigger** - An auto-remediation action is triggered via GitHub Actions to address the issue.
+
+See how to [Configure and Trigger Alerts with Webhook](https://help.accuknox.com/integrations/webhook-integration/)
+![alt text](image-14.png)
+![alt text](image-15.png)
+![alt text](image-16.png)
+
+### **Step 4: Asset Securing** - The asset configuration is automatically updated to make it private again, resolving the security risk.
+![alt text](image-17.png)
