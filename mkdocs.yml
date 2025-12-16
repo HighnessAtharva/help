@@ -252,8 +252,6 @@ nav:
       - "AWS Onboarding": "getting-started/aws-cdr.md"
       - "GCP Onboarding": "getting-started/gcp-cdr.md"
       - "Azure Onboarding": "getting-started/azure-cdr.md"
-    - "AI-DR (Detection & Response)":
-      - "Azure Onboarding": "getting-started/azure-aidr.md"
     - "SBOM": "getting-started/sbom.md"
     - "Secrets Management": "getting-started/secrets-management.md"
     - "Reports":
@@ -429,6 +427,7 @@ nav:
     - "API Security": "use-cases/api-security.md"
     - "AI/ML Security":
       - "Overview": "use-cases/aiml-usecases.md"
+      - "Azure AI-DR (Detection & Response)": "use-cases/azure-aidr.md"
       - "Prompt Firewall": "use-cases/prompt-firewall.md"
       - "Jupyter Notebook": "use-cases/jupyter-notebook.md"
       - "ModelArmor":
