@@ -136,18 +136,26 @@ onboarding process.
 
 ![alt text](image-11.png)
 
-### **Step 1: Detection of Public Exposure** - The system detects if a network or other AI asset is inadvertently made public.
+### Step 1: Detection of Public Exposure
+
+AccuKnox AI-DR detects if a network or other AI asset is inadvertently made public.
 ![alt text](image-12.png)
 
-### **Step 2: Alert Generation** - You receive an immediate notification on the AccuKnox platform regarding the policy violation.
+### Step 2: Alert Generation
+
+An alert is generated in the AccuKnox console indicating the public exposure of the AI asset.
 ![alt text](image-13.png)
 
-### **Step 3: Automated Remediation Trigger** - An auto-remediation action is triggered via GitHub Actions to address the issue.
+### Step 3: Automated Remediation Trigger
 
-See how to [Configure and Trigger Alerts with Webhook](https://help.accuknox.com/integrations/webhook-integration/)
+An auto-remediation action is triggered via GitHub Actions to address the issue.
+
+See how to [**Configure and Trigger Alerts with Webhook**](https://help.accuknox.com/integrations/webhook-integration/)
 ![alt text](image-14.png)
 ![alt text](image-15.png)
 ![alt text](image-16.png)
 
-### **Step 4: Asset Securing** - The asset configuration is automatically updated to make it private again, resolving the security risk.
+### Step 4: Asset Securing
+
+The asset configuration is automatically updated to make it private again, resolving the security risk.
 ![alt text](image-17.png)
