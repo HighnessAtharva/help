@@ -121,6 +121,19 @@ You will be redirected to the **LLM Findings** page, which lists details such as
 
 ## Analyzing Findings
 
+### Group LLM Scan Findings
+
+You can group findings by different parameters such as `Asset Type`, `Label`, `Vulnerability Name`, `Location`, etc. Use the **Group By** dropdown to select your preferred grouping. This helps in organizing and prioritizing vulnerabilities effectively. The grouped view provides a consolidated look at similar issues, making it easier to assess the overall security posture of your LLM assets and can easily be exported for reporting purposes.
+
+![alt text](image-23.png)
+
+### Ask AI for Remediation
+
+Click on the **Ask AI** button in the detailed pane to get AI-generated remediation steps for the identified issue. This feature leverages advanced LLM capabilities to provide actionable insights based on the specific vulnerability detected.
+![alt text](image-22.png)
+
+### Detailed View of LLM Scan Findings
+
 Click on any finding to open the **Detailed Pane**. Here you can:
 
 * View a detailed **Description** of the vulnerablity for the LLM.

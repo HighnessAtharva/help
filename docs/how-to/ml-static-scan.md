@@ -97,6 +97,19 @@ You will be redirected to the **ML Findings** page, which lists details such as:
 
 ## Analyzing Findings
 
+### Group ML Scan Findings
+
+You can group findings by different parameters such as `Status`, `Location`, `Vulnerability Name`, `Risk Factor`, etc. Use the **Group By** dropdown to select your preferred grouping. This helps in organizing and prioritizing vulnerabilities effectively. The grouped view provides a consolidated look at similar issues, making it easier to assess the overall security posture of your ML assets and can easily be exported for reporting purposes.
+![alt text](image-24.png)
+
+### Ask AI for Remediation
+
+Click on the **Ask AI** button in the detailed pane to get AI-generated remediation steps for the identified issue. This feature leverages advanced LLM capabilities to provide actionable insights based on the specific vulnerability detected.
+
+![alt text](image-25.png)
+
+### Detailed Finding View
+
 Click on any finding to open the **Detailed Pane**. Here you can:
 
 * View a detailed **Description** of the vulnerability.
