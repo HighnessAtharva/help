@@ -11,6 +11,7 @@ Task-oriented how-to guides: onboarding, configuration, and step-by-step procedu
 | [RINC.md](RINC.md) | Introduction to RINC (short for Runtime Insights and Network Controls) and how to get started with its features on AccuKnox SaaS. |
 | [acr.md](acr.md) | Instructions for onboarding Azure Container Registry (ACR) to AccuKnox SaaS for image scanning and vulnerability detection. |
 | [administrators-guide.md](administrators-guide.md) | Step-by-step guidance for AccuKnox administrators covering onboarding, deployment, configuration, and task-oriented references for managing the platform. |
+| [agent-identities.md](agent-identities.md) | Give each coding agent on your machine its own identity in AgentZ. Add Claude Code or Codex as an external agent, choose its models, sign in, and see its act... |
 | [ai-pentesting.md](ai-pentesting.md) | Run an autonomous AI pentest against your web apps and APIs with the AccuKnox AI Dast Scan collector, powered by AgentZ. Set targets, scan depth, login and t... |
 | [aiml-aws-onboard.md](aiml-aws-onboard.md) | Onboard an AWS Organization to AccuKnox AI Security with one CloudFormation stack that deploys a read-only IAM role to the Management Account and to member a... |
 | [aiml-aws-standalone-onboard.md](aiml-aws-standalone-onboard.md) | Connect a standalone AWS account to AccuKnox AI Security for AI/ML asset discovery and security assessment, using access keys that a Terraform script creates. |
@@ -34,6 +35,10 @@ Task-oriented how-to guides: onboarding, configuration, and step-by-step procedu
 | [azure-aidr.md](azure-aidr.md) | Onboarding guide for AccuKnox AI-DR for Azure with Terraform to get started with threat detection and response for your AI workloads. |
 | [azure-onboarding.md](azure-onboarding.md) | Step-by-step instructions for onboarding an Azure cloud account to AccuKnox SaaS for automated security management. |
 | [azure-org-onboard.md](azure-org-onboard.md) | A step-by-step guide to onboarding your Azure Organization to the AccuKnox platform for centralized cloud security management. |
+| [bluelock-azure-container-apps.md](bluelock-azure-container-apps.md) | Deploy BlueLock on Azure Container Apps with Terraform, onboard the replicas to AccuKnox as a VM cluster and block a command to confirm runtime enforcement. |
+| [bluelock-ecs-fargate.md](bluelock-ecs-fargate.md) | Deploy BlueLock on Amazon ECS Fargate with Terraform, onboard the tasks to AccuKnox as a VM cluster and block a command to confirm runtime enforcement. |
+| [bluelock-eks-fargate.md](bluelock-eks-fargate.md) | Deploy BlueLock on an Amazon EKS Fargate cluster, onboard the cluster to AccuKnox and block a command in a sample workload to confirm runtime enforcement. |
+| [bluelock.md](bluelock.md) | BlueLock enforces runtime security policy from inside the container on AWS Fargate and Azure Container Apps, where you cannot reach the host kernel. Pick the... |
 | [cis-benchmarking.md](cis-benchmarking.md) | Guide on onboarding Kubernetes clusters for CIS Benchmarking compliance, enabling monitoring and improving security based on CIS standards. |
 | [cloud-offboarding.md](cloud-offboarding.md) | Guide on securely offboarding a cloud account from AccuKnox SaaS to prevent unauthorized access and data leakage. |
 | [cluster-misconfig-scan-onboarding.md](cluster-misconfig-scan-onboarding.md) | AccuKnox helps detect and fix security misconfigurations in Kubernetes clusters, securing applications and infrastructure. |

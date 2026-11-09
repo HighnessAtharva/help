@@ -48,7 +48,12 @@ hide:
     - [AccuKnox Homepage](https://accuknox.com)
 
 ??? "**3. What are all the modules supported by AccuKnox CNAPP?**"
-    AccuKnox delivers **12 product offerings** across AppSec, CloudSec, and AISec. Nine are generally available and three are in beta.
+    AccuKnox delivers **13 product offerings** across AppSec, CloudSec, and AISec. Eleven are generally available, including the new DSPM and CIEM modules, and two are in beta.
+
+    **New:**
+
+    - **Data Security (DSPM):** Sensitive data discovery in cloud storage, databases and SaaS apps, with a scanner that runs in your region with read-only access. See [DSPM Overview](https://help.accuknox.com/getting-started/dspm-overview/).
+    - **Identity Security (CIEM):** Unified Multi-Cloud Entitlement Visibility, Cross-Cloud Identity and Permission Correlation, Consistent Multi-Cloud CIEM Controls. See [CIEM Overview](https://help.accuknox.com/getting-started/ciem-overview/).
 
     **Generally Available:**
 
@@ -64,11 +69,10 @@ hide:
 
     **Beta:**
 
-    - **Cloud Identity Security (CIEM):** Unified Multi-Cloud Entitlement Visibility, Cross-Cloud Identity and Permission Correlation, Consistent Multi-Cloud CIEM Controls
     - **Static Security (SBOM):** Shift Left Security in CI/CD, Supply Chain Visibility, Drift Detection
     - **Threat Modeling (CTEM):** Adversarial Emulation and Validation, Policy Enforcement & Remediation, Real-Time Threat Detection
 
-    GRC backs all modules with **35+ compliance templates** (SOC2, NIST, ISO, GDPR, HIPAA).
+    Compliance backs all modules with **35+ compliance templates** (SOC2, NIST, ISO, GDPR, HIPAA).
 
     **References:**
 
@@ -118,7 +122,7 @@ hide:
 
     - **AccuKnox SaaS (Cloud Delivered):** AccuKnox hosts and manages the control plane. Customers connect cloud accounts and clusters through agentless or agent-based integrations. It is available in US, EU, India, and Middle East regions, and gives the fastest time to value.
     - **Customer's On-Prem (VMs, Bare Metal):** The AccuKnox control plane runs in the customer's own data center or private cloud. Agents deploy into K8s clusters and VMs. Full platform capabilities work with no external connectivity required.
-    - **Customer's Air-Gapped Infrastructure:** The full AccuKnox CNAPP runs in a completely isolated environment with no internet connectivity. All modules (ASPM, CSPM, CWPP, KSPM, GRC) are supported. It is designed for government, defense, and regulated industries.
+    - **Customer's Air-Gapped Infrastructure:** The full AccuKnox CNAPP runs in a completely isolated environment with no internet connectivity. All modules (ASPM, CSPM, CWPP, KSPM, Compliance) are supported. It is designed for government, defense, and regulated industries.
     - **Customer's Hosted Public & Private Cloud:** The AccuKnox control plane runs in the customer's AWS, Azure, or GCP account. Data never leaves the customer environment. Hybrid configurations can combine cloud accounts and on-prem clusters.
 
     **References:**
@@ -198,7 +202,7 @@ hide:
     AccuKnox Enterprise extends KubeArmor with:
 
     - **Central management:** A centralized control plane, multi-tenancy, and RBAC manage policies across thousands of clusters.
-    - **CNAPP modules:** CSPM, KSPM, ASPM, API Security, AI-SPM, GRC, and all other CNAPP modules run in a unified platform.
+    - **CNAPP modules:** CSPM, KSPM, ASPM, API Security, AI-SPM, Compliance, and all other CNAPP modules run in a unified platform.
     - **Policy automation:** It auto-discovers workload behaviors and auto-generates least-privilege policies at scale.
     - **Operations:** It adds compliance reporting, posture dashboards, ticketing integrations, SIEM connectors, and an AI-powered co-pilot.
 
@@ -213,7 +217,7 @@ hide:
     Use **AccuKnox Enterprise** if you need:
 
     - **Central policy management:** Manage policies across multiple clusters, clouds, and environments.
-    - **Full CNAPP coverage:** Get CSPM, CWPP, KSPM, ASPM, AI-SPM, API Security, and GRC in one platform.
+    - **Full CNAPP coverage:** Get CSPM, CWPP, KSPM, ASPM, AI-SPM, API Security, and Compliance in one platform.
     - **Auto-discovery:** Discover cloud assets and workloads without onboarding each resource manually.
     - **Compliance dashboards:** Get audit-ready evidence for SOC 2, HIPAA, PCI DSS, NIST, and 30+ other frameworks.
     - **Integrations:** Connect ticketing, SIEM, and DevSecOps tools for enterprise-scale remediation workflows.
