@@ -673,7 +673,7 @@
     "rotation"
    ],
    "pages": [
-    "secrets-manager/index.md",
+    "secrets-manager/overview.md",
     "secrets-manager/deployment.md",
     "secrets-manager/kv-secrets.md",
     "secrets-manager/transit.md",
@@ -837,7 +837,7 @@
     "iso"
    ],
    "pages": [
-    "getting-started/deployment-models.md",
+    "resources/deployment.md",
     "getting-started/on-prem-overview.md",
     "getting-started/on-prem-installation-guide.md",
     "getting-started/accuknox-arch.md",

@@ -5,9 +5,6 @@ description: "Turn on AccuKnox CIEM for a standalone AWS, GCP, Azure or Oracle c
 
 # Onboard a Cloud Account for CIEM
 
-!!! info "Coming soon"
-    CIEM releases soon in a newer version of AccuKnox. The screens on this page come from the current build and can change before the release.
-
 Turn on CIEM when you onboard a cloud account, then open **Identities > CIEM** to see the account's users, groups and roles. For what CIEM shows, see the [CIEM overview](ciem-overview.md).
 
 ![The CIEM graph of an onboarded AWS account, with count badges for 77 users, 22 groups, 637 roles and 504 policies](images/ciem/ciem-account-graph.png)
@@ -16,7 +13,7 @@ Turn on CIEM when you onboard a cloud account, then open **Identities > CIEM** t
 
 | Item | Requirement |
 |---|---|
-| Account type | A standalone AWS, GCP, Azure or OCI account. CIEM does not support organization accounts yet |
+| Account type | A standalone AWS, GCP, Azure or OCI account, or an AWS organization account. The steps below cover a standalone account |
 | Cloud-side setup | The prerequisites for your cloud in [AWS](../how-to/aws-onboarding.md), [GCP](../how-to/gcp-onboarding.md), [Azure](../how-to/azure-onboarding.md) or [Oracle](../how-to/oracle-onboarding.md) onboarding |
 | Terraform | Terraform on your workstation, for the AWS script step |
 

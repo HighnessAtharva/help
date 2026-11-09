@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GTM Engineer Trainee: Role Brief</title>
+<style>
+@font-face{font-family:"Inter";font-weight:400;src:url("file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/fonts/Inter-Regular.ttf")}
+@font-face{font-family:"Inter";font-weight:500;src:url("file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/fonts/Inter-Medium.ttf")}
+@font-face{font-family:"Inter";font-weight:600;src:url("file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/fonts/Inter-SemiBold.ttf")}
+@font-face{font-family:"Inter";font-weight:700;src:url("file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/fonts/Inter-Bold.ttf")}
+@page{size:A4;margin:0}
+:root{--blue:#1040C5;--bright:#0F7FFF;--navy:#000025;--ink:#263238;--ink3:#607D8B;--rule:#DDE5EC;--tint:#F5F8FF;
+--ok:#04B745;--weak:#D98E00;--weak-bg:#FFF6E0;--bad:#D63637;--bad-bg:#FEF1F1;--ok-bg:#E8F8EE}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:210mm;background:#fff}
+body{font-family:"Inter",sans-serif;color:var(--ink);font-size:8.4pt;line-height:1.35}
+.page{width:210mm;height:297mm;padding:11mm 12mm 9mm;display:flex;flex-direction:column;page-break-after:always;overflow:hidden}
+.page:last-child{page-break-after:auto}
+header{display:flex;justify-content:space-between;align-items:center}
+header img{height:6.4mm}
+.tag{font-size:7pt;font-weight:600;color:var(--blue);letter-spacing:.06em;text-transform:uppercase}
+.top{display:flex;justify-content:space-between;align-items:flex-end;margin-top:5mm;gap:8mm}
+h1{font-size:23pt;line-height:1.06;font-weight:700;color:var(--navy);letter-spacing:-.02em}
+h1 span{color:var(--blue)}
+.lede{font-size:9pt;color:var(--ink);max-width:62mm}
+.ic{width:5.6mm;height:5.6mm;object-fit:contain;display:block}
+.chip{display:inline-flex;align-items:center;gap:1.4mm;background:#fff;border:1px solid var(--rule);border-radius:5mm;padding:.9mm 2.4mm .9mm 1.2mm;font-size:7pt;font-weight:600;color:var(--navy)}
+.chip .ic{width:4mm;height:4mm}
+.stats{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:3mm;margin-top:5mm}
+.stat{background:var(--tint);border-radius:3mm;padding:3.2mm 3.6mm;position:relative}
+.stat b{display:block;font-size:19pt;line-height:1;font-weight:700;color:var(--navy);letter-spacing:-.02em}
+.stat b s{text-decoration:none;color:var(--bad)}
+.stat span{display:block;margin-top:1.4mm;font-size:7.4pt;color:var(--ink3);max-width:38mm}
+.stat .ic{position:absolute;right:3mm;top:3mm;width:7mm;height:7mm}
+.key{display:flex;gap:5mm;margin-top:4mm;font-size:7.2pt;color:var(--ink3);align-items:center}
+.key i{display:inline-block;width:6mm;height:0;border-top:.7mm solid;vertical-align:middle;margin-right:1.4mm}
+.key .a i{border-color:var(--ok)}.key .b i{border-color:var(--weak);border-top-style:dashed}.key .c i{border-color:var(--bad);border-top-style:dashed}
+.key b{color:var(--ink);font-weight:600}
+.lane{margin-top:3.4mm;border:1px solid var(--rule);border-radius:3.4mm;padding:3.4mm 3.6mm 3.6mm}
+.lh{display:flex;justify-content:space-between;align-items:center}
+.lh h2{font-size:11pt;font-weight:700;color:var(--navy);letter-spacing:-.01em;display:flex;align-items:center;gap:2mm}
+.lh h2 em{font-style:normal;background:var(--navy);color:#fff;border-radius:50%;width:5mm;height:5mm;display:inline-flex;align-items:center;justify-content:center;font-size:7.4pt}
+.lh .rate{font-size:7.2pt;color:var(--ink3)}
+.flow{display:flex;align-items:center;margin-top:3mm}
+.node{flex:1;text-align:center;border:.5mm solid var(--ok);background:var(--ok-bg);border-radius:2.4mm;padding:2.2mm 1mm 2mm;font-weight:600;color:var(--navy);font-size:7.4pt;line-height:1.2;display:flex;flex-direction:column;align-items:center;gap:.9mm;min-height:19mm;justify-content:center}
+.node small{display:block;font-weight:400;font-size:6.4pt;color:var(--ink3)}
+.node.weak{border-color:var(--weak);background:var(--weak-bg)}
+.node.bad{border-color:var(--bad);background:var(--bad-bg)}
+.link{width:13mm;position:relative;height:9mm;flex:none}
+.link:before{content:"";position:absolute;left:0;right:0;top:50%;border-top:.6mm solid var(--ok)}
+.link:after{content:"";position:absolute;right:0;top:50%;margin-top:-1mm;border-left:1.6mm solid var(--ok);border-top:1mm solid transparent;border-bottom:1mm solid transparent}
+.link.weak:before{border-color:var(--weak);border-top-style:dashed}.link.weak:after{border-left-color:var(--weak)}
+.link.bad:before{border-color:var(--bad);border-top-style:dashed}.link.bad:after{border-left-color:var(--bad)}
+.link em{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-style:normal;font-weight:700;font-size:6.6pt;color:#fff;background:var(--ok);border-radius:1.6mm;padding:.3mm 1.3mm;z-index:2}
+.link.weak em{background:var(--weak)}.link.bad em{background:var(--bad)}
+.cards{display:grid;gap:2.2mm;margin-top:3mm}
+.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+.card{border-radius:2mm;padding:2.2mm 2.4mm;border-top:.8mm solid var(--weak);background:var(--weak-bg)}
+.card.bad{border-top-color:var(--bad);background:var(--bad-bg)}
+.card h3{font-size:7.6pt;font-weight:700;color:var(--navy);line-height:1.25}
+.card h3 u{text-decoration:none;color:var(--weak);margin-right:1mm}.card.bad h3 u{color:var(--bad)}
+.card .m{margin-top:1.2mm;font-size:6.9pt;color:var(--blue);font-weight:600}
+.card .m:before{content:"\25CE\00a0"}
+.bottom{margin-top:auto;display:grid;grid-template-columns:1fr;gap:3mm;padding-top:3.4mm}
+.gap{background:var(--bad-bg);border-radius:3mm;padding:3.2mm 4mm;border-left:1mm solid var(--bad);display:flex;align-items:center;gap:4mm}
+.gap .tools{display:flex;gap:1.6mm;flex-wrap:wrap;max-width:62mm}
+.gap p{font-size:7.8pt;color:var(--ink)}.gap p b{color:var(--navy)}
+.gap .tag{color:var(--bad);margin-bottom:.8mm}
+.pn{margin-top:auto;display:flex;justify-content:space-between;padding-top:2.4mm;font-size:6.8pt;color:var(--ink3)}
+
+/* page 2 */
+.kit{display:flex;gap:2mm;flex-wrap:wrap;margin-top:4mm}
+.sec{margin-top:4mm}
+.sh{display:flex;align-items:center;gap:2mm;padding-bottom:1.6mm;border-bottom:.5mm solid var(--blue)}
+.sh h2{font-size:11pt;font-weight:700;color:var(--navy);letter-spacing:-.01em}
+.sh .ic{width:5mm;height:5mm}
+.plays{display:grid;gap:2.6mm;margin-top:2.6mm}
+.play{border:1px solid var(--rule);border-radius:2.6mm;padding:2.6mm 2.8mm;background:#fff;display:flex;flex-direction:column;gap:1.2mm}
+.play .row{display:flex;align-items:center;justify-content:space-between}
+.play .ics{display:flex;gap:1.2mm}
+.play .ics .ic{width:5mm;height:5mm}
+.play .num{font-size:6.6pt;font-weight:700;color:var(--ink3)}
+.play h3{font-size:8.2pt;font-weight:700;color:var(--navy);line-height:1.2}
+.play p{font-size:7.2pt;color:var(--ink)}
+.play .closes{margin-top:auto;display:flex;gap:1mm;flex-wrap:wrap}
+.play .closes b{font-size:6.2pt;font-weight:700;color:#fff;background:var(--bad);border-radius:1.2mm;padding:.2mm 1.2mm}
+.play .closes b.w{background:var(--weak)}
+.weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:2mm;margin-top:2.6mm}
+.wk{background:var(--tint);border-radius:2.6mm;padding:2.6mm 2.8mm;position:relative}
+.wk .n{font-size:6.8pt;font-weight:700;color:var(--blue);letter-spacing:.05em;text-transform:uppercase}
+.wk h3{font-size:8.2pt;font-weight:700;color:var(--navy);margin-top:.6mm}
+.wk p{font-size:7pt;color:var(--ink3);margin-top:.6mm}
+.wk:not(:last-child):after{content:"";position:absolute;right:-2.2mm;top:50%;margin-top:-1.6mm;border-left:1.8mm solid var(--blue);border-top:1.6mm solid transparent;border-bottom:1.6mm solid transparent;z-index:2}
+.goal{display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;border-radius:3.4mm;padding:4mm 5mm;margin-top:auto}
+.goal .gn{font-size:26pt;font-weight:700;letter-spacing:-.02em;line-height:1}
+.goal .gn s{text-decoration:none;color:#4F9CF9}
+.goal .l{font-size:8.2pt;color:#DDE5EC;max-width:60mm}
+.goal .tag{color:#9CC6FB;margin-bottom:1mm}
+.goal .r{font-size:7.4pt;color:#9CC6FB;max-width:48mm;text-align:right}
+
+/* spread to fill both pages */
+.lane{flex:1;display:flex;flex-direction:column}
+.flow{flex:1;align-items:stretch;margin-top:3.4mm}
+.link{align-self:center}
+.node{min-height:0;gap:1.6mm;font-size:8.4pt}
+.node .ic{width:8.4mm;height:8.4mm}
+.node small{font-size:7pt}
+.card h3{font-size:8.6pt}.card .m{font-size:7.6pt;margin-top:1.6mm}
+.card{padding:2.8mm 3mm}
+.stat b{font-size:22pt}.stat span{font-size:8pt}
+.gap p{font-size:8.6pt}.chip{font-size:7.6pt}
+.sec{flex:1;display:flex;flex-direction:column}
+.sec.fixed{flex:none}
+.plays{flex:1}
+.play{padding:3.4mm 3.6mm;gap:1.8mm}
+.play .ics .ic{width:6.8mm;height:6.8mm}
+.play h3{font-size:9.6pt}.play p{font-size:8.2pt}
+.play .closes b{font-size:7pt;padding:.4mm 1.6mm}
+.play .num{font-size:7pt}
+.sh h2{font-size:12pt}.sh .ic{width:6mm;height:6mm}
+.wk{padding:3.4mm 3.6mm}.wk h3{font-size:9.6pt}.wk p{font-size:8pt}
+.goal{margin-top:4mm;padding:5mm 6mm}.goal .gn{font-size:30pt}.goal .l{font-size:9pt}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <header>
+    <img src="file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/logo.png" alt="AccuKnox">
+    <div class="tag">Role brief &middot; 1 of 2</div>
+  </header>
+
+  <div class="top">
+    <h1>GTM Engineer Trainee:<br><span>10 weak links to fix</span></h1>
+    <p class="lede">Double our website leads with three organic channels. No paid ads. Each lane shows where leads leak.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/googleanalytics.svg"><b>~25</b><span>website leads a month today</span></div>
+    <div class="stat"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png"><b>2,062 <s>&rarr; 3</s></b><span>companies identified in 15 days, against inbound leads in a similar fortnight</span></div>
+    <div class="stat"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/salesforce.svg"><b>171 of 1,196</b><span>webinar guests were duplicates in one upload</span></div>
+  </div>
+
+  <div class="key">
+    <span class="a"><i></i><b>Working</b></span>
+    <span class="b"><i></i><b>Weak link</b> leaks leads</span>
+    <span class="c"><i></i><b>Broken link</b> loses leads</span>
+  </div>
+
+  <!-- LinkedIn -->
+  <section class="lane">
+    <div class="lh"><h2><em>1</em>Organic LinkedIn</h2><span class="rate">~5 leads a month</span></div>
+    <div class="flow">
+      <div class="node"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/accuknox-mark.png">Technical asset<small>blog, benchmark</small></div>
+      <div class="link weak"><em>L2</em></div>
+      <div class="node weak"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/linkedin.com.png">LinkedIn post<small>made ad hoc</small></div>
+      <div class="link bad"><em>L1</em></div>
+      <div class="node bad"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/googleanalytics.svg">Click<small>no tracked link</small></div>
+      <div class="link weak"><em>L3</em></div>
+      <div class="node weak"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png">Site visit<small>account unknown</small></div>
+      <div class="link"><em>ok</em></div>
+      <div class="node"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/cal.com.png">Demo request<small>booking</small></div>
+    </div>
+    <div class="cards c3">
+      <div class="card bad"><h3><u>L1</u>No post is tied to a lead</h3><p class="m">80% of leads trace to a post</p></div>
+      <div class="card"><h3><u>L2</u>Assets reach LinkedIn one by one</h3><p class="m">Post set in 3 days</p></div>
+      <div class="card"><h3><u>L3</u>Visitors not matched to accounts</h3><p class="m">Accounts to sales weekly</p></div>
+    </div>
+  </section>
+
+  <!-- Webinars -->
+  <section class="lane">
+    <div class="lh"><h2><em>2</em>Webinars</h2><span class="rate">~4 leads a month &middot; converts best</span></div>
+    <div class="flow">
+      <div class="node"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/accuknox-mark.png">Webinar<small>own and partner</small></div>
+      <div class="link weak"><em>W3</em></div>
+      <div class="node weak"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#607D8B" stroke-width="2" stroke-linecap="round"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>Registrant list<small>partners hold it</small></div>
+      <div class="link bad"><em>W1</em></div>
+      <div class="node bad"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/salesforce.svg">CRM record<small>late, duplicated</small></div>
+      <div class="link weak"><em>W2</em></div>
+      <div class="node weak"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/gmail.svg">Follow-up<small>one 3-email set</small></div>
+      <div class="link"><em>ok</em></div>
+      <div class="node"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/cal.com.png">Demo request<small>qualified</small></div>
+    </div>
+    <div class="cards c3">
+      <div class="card bad"><h3><u>W1</u>Lists arrive late and dirty</h3><p class="m">Hours from event to clean load</p></div>
+      <div class="card"><h3><u>W2</u>Follow-up stops at one sequence</h3><p class="m">Qualified contacts per webinar</p></div>
+      <div class="card"><h3><u>W3</u>Partner webinars have no kit</h3><p class="m">Full list within 24 hours</p></div>
+    </div>
+  </section>
+
+  <!-- Signals -->
+  <section class="lane">
+    <div class="lh"><h2><em>3</em>Website Visitor Signals</h2><span class="rate">Factors.ai names the company, then nothing</span></div>
+    <div class="flow">
+      <div class="node weak"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png">Company seen<small>credits 75% used</small></div>
+      <div class="link bad"><em>S2</em></div>
+      <div class="node bad"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png">Fit shortlist<small>noise, no scoring</small></div>
+      <div class="link bad"><em>S4</em></div>
+      <div class="node bad"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/apollo.io.png">Buyer contact<small>none found</small></div>
+      <div class="link bad"><em>S1</em></div>
+      <div class="node bad"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/slack.svg">Outreach<small>no owner</small></div>
+      <div class="link"><em>ok</em></div>
+      <div class="node"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/cal.com.png">Meeting<small>booked</small></div>
+    </div>
+    <div class="cards c4">
+      <div class="card bad"><h3><u>S1</u>Alerts have no owner</h3><p class="m">Acted on in 1 day</p></div>
+      <div class="card bad"><h3><u>S2</u>More noise than buyers</h3><p class="m">% of shortlist that fits</p></div>
+      <div class="card"><h3><u>S3</u>Credits run low early</h3><p class="m">Cost per ideal-fit account</p></div>
+      <div class="card bad"><h3><u>S4</u>Names, not people</h3><p class="m">Meetings from outreach</p></div>
+    </div>
+  </section>
+
+  <div class="bottom">
+    <div class="gap">
+      <div class="tools">
+        <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/salesforce.svg">Salesforce</span>
+        <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png">Factors.ai</span>
+        <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/googleanalytics.svg">Analytics</span>
+        <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/cal.com.png">Cal.com</span>
+      </div>
+      <div><div class="tag">Gap under all three lanes</div><p><b>Leads live in four tools.</b> No single weekly view shows leads, meetings and no-shows by channel.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <header>
+    <img src="file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/logo.png" alt="AccuKnox">
+    <div class="tag">Role brief &middot; 2 of 2</div>
+  </header>
+
+  <div class="top">
+    <h1>10 plays to run<br><span>in your first 90 days</span></h1>
+    <p class="lede">Each play closes one or more weak links from page 1. You pick the order with us in week one.</p>
+  </div>
+
+  <div class="kit">
+    <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/linkedin.com.png">LinkedIn</span>
+    <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png">Factors.ai</span>
+    <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/salesforce.svg">Salesforce</span>
+    <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/googleanalytics.svg">Google Analytics</span>
+    <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/cal.com.png">Cal.com</span>
+    <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/slack.svg">Slack</span>
+    <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/gmail.svg">Gmail</span>
+    <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/apollo.io.png">Apollo</span>
+    <span class="chip"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/claude.ai.png">Claude</span>
+  </div>
+
+  <section class="sec">
+    <div class="sh"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/linkedin.com.png"><h2>Organic LinkedIn</h2></div>
+    <div class="plays" style="grid-template-columns:repeat(3,1fr)">
+      <div class="play"><div class="row"><div class="ics"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/linkedin.com.png"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/googleanalytics.svg"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png"></div><span class="num">PLAY 1</span></div>
+        <h3>Tag every post</h3><p>One tracked link per post. One dashboard from post to lead.</p><div class="closes"><b>L1</b><b class="w">L3</b></div></div>
+      <div class="play"><div class="row"><div class="ics"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/linkedin.com.png"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/claude.ai.png"></div><span class="num">PLAY 2</span></div>
+        <h3>The monthly map post</h3><p>A dated map or stack visual in line one. No engagement bait.</p><div class="closes"><b class="w">L2</b></div></div>
+      <div class="play"><div class="row"><div class="ics"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/linkedin.com.png"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/accuknox-mark.png"></div><span class="num">PLAY 3</span></div>
+        <h3>Receipts, with the loss</h3><p>Real benchmark, the method, and where we lost.</p><div class="closes"><b class="w">L2</b></div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/accuknox-mark.png"><h2>Webinars</h2></div>
+    <div class="plays" style="grid-template-columns:repeat(3,1fr)">
+      <div class="play"><div class="row"><div class="ics"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/salesforce.svg"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/apollo.io.png"></div><span class="num">PLAY 4</span></div>
+        <h3>The 48-hour list pipeline</h3><p>Dedupe, enrich, tag the source, load to the CRM.</p><div class="closes"><b>W1</b></div></div>
+      <div class="play"><div class="row"><div class="ics"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/gmail.svg"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/linkedin.com.png"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png"></div><span class="num">PLAY 5</span></div>
+        <h3>The 8-touch ladder</h3><p>Email, a LinkedIn touch, and a site-visit trigger.</p><div class="closes"><b class="w">W2</b></div></div>
+      <div class="play"><div class="row"><div class="ics"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/accuknox-mark.png"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/linkedin.com.png"></div><span class="num">PLAY 6</span></div>
+        <h3>The partner webinar kit</h3><p>One promo pack, lead-share terms, an events page block.</p><div class="closes"><b class="w">W3</b></div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png"><h2>Website Visitor Signals</h2></div>
+    <div class="plays" style="grid-template-columns:repeat(4,1fr)">
+      <div class="play"><div class="row"><div class="ics"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png"></div><span class="num">PLAY 7</span></div>
+        <h3>Score the signal</h3><p>Fit plus pricing, demo and comparison views. Log false alarms.</p><div class="closes"><b>S2</b><b class="w">S3</b></div></div>
+      <div class="play"><div class="row"><div class="ics"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/slack.svg"></div><span class="num">PLAY 8</span></div>
+        <h3>A 24-hour owner</h3><p>Every alert gets a name and a next step.</p><div class="closes"><b>S1</b></div></div>
+      <div class="play"><div class="row"><div class="ics"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/apollo.io.png"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/claude.ai.png"></div><span class="num">PLAY 9</span></div>
+        <h3>Find 3 buyers per account</h3><p>Roles, then a message tied to the page they read.</p><div class="closes"><b>S4</b></div></div>
+      <div class="play"><div class="row"><div class="ics"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/salesforce.svg"><img class="ic" src="file:///D:/AccuKnox/help/drafts/icons/factors.ai.png"></div><span class="num">PLAY 10</span></div>
+        <h3>The 14-day receipt</h3><p>Trace one account, signal by signal, to a meeting.</p><div class="closes"><b>S4</b><b>S1</b></div></div>
+    </div>
+  </section>
+
+  <section class="sec fixed">
+    <div class="sh"><h2>Your First Four Weeks</h2></div>
+    <div class="weeks">
+      <div class="wk"><div class="n">Week 1</div><h3>Track it</h3><p>Play 1. One lead view.</p></div>
+      <div class="wk"><div class="n">Week 2</div><h3>Clean it</h3><p>Play 4. Lists in 48 hours.</p></div>
+      <div class="wk"><div class="n">Week 3</div><h3>Score it</h3><p>Plays 7 and 8. Owner named.</p></div>
+      <div class="wk"><div class="n">Week 4</div><h3>Ship it</h3><p>Play 2. First weekly report.</p></div>
+    </div>
+  </section>
+
+  <div class="goal">
+    <div><div class="tag">Proposed 90-day goal</div><div class="l">Website leads a month, each tied to a channel and a source.</div></div>
+    <div class="gn">25 <s>&rarr;</s> 50</div>
+    <div class="r">Metrics are proposed. We agree them with you in week one.</div>
+  </div>
+</div>
+
+</body>
+</html>

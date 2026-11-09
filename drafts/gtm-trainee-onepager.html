@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GTM Engineer Trainee: 10 Problems to Own</title>
+<style>
+@font-face{font-family:"Inter";font-weight:400;src:url("file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/fonts/Inter-Regular.ttf")}
+@font-face{font-family:"Inter";font-weight:500;src:url("file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/fonts/Inter-Medium.ttf")}
+@font-face{font-family:"Inter";font-weight:600;src:url("file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/fonts/Inter-SemiBold.ttf")}
+@font-face{font-family:"Inter";font-weight:700;src:url("file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/fonts/Inter-Bold.ttf")}
+@page{size:A4;margin:0}
+:root{--blue:#1040C5;--bright:#0F7FFF;--navy:#000025;--ink:#263238;--ink3:#607D8B;--rule:#DDE5EC;--tint:#F5F8FF;
+--ok:#04B745;--weak:#D98E00;--weak-bg:#FFF6E0;--bad:#D63637;--bad-bg:#FEF1F1;--ok-bg:#E8F8EE}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:210mm;height:297mm;background:#fff}
+body{font-family:"Inter",sans-serif;color:var(--ink);padding:11mm 12mm 8mm;display:flex;flex-direction:column;font-size:7.6pt;line-height:1.38}
+header{display:flex;justify-content:space-between;align-items:center}
+header img{height:6.4mm}
+.tag{font-size:7pt;font-weight:600;color:var(--blue);letter-spacing:.06em;text-transform:uppercase}
+.top{display:flex;justify-content:space-between;align-items:flex-end;margin-top:5mm;gap:8mm}
+h1{font-size:20pt;line-height:1.08;font-weight:700;color:var(--navy);letter-spacing:-.02em}
+.lede{font-size:8.6pt;color:var(--ink);max-width:78mm;text-align:left}
+.stats{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:3mm;margin-top:4.4mm}
+.stat{background:var(--tint);border-radius:2.6mm;padding:3mm 3.6mm}
+.stat b{display:block;font-size:17pt;line-height:1;font-weight:700;color:var(--navy);letter-spacing:-.02em}
+.stat b s{text-decoration:none;color:var(--bad)}
+.stat span{display:block;margin-top:1.2mm;font-size:7.2pt;color:var(--ink3)}
+.key{display:flex;gap:4mm;margin-top:3.6mm;font-size:7pt;color:var(--ink3);align-items:center}
+.key i{display:inline-block;width:5mm;height:0;border-top:.6mm solid;vertical-align:middle;margin-right:1.4mm}
+.key .a i{border-color:var(--ok)} .key .b i{border-color:var(--weak);border-top-style:dashed} .key .c i{border-color:var(--bad);border-top-style:dashed}
+.key b{color:var(--ink);font-weight:600}
+.lane{margin-top:3.2mm;border:1px solid var(--rule);border-radius:3mm;padding:3mm 3.4mm 3.2mm}
+.lh{display:flex;justify-content:space-between;align-items:baseline}
+.lh h2{font-size:10.4pt;font-weight:700;color:var(--navy);letter-spacing:-.01em}
+.lh span{font-size:7pt;color:var(--ink3)}
+.flow{display:flex;align-items:center;margin-top:2.4mm}
+.node{flex:1;text-align:center;border:.5mm solid var(--ok);background:var(--ok-bg);border-radius:2mm;padding:2.1mm 1mm;font-weight:600;color:var(--navy);font-size:7.2pt;line-height:1.25}
+.node small{display:block;font-weight:400;font-size:6.4pt;color:var(--ink3);margin-top:.4mm}
+.node.weak{border-color:var(--weak);background:var(--weak-bg)}
+.node.bad{border-color:var(--bad);background:var(--bad-bg)}
+.link{width:15mm;position:relative;height:9mm;flex:none}
+.link:before{content:"";position:absolute;left:0;right:0;top:50%;border-top:.6mm solid var(--ok)}
+.link:after{content:"";position:absolute;right:0;top:50%;margin-top:-1mm;border-left:1.6mm solid var(--ok);border-top:1mm solid transparent;border-bottom:1mm solid transparent}
+.link.weak:before{border-color:var(--weak);border-top-style:dashed}.link.weak:after{border-left-color:var(--weak)}
+.link.bad:before{border-color:var(--bad);border-top-style:dashed}.link.bad:after{border-left-color:var(--bad)}
+.link em{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-style:normal;font-weight:700;font-size:6.6pt;color:#fff;background:var(--ok);border-radius:1.6mm;padding:.3mm 1.3mm;z-index:2}
+.link.weak em{background:var(--weak)}.link.bad em{background:var(--bad)}
+.cards{display:grid;gap:2.2mm;margin-top:2.6mm}
+.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+.card{border-radius:1.8mm;padding:2mm 2.2mm;border-top:.7mm solid var(--weak);background:var(--weak-bg)}
+.card.bad{border-top-color:var(--bad);background:var(--bad-bg)}
+.card h3{font-size:7.3pt;font-weight:700;color:var(--navy);line-height:1.25}
+.card h3 u{text-decoration:none;color:var(--weak);margin-right:1mm}.card.bad h3 u{color:var(--bad)}
+.card p{font-size:6.8pt;color:var(--ink);margin-top:.9mm;line-height:1.32}
+.card p b{font-weight:600;color:var(--navy)}
+.card .m{margin-top:.9mm;color:var(--blue);font-weight:600}
+.bottom{display:grid;grid-template-columns:1.9fr 1fr;gap:3mm;margin-top:3.6mm}
+.gap{background:var(--bad-bg);border-radius:2.6mm;padding:3.2mm 3.8mm;border-left:1mm solid var(--bad)}
+.gap p{margin-top:1.2mm;font-size:7.6pt;color:var(--ink)}.gap p b{color:var(--navy)}
+.goal{background:var(--navy);border-radius:2.6mm;padding:3.2mm 3.8mm;color:#fff}
+.goal .tag{color:#9CC6FB}.goal p{font-size:7.2pt;color:#DDE5EC;margin-top:.8mm}
+.goal .gn{font-size:19pt;font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em;margin-top:1mm}.goal .gn s{text-decoration:none;color:#4F9CF9}
+.foot{margin-top:auto;padding-top:2.6mm;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:6mm;font-size:7pt;color:var(--ink3)}
+.foot b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <img src="file:///D:/AccuKnox/help/.claude/skills/accuknox-gated-content/assets/logo.png" alt="AccuKnox">
+  <div class="tag">Role brief &middot; October 2026</div>
+</header>
+
+<div class="top">
+  <h1>GTM Engineer Trainee:<br>10 weak links to fix</h1>
+  <p class="lede">Your job is to double our website leads. Three organic channels carry the work, with no paid ads. Each lane below shows the path from effort to lead, and where it breaks.</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><b>~25</b><span>website leads a month. Organic search ~10, LinkedIn ~5, webinars ~4, partners ~3.</span></div>
+  <div class="stat"><b>2,062 <s>&rarr; 3</s></b><span>companies Factors.ai identified in 15 days, against inbound leads in a similar fortnight.</span></div>
+  <div class="stat"><b>171 of 1,196</b><span>webinar guests were duplicates in one upload. 30 more had no company name.</span></div>
+</div>
+
+<div class="key">
+  <span class="a"><i></i><b>Working</b></span>
+  <span class="b"><i></i><b>Weak link</b> leaks leads</span>
+  <span class="c"><i></i><b>Broken link</b> loses leads</span>
+</div>
+
+<!-- LinkedIn -->
+<section class="lane">
+  <div class="lh"><h2>1 &nbsp;Organic LinkedIn</h2><span>About 5 leads a month</span></div>
+  <div class="flow">
+    <div class="node">Technical asset<small>blog, benchmark, release</small></div>
+    <div class="link weak"><em>L2</em></div>
+    <div class="node weak">LinkedIn post<small>made ad hoc</small></div>
+    <div class="link bad"><em>L1</em></div>
+    <div class="node bad">Click<small>no tracked link</small></div>
+    <div class="link weak"><em>L3</em></div>
+    <div class="node weak">Site visit<small>account unknown</small></div>
+    <div class="link"><em>ok</em></div>
+    <div class="node">Demo request<small>form or booking</small></div>
+  </div>
+  <div class="cards c3">
+    <div class="card bad"><h3><u>L1</u>No post has a tracked path to a lead</h3><p><b>Fix:</b> one tracked-link standard and a post-to-lead dashboard.</p><p class="m">Metric: 80% of LinkedIn leads trace to a post</p></div>
+    <div class="card"><h3><u>L2</u>Assets reach LinkedIn one at a time</h3><p><b>Fix:</b> a flow that turns one asset into 3 to 5 posts.</p><p class="m">Metric: post set within 3 days of every asset</p></div>
+    <div class="card"><h3><u>L3</u>Visitors are not matched to target accounts</h3><p><b>Fix:</b> a weekly list of target accounts from LinkedIn.</p><p class="m">Metric: accounts handed to sales each week</p></div>
+  </div>
+</section>
+
+<!-- Webinars -->
+<section class="lane">
+  <div class="lh"><h2>2 &nbsp;Webinars</h2><span>About 4 leads a month. Best converting source.</span></div>
+  <div class="flow">
+    <div class="node">Webinar<small>own and partner</small></div>
+    <div class="link weak"><em>W3</em></div>
+    <div class="node weak">Registrant list<small>partners hold it</small></div>
+    <div class="link bad"><em>W1</em></div>
+    <div class="node bad">Clean CRM record<small>late, duplicated</small></div>
+    <div class="link weak"><em>W2</em></div>
+    <div class="node weak">Follow-up<small>one 3-email set</small></div>
+    <div class="link"><em>ok</em></div>
+    <div class="node">Demo request<small>qualified contact</small></div>
+  </div>
+  <div class="cards c3">
+    <div class="card bad"><h3><u>W1</u>Lists arrive late, dirty and duplicated</h3><p><b>Fix:</b> one registration-to-CRM pipeline with a source tag.</p><p class="m">Metric: hours from event end to clean load</p></div>
+    <div class="card"><h3><u>W2</u>Follow-up stops at one sequence</h3><p>Buyers need 8 to 10 touches. <b>Fix:</b> add a LinkedIn touch and a site-visit trigger.</p><p class="m">Metric: qualified contacts per webinar</p></div>
+    <div class="card"><h3><u>W3</u>Partner webinars have no standard kit</h3><p>6+ are planned for Nov and Dec. <b>Fix:</b> one promo pack and lead-share terms.</p><p class="m">Metric: full list within 24 hours</p></div>
+  </div>
+</section>
+
+<!-- Signals -->
+<section class="lane">
+  <div class="lh"><h2>3 &nbsp;Website Visitor Signals</h2><span>Factors.ai names the company, then nothing happens</span></div>
+  <div class="flow">
+    <div class="node weak">Company identified<small>credits 75% used</small></div>
+    <div class="link bad"><em>S2</em></div>
+    <div class="node bad">Ideal-fit shortlist<small>noise, no scoring</small></div>
+    <div class="link bad"><em>S4</em></div>
+    <div class="node bad">Buyer contact<small>none found</small></div>
+    <div class="link bad"><em>S1</em></div>
+    <div class="node bad">Outreach<small>no owner, no SLA</small></div>
+    <div class="link"><em>ok</em></div>
+    <div class="node">Meeting<small>booked</small></div>
+  </div>
+  <div class="cards c4">
+    <div class="card bad"><h3><u>S1</u>Alerts have no owner</h3><p>17 lost deals returned in 15 days. <b>Fix:</b> a named owner and a 24-hour rule.</p><p class="m">Metric: alerts acted on in 1 business day</p></div>
+    <div class="card bad"><h3><u>S2</u>More noise than buyers</h3><p>Careers is our #2 page. <b>Fix:</b> score on fit plus pricing, demo, case-study views.</p><p class="m">Metric: % of shortlist that fits</p></div>
+    <div class="card"><h3><u>S3</u>Credits run low early</h3><p>75% used by 23 Oct. <b>Fix:</b> spend only on ideal-fit accounts.</p><p class="m">Metric: cost per ideal-fit account</p></div>
+    <div class="card bad"><h3><u>S4</u>Names, not people</h3><p><b>Fix:</b> 2 to 3 buyer contacts and a message tied to the page read.</p><p class="m">Metric: meetings from signal outreach</p></div>
+  </div>
+</section>
+
+<section class="bottom">
+  <div class="gap">
+    <div class="tag" style="color:var(--bad)">Gap under all three lanes</div>
+    <p><b>Leads live in four places.</b> Salesforce, Factors.ai, Google Analytics and an inbound sheet each hold part of the story. No single weekly view shows leads, meetings and no-shows by channel. The inbound report for 10 to 23 October lists 3 leads and 1 no-show.</p>
+  </div>
+  <div class="goal">
+    <div class="tag">Proposed 90-day goal</div>
+    <p class="gn">25 <s>&rarr;</s> 50</p>
+    <p>website leads a month, with every lead tied to a channel and a source.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div><b>Start with the red links:</b> L1, W1, S1, S2, S4. You own one weekly report on leads by channel.</div>
+  <div>Metrics are proposed. We agree them in week one.</div>
+</footer>
+</body>
+</html>

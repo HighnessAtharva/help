@@ -20,7 +20,14 @@
       "Skill(firecrawl-parse)",
       "Skill(firecrawl-parse:*)",
       "Bash(gh api *)",
-      "Bash(git fetch *)"
+      "Bash(git fetch *)",
+      "Bash(py -3.11 -c ' *)",
+      "mcp__bbe4ee69-345e-49c4-afae-021de05e9ee0__get_meeting_transcript",
+      "Bash(cd /d/AccuKnox/help; ls .claude/skills/accuknox-pptx-rebrand/ .claude/skills/accuknox-pptx-rebrand/* .claude/skills/accuknox-rfp-filler/ references/competitive/ 2>&1 | head -150; ls /d/AccuKnox/agentz-docs 2>&1 | head; ls \"/c/Users/AtharvaShah/.claude/projects/D--AccuKnox-help/memory/\" | grep -E \"deck-covers|marketing-file|inter-only\")",
+      "mcp__eeb60128-7d10-4c7a-8f92-18d546a60a8b__search_files",
+      "mcp__eeb60128-7d10-4c7a-8f92-18d546a60a8b__read_file_content",
+      "Bash(cd /d/AccuKnox/help/.claude/skills/accuknox-pptx-rebrand; grep -n -i -E \"cover|contents|toc|agenda|divider|template|kit.js|tplCover|ink strip\" references/human-made-look.md | head -50; ls /d/AccuKnox/doc-ppt-template/ 2>&1 | head -30; find /d/AccuKnox -maxdepth 4 -name kit.js -not -path \"*/node_modules/*\" 2>/dev/null | head)",
+      "Bash(grep -v \"^$\")"
     ]
   }
 }

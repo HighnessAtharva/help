@@ -4,7 +4,7 @@
 Input: a folder or .zip with one subfolder per email list. Each list folder holds
 four Excel files: bounce_, unsubscribe_, open_click_ and click_details_.
 
-Output: report.md, summary.json, link_table.csv and human_clickers.csv.
+Output: report.html, summary.json, link_table.csv and human_clickers.csv.
 The output holds customer emails. Never write it inside a git repo.
 
 Run with: python3 -I analyze.py --input <dir or zip> [--sent "NAT CRM=12000,TGACRM=20000"]
@@ -13,6 +13,7 @@ Needs only openpyxl.
 import argparse
 import collections
 import csv
+import html
 import json
 import math
 import re
@@ -359,10 +360,190 @@ def domain_tables(lists, res):
     return human_dom, scanner_dom, bounce_dom
 
 
-def table(headers, rows):
-    out = ["| " + " | ".join(headers) + " |", "|" + "|".join("---" for _ in headers) + "|"]
-    out += ["| " + " | ".join(str(c) for c in r) + " |" for r in rows]
-    return "\n".join(out)
+def esc(x):
+    return html.escape(str(x), quote=True)
+
+
+CSS = """
+:root{--bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--ink2:#424245;--mute:#6e6e73;--line:#d2d2d7;--soft:#ececf0;
+--blue:#0066cc;--blue-bg:#e8f1fb;--gray-bar:#c7c7cc;--red:#c0271d;--red-bg:#fdecea;--amber:#8a5a00;--amber-bg:#fff4dc;
+--green:#1a7f37;--green-bg:#e6f4ea;--r:18px;color-scheme:light}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:48px 24px 72px}
+h1{font-size:2.25rem;line-height:1.1;letter-spacing:-.02em;margin:0 0 6px;font-weight:700;text-wrap:balance}
+h2{font-size:1.5rem;letter-spacing:-.015em;margin:56px 0 16px;font-weight:700;text-wrap:balance}
+h3{font-size:1.0625rem;margin:0 0 12px;font-weight:600}
+p,li,span,b{overflow-wrap:anywhere}p{margin:0}
+.sub{color:var(--mute);font-size:1.0625rem}
+.card{background:var(--card);border-radius:var(--r);padding:28px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.lead{font-size:1.375rem;line-height:1.35;letter-spacing:-.01em;font-weight:600;max-width:46ch;text-wrap:pretty;margin-bottom:24px}
+.facts{display:flex;flex-wrap:wrap;gap:28px;margin-top:26px;padding-top:22px;border-top:1px solid var(--soft)}
+.fact b{display:block;font-size:1.75rem;line-height:1.1;letter-spacing:-.02em;font-weight:700;font-variant-numeric:tabular-nums}
+.fact span{color:var(--mute);font-size:.9375rem}
+.lbar{margin:18px 0}
+.lbar .hd{display:flex;justify-content:space-between;gap:12px;font-size:.9375rem;margin-bottom:8px;flex-wrap:wrap}
+.lbar .hd b{font-weight:600}
+.lbar .hd span{color:var(--mute);font-variant-numeric:tabular-nums}
+.track{display:flex;height:22px;border-radius:11px;overflow:hidden;background:var(--soft)}
+.seg-h{background:var(--blue);min-width:3px}
+.seg-s{background:var(--gray-bar)}
+.seg-u{background:repeating-linear-gradient(45deg,#e3e3e8 0 6px,#f1f1f4 6px 12px)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;color:var(--mute);font-size:.875rem}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:baseline}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.chip{padding:6px 14px;border-radius:999px;font-weight:600;font-size:.9375rem}
+.chip.fail{background:var(--red-bg);color:var(--red)}
+.chip.warn{background:var(--amber-bg);color:var(--amber)}
+.chip.ok{background:var(--green-bg);color:var(--green)}
+.checks{list-style:none;margin:0;padding:0}
+.checks li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;padding:12px 0;border-top:1px solid var(--soft);align-items:baseline}
+.checks li:first-child{border-top:0}
+.pill{display:inline-block;text-align:center;padding:2px 0;border-radius:8px;font-size:.8125rem;font-weight:700;width:56px}
+.pill.fail{background:var(--red-bg);color:var(--red)}
+.pill.warn{background:var(--amber-bg);color:var(--amber)}
+.pill.ok{background:var(--green-bg);color:var(--green)}
+.checks .t{font-weight:600}
+.checks .d{display:block;color:var(--mute);font-size:.9375rem}
+details{margin-top:8px}
+summary{cursor:pointer;color:var(--blue);font-weight:600;padding:10px 0}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.two>div,.card.col{padding:28px}
+.ticks{list-style:none;margin:0;padding:0}
+.ticks li{position:relative;padding:10px 0 10px 34px;border-top:1px solid var(--soft);font-size:1rem}
+.ticks li:first-child{border-top:0}
+.ticks li::before{position:absolute;left:0;top:10px;width:22px;height:22px;border-radius:50%;text-align:center;font-size:.8125rem;font-weight:700;line-height:22px}
+.ticks.good li::before{content:"\\2713";background:var(--green-bg);color:var(--green)}
+.ticks.bad li::before{content:"!";background:var(--red-bg);color:var(--red)}
+ol.recs{margin:0;padding:0;list-style:none;counter-reset:r}
+ol.recs li{counter-increment:r;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;padding:14px 0;border-top:1px solid var(--soft)}
+ol.recs li:first-child{border-top:0}
+ol.recs li::before{content:counter(r);width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:.8125rem;display:grid;place-items:center}
+.bars{list-style:none;margin:0;padding:0}
+.bars li{padding:12px 0;border-top:1px solid var(--soft)}
+.bars li:first-child{border-top:0}
+.bars .nm{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.bars a{color:var(--ink);text-decoration:none;font-weight:500;overflow-wrap:anywhere}
+.bars a:hover{color:var(--blue);text-decoration:underline}
+.bars .n{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bars .meta{color:var(--mute);font-size:.875rem;margin-top:2px}
+.bar{height:8px;border-radius:4px;background:var(--soft);margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--blue);border-radius:4px;min-width:2px}
+.bar.zero i{background:var(--gray-bar)}
+.note{color:var(--mute);font-size:.9375rem;margin:-6px 0 12px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+table{width:100%;border-collapse:collapse;font-size:.9375rem;font-variant-numeric:tabular-nums}
+th{text-align:left;color:var(--mute);font-weight:600;font-size:.8125rem;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:10px;border-bottom:1px solid var(--soft)}
+td.r,th.r{text-align:right}
+.scroll{overflow-x:auto}
+.foot{margin-top:56px;color:var(--mute);font-size:.875rem}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:4px}
+@media (max-width:760px){.wrap{padding:28px 16px 56px}h1{font-size:1.75rem}.two,.three{grid-template-columns:minmax(0,1fr)}.card{padding:20px}.lead{font-size:1.1875rem}}
+@media print{body{background:#fff}.card{box-shadow:none;border:1px solid var(--line);break-inside:avoid}h2{break-after:avoid}.wrap{padding:0}details>*{display:block}}
+"""
+
+
+def render_html(month, res, checks, work, notw, rec, top5, worst5, hdom, sdom, bdom, links, hum, scan, clickers, sent):
+    fails = sum(1 for c in checks if c[0] == "FAIL")
+    warns = sum(1 for c in checks if c[0] == "WARN")
+    oks = sum(1 for c in checks if c[0] == "OK")
+    det_names = ", ".join(n for n, r in res.items() if r["has_details"])
+    if clickers:
+        lead = (f"In {esc(det_names)}, {pct(scan, clickers)} of reported clickers are security scanners. "
+                f"Only {hum} of {clickers:,} are likely people.")
+    else:
+        lead = "No click details were found, so real readers cannot be counted."
+    h = [f"<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>"
+         f"<title>AccuKnox Newsletter Clicks, {esc(month)}</title><style>{CSS}</style></head><body><main class='wrap'>"]
+    h.append(f"<h1>Newsletter Clicks</h1><p class='sub'>AccuKnox newsletter, {esc(month)}</p>")
+
+    # hero
+    h.append("<section class='card' style='margin-top:28px'>")
+    h.append(f"<p class='lead'>{lead}</p>")
+    for n, r in res.items():
+        if r["has_details"]:
+            tot = max(r["clickers"], 1)
+            hp, sp = 100 * len(r["humans"]) / tot, 100 * len(r["scanners"]) / tot
+            h.append(f"<div class='lbar'><div class='hd'><b>{esc(n)}</b><span>{len(r['humans'])} people, {len(r['scanners']):,} scanners, {r['clickers']:,} clickers in detail</span></div>"
+                     f"<div class='track' role='img' aria-label='{len(r['humans'])} human and {len(r['scanners'])} scanner clickers'>"
+                     f"<div class='seg-h' style='width:{hp:.2f}%'></div><div class='seg-s' style='width:{sp:.2f}%'></div></div></div>")
+        else:
+            h.append(f"<div class='lbar'><div class='hd'><b>{esc(n)}</b><span>{r['click_state']:,} reported clickers, no click detail file</span></div>"
+                     f"<div class='track' role='img' aria-label='unchecked'><div class='seg-u' style='width:100%'></div></div></div>")
+    h.append("<div class='legend'><span><i class='dot' style='background:var(--blue)'></i>Likely people</span>"
+             "<span><i class='dot' style='background:var(--gray-bar)'></i>Security scanners</span>"
+             "<span><i class='dot' style='background:#e3e3e8'></i>Not checked</span></div>")
+    h.append(f"<div class='facts'><div class='fact'><b>{hum}</b><span>likely people</span></div>"
+             f"<div class='fact'><b>{pct(scan, clickers) if clickers else 'n/a'}</b><span>scanner share</span></div>"
+             f"<div class='fact'><b>{fails} / {warns}</b><span>data FAIL / WARN</span></div></div></section>")
+
+    # sanity
+    h.append("<h2>The Data Check Found Gaps to Fix</h2><section class='card'>")
+    h.append(f"<div class='chips'><span class='chip fail'>{fails} fail</span><span class='chip warn'>{warns} warn</span><span class='chip ok'>{oks} ok</span></div>")
+    order = {"FAIL": 0, "WARN": 1, "OK": 2}
+    bad = [c for c in sorted(checks, key=lambda c: order[c[0]]) if c[0] != "OK"]
+    good = [c for c in checks if c[0] == "OK"]
+    row = lambda c: (f"<li><span class='pill {c[0].lower()}'>{c[0]}</span><span><span class='t'>{esc(c[1])}</span>"
+                     f"<span class='d'>{esc(c[2])}</span></span></li>")
+    h.append("<ul class='checks'>" + "".join(row(c) for c in bad) + "</ul>")
+    if good:
+        h.append("<details><summary>Passed checks</summary><ul class='checks'>" + "".join(row(c) for c in good) + "</ul></details>")
+    h.append("</section>")
+
+    # working / not working
+    h.append("<h2>What Works and What Does Not</h2><div class='two'>")
+    h.append("<section class='card'><h3>Working</h3><ul class='ticks good'>" + "".join(f"<li>{esc(x)}</li>" for x in work) + "</ul></section>")
+    h.append("<section class='card'><h3>Not working</h3><ul class='ticks bad'>" + "".join(f"<li>{esc(x)}</li>" for x in notw) + "</ul></section></div>")
+
+    # recommend
+    h.append("<h2>What We Recommend Next</h2><section class='card'><ol class='recs'>" + "".join(f"<li><span>{esc(x)}</span></li>" for x in rec) + "</ol></section>")
+
+    # links
+    def bars(L, zero_ok):
+        mx = max([x["human_clickers"] for x in top5] + [1])
+        out = ["<ul class='bars'>"]
+        for x in L:
+            w = 100 * x["human_clickers"] / mx
+            cls = " zero" if x["human_clickers"] == 0 else ""
+            out.append(f"<li><div class='nm'><a href='{esc(x['link'])}' target='_blank' rel='noopener noreferrer'>{esc(short(x['link'], 58))}</a>"
+                       f"<span class='n'>{x['human_clickers']}</span></div>"
+                       f"<div class='bar{cls}'><i style='width:{w:.1f}%'></i></div>"
+                       f"<div class='meta'>{esc(x['type'])} &middot; {x['scanner_clickers']:,} scanners &middot; {x['raw_clicks']:,} raw clicks</div></li>")
+        out.append("</ul>")
+        return "".join(out)
+    tie = sum(1 for x in links if worst5 and x["human_clickers"] == worst5[0]["human_clickers"])
+    h.append("<h2>The Links People Clicked and Skipped</h2><p class='note'>Bars show likely people, not raw clicks.</p><div class='two'>")
+    h.append(f"<section class='card'><h3>Top 5</h3>{bars(top5, False)}</section>")
+    h.append(f"<section class='card'><h3>Worst 5</h3><p class='note'>{tie} links tie at {worst5[0]['human_clickers'] if worst5 else 0} people. Ties show the most scanner-hit link first.</p>{bars(worst5, True)}</section></div>")
+
+    # companies
+    def dtable(title, head, data):
+        rows = "".join(f"<tr><td>{esc(d)}</td><td class='r'>{n}</td></tr>" for d, n in data) or "<tr><td colspan='2'>None</td></tr>"
+        return f"<section class='card'><h3>{title}</h3><table><tr><th>Email domain</th><th class='r'>{head}</th></tr>{rows}</table></section>"
+    h.append("<h2>Which Companies Engage, Bounce and Scan</h2><div class='three'>")
+    h.append(dtable("Top 5 by people", "People", hdom.most_common(5)))
+    h.append(dtable("Worst 5 by bounces", "Bounced", bdom.most_common(5)))
+    h.append(dtable("Scanner-heavy", "Scanners", sdom.most_common(5)))
+    h.append("</div><p class='note' style='margin-top:12px'>Ignore clicks from scanner-heavy companies when sales picks leads.</p>")
+
+    # numbers
+    h.append("<h2>The Numbers by List</h2><section class='card'><div class='scroll'><table><tr><th>List</th><th class='r'>Campaign</th><th class='r'>Sent</th><th class='r'>Tracked</th>"
+             "<th class='r'>Click</th><th class='r'>Open</th><th class='r'>Bounced</th><th class='r'>Unsub</th><th class='r'>Clickers in detail</th><th class='r'>Scanners</th><th class='r'>People</th></tr>")
+    for n, r in res.items():
+        s = next((v for k, v in sent.items() if norm(k) == norm(n)), None)
+        cells = [esc(n), r["campaign_id"] or "?", f"{s:,}" if s else "not given", f"{r['tracked']:,}", f"{r['click_state']:,}", f"{r['open_state']:,}",
+                 f"{r['bounced']:,}", r["unsub"], f"{r['clickers']:,}" if r["has_details"] else "no file",
+                 f"{len(r['scanners']):,}" if r["has_details"] else "n/a", len(r["humans"]) if r["has_details"] else "n/a"]
+        h.append("<tr>" + f"<td>{cells[0]}</td>" + "".join(f"<td class='r'>{c}</td>" for c in cells[1:]) + "</tr>")
+    h.append("</table></div><p class='note' style='margin-top:12px'>Tracked means people with any event. It is not the sent count.</p>")
+    h.append(f"<details><summary>How scanners are found</summary><p class='note'>A newsletter link is a link clicked by at least {TEMPLATE_SHARE:.0%} of a list's clickers. "
+             f"A scanner is a clicker who hit at least {SCANNER_COVERAGE:.0%} of those links. The export has no click timestamps, so speed cannot be tested. "
+             "Treat the scanner count as a strong estimate.</p></details></section>")
+    h.append("<p class='foot'>Made by the newsletter-clicks skill. This file holds company names only. The people list is in human_clickers.csv beside it.</p>")
+    h.append("</main></body></html>")
+    return "".join(h)
 
 
 def write_outputs(out, lists, res, checks, months, sent, month_arg):
@@ -373,47 +554,8 @@ def write_outputs(out, lists, res, checks, months, sent, month_arg):
     fails = sum(1 for c in checks if c[0] == "FAIL")
     warns = sum(1 for c in checks if c[0] == "WARN")
 
-    md = [f"# AccuKnox Newsletter Clicks, {month}", ""]
-    detail_names = ", ".join(n for n, r in res.items() if r["has_details"])
-    tail = f"The data check found {fails} FAIL and {warns} WARN."
-    if clickers:
-        md.append(f"In {detail_names}, {pct(scan, clickers)} of reported clickers are security scanners. "
-                  f"Only {hum} of {clickers} clickers are likely people. {tail}")
-    else:
-        md.append(f"No click details were found. {tail}")
-    md += ["", "## Data Sanity Check", "", table(["Status", "Check", "Detail"], [(s, c, d) for s, c, d in sorted(checks, key=lambda c: ("FAIL", "WARN", "OK").index(c[0]))]), ""]
-    md += ["## What Is Working", ""] + [f"- {x}" for x in work] + [""]
-    md += ["## What Is Not Working", ""] + [f"- {x}" for x in notw] + [""]
-    md += ["## What We Recommend", ""] + [f"{i}. {x}" for i, x in enumerate(rec, 1)] + [""]
-    cols = ["Rank", "Link", "Type", "Human clickers", "Scanner clickers", "Raw clicks"]
-    fmt = lambda L: [(i, short(x["link"]), x["type"], x["human_clickers"], x["scanner_clickers"], x["raw_clicks"]) for i, x in enumerate(L, 1)]
-    md += ["## Top 5 Links by Human Clickers", "", table(cols, fmt(top5)), ""]
-    tie = sum(1 for x in links if x["human_clickers"] == worst5[0]["human_clickers"]) if worst5 else 0
-    md += ["## Worst 5 Links by Human Clickers", "",
-           f"{tie} links tie at {worst5[0]['human_clickers'] if worst5 else 0} human clickers. Ties break on raw clicks, highest first.", "",
-           table(cols, fmt(worst5)), ""] if worst5 else []
-    md += ["## Top 5 Companies by Human Clickers", "",
-           table(["Rank", "Email domain", "Human clickers"], [(i, d, n) for i, (d, n) in enumerate(hdom.most_common(5), 1)]), ""]
-    md += ["## Worst 5 Companies by Bounces", "",
-           table(["Rank", "Email domain", "Bounced addresses"], [(i, d, n) for i, (d, n) in enumerate(bdom.most_common(5), 1)]), ""]
-    md += ["## Scanner-Heavy Companies", "", "These domains have the most machine clickers. Do not treat their clicks as intent.", "",
-           table(["Rank", "Email domain", "Scanner clickers"], [(i, d, n) for i, (d, n) in enumerate(sdom.most_common(5), 1)]), ""]
-    rows = []
-    for n, r in res.items():
-        s = next((v for k, v in sent.items() if norm(k) == norm(n)), None)
-        rows.append((n, r["campaign_id"] or "?", s or "not given", r["tracked"], r["click_state"], r["open_state"],
-                     r["bounced"], r["unsub"],
-                     r.get("clickers", "no file"), len(r["scanners"]) if r["has_details"] else "n/a",
-                     len(r["humans"]) if r["has_details"] else "n/a"))
-    md += ["## Numbers by List", "",
-           table(["List", "Campaign", "Sent", "Tracked", "Click state", "Open state", "Bounced", "Unsubscribed",
-                  "Clickers in detail", "Scanner clickers", "Human clickers"], rows), "",
-           "Tracked means people with any event. It is not the sent count. Reported clicks use the Click state.", "",
-           "## How Scanners Are Detected", "",
-           f"A newsletter link is a link clicked by at least {TEMPLATE_SHARE:.0%} of clickers in a list. "
-           f"A scanner is a clicker who hit at least {SCANNER_COVERAGE:.0%} of those links. "
-           "The export has no click timestamps, so speed cannot be tested. Treat the scanner count as a strong estimate."]
-    (out / "report.md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    page = render_html(month, res, checks, work, notw, rec, top5, worst5, hdom, sdom, bdom, links, hum, scan, clickers, sent)
+    (out / "report.html").write_text(page, encoding="utf-8")
 
     with open(out / "link_table.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
@@ -469,7 +611,7 @@ def main():
     out = Path(a.out).expanduser() if a.out else Path.home() / "Atharva/AccuKnox/newsletter-reports" / slug
     out.mkdir(parents=True, exist_ok=True)
     fails, warns, clickers, scan, hum = write_outputs(out, lists, res, checks, months, sent, a.month)
-    print(f"Report: {out / 'report.md'}")
+    print(f"Report: {out / 'report.html'}")
     print(f"Sanity: {fails} FAIL, {warns} WARN | clickers {clickers}, scanners {scan}, human {hum}")
     if tmp:
         tmp.cleanup()

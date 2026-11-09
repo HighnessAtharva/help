@@ -33,13 +33,14 @@ Add `--window m` on the first run to look back a month. The sheet lands in `draf
 
 To watch another tool, add one line to `TOOLS` in `scripts/run.py`. To change the opening line, edit `OPENER` in the same file.
 
-## Five Rules Keep the Run Safe and Cheap
+## Six Rules Keep the Run Safe and Cheap
 
 1. Send nothing. The routine only builds the sheet, and a person reviews it first.
 2. LinkedIn job pages stay out of step 1 because Firecrawl refuses linkedin.com. A LinkedIn job title that names a tool can still be added through treg.
 3. The sheet holds personal emails, so keep it internal and out of git. `drafts/` is untracked.
 4. Check the Firecrawl balance with `firecrawl credit-usage` before a manual run. The free plan gives 1,000 credits a month.
-5. The script imports `common.py` from `D:\Atharva\NOTES\SCRIPTS\gtm`. Restore the vault first on a new PC.
+5. The script imports `common.py` from the vault at `NOTES/SCRIPTS/gtm` (`D:\Atharva\...` on the Windows PC, `~/Atharva/...` on the Mac). Restore the vault first on a new PC.
+6. treg changes its people-search fields without notice. On 2026-11-09 it switched to `name` and `profile_url`, and the run returned 0 people. `run.py` reads both shapes. If people drop to 0 again, run `treg call treg.people.search --data '{"company_domain":"leidos.com","title":"security","limit":5}'` and compare the fields.
 
 ## Sources
 

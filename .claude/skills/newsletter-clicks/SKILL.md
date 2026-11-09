@@ -33,7 +33,7 @@ The script writes four files to `~/Atharva/AccuKnox/newsletter-reports/<month>/`
 
 | File | Holds |
 |---|---|
-| `report.md` | The full report |
+| `report.html` | The full visual report. Open it in a browser. It prints cleanly to PDF. |
 | `summary.json` | The same facts for scripts |
 | `link_table.csv` | Every link with human, scanner and raw clicks |
 | `human_clickers.csv` | People who clicked and are not scanners, for sales |
@@ -70,7 +70,7 @@ The export has no click timestamps, so click speed cannot be tested. Say "strong
 
 ## Judge the Result, Then Add Your Own Read
 
-The script writes the verdicts from fixed rules. Read `report.md` before you answer, then add what the rules cannot see.
+The script writes the verdicts from fixed rules. Read `report.html` (or `summary.json`) before you answer, then add what the rules cannot see.
 
 1. Open the top 5 links. Name the topic that won, and say why it fits the audience.
 2. Open the worst 5 links. Check whether a zero-click link is there on purpose, such as a webinar the sales team needs.

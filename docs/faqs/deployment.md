@@ -49,7 +49,7 @@ hide:
 ??? "**6. Does AccuKnox integrate with virtualization platforms such as VMware or Hyper-V?**"
     No. AccuKnox does not integrate directly with VMware, Hyper-V, KVM or Nutanix AHV. Instead, AccuKnox **secures the VMs you create on these platforms**.
 
-    - **Agentless**: AccuKnox scans VMs through snapshots.
+    - **Agentless**: AccuKnox scans VMs through snapshots on AWS, GCP, Azure and OpenShift. See [FAQ 14](#nutanix-oci-agentless) for Nutanix and OCI.
     - **Agent-based**: AccuKnox scans VMs with lightweight scanning agents.
 
 ??? "**7. What is the typical timeline for a Proof of Concept (PoC)?**"
@@ -82,6 +82,27 @@ hide:
     - **Europe**: [app.eu.accuknox.com](https://app.eu.accuknox.com)
     - **Middle East**: [app.me.accuknox.com](https://app.me.accuknox.com)
     - **India**: [app.in.accuknox.com](https://app.in.accuknox.com)
+
+??? "**11. Which capabilities run agentless, and which need agents?**"
+    **CSPM, CIEM, vulnerability management and part of CWPP run fully agentless.** The agentless part of CWPP covers cluster misconfiguration and KIEM.
+
+    Two areas need agents:
+
+    - **Runtime security**: VMs, containers and Kubernetes need the KubeArmor agent. See [Runtime Security Architecture](../getting-started/runtime-sec-arch.md).
+    - **Vulnerability and malware scans of some VMs**: VMs that agentless mode cannot reach, such as VMs in a private cloud, need the agent-based scan.
+
+    For the resources the agent uses, see [runtime security FAQ 10](runtime-security.md).
+
+??? "**12. Can agentless cloud and VM scanning report to an on-premises or air-gapped Control Plane?**"
+    **Yes.** Agentless cloud scanning and agentless VM scanning both report to an on-premises or air-gapped AccuKnox Control Plane. You do not need SaaS for them. See [Deployment](../resources/deployment.md) and the [On-Premise Installation Guide](../getting-started/on-prem-installation-guide.md).
+
+??? "**13. Can AccuKnox run fully on premises in Japan? Is there a Japan SaaS region?**"
+    **Yes for on premises.** AccuKnox supports a full on-premises installation in Japan, including Tokyo.
+
+    AccuKnox SaaS runs in four regions today: US, Europe, Middle East and India. No Japan SaaS instance exists yet. If a customer needs one, AccuKnox can add that environment. Contact AccuKnox to plan it. See FAQ 10 for the region list.
+
+??? "**14. Is agentless VM scanning available for Nutanix and OCI VMs?** { #nutanix-oci-agentless }"
+    **No, not yet.** Agentless VM scanning is live on AWS, GCP, Azure and OpenShift. It is not live for Nutanix or OCI VMs. Use the agent-based scan for those VMs. See [Cloud Based VM Scanning (Agentless)](../how-to/vm-security/agentless/cloud-vm-scanning.md).
 
 ---
 

@@ -36,5 +36,6 @@ Both dates are `YYYY-MM-DD`, and `<end-date>` is the date the report was generat
 | 2026-10-06 to 2026-10-13 | [2026-10-06_to_2026-10-13.md](2026-10-06_to_2026-10-13.md) |
 | 2026-10-19 to 2026-10-26 | [2026-10-19_to_2026-10-26.md](2026-10-19_to_2026-10-26.md) |
 | 2026-10-26 to 2026-11-02 | [2026-10-26_to_2026-11-02.md](2026-10-26_to_2026-11-02.md) |
+| 2026-11-02 to 2026-11-09 | [2026-11-02_to_2026-11-09.md](2026-11-02_to_2026-11-09.md) |
 
 New reports are appended automatically each week by the scheduled task — see the task instructions for the generation and delivery workflow.

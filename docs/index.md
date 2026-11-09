@@ -1210,7 +1210,7 @@ hide:
                 <a href="/getting-started/ciem-onboarding/" class="action-btn" target="_blank">Onboarding</a>
             </div>
             <div class="module-detail-title">
-                Identity Security (CIEM) <span class="agentless-badge">Coming Soon</span>
+                Identity Security (CIEM) <span class="agentless-badge">Agentless</span>
             </div>
             <div class="module-description">
                 List the users, groups and roles in your AWS, GCP, Azure and Oracle cloud accounts, see the policies attached to each one, and follow the access chain as a graph.

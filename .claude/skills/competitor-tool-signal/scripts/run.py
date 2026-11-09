@@ -15,14 +15,18 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
-sys.path.insert(0, r"D:\Atharva\NOTES\SCRIPTS\gtm")
+import os  # noqa: E402
+
+# Windows PC keeps the vault on D:, the Mac keeps it under ~/Atharva.
+_WIN = os.name == "nt"
+sys.path.insert(0, r"D:\Atharva\NOTES\SCRIPTS\gtm" if _WIN else str(Path.home() / "Atharva/NOTES/SCRIPTS/gtm"))
 from common import Ledger, output, stamp  # noqa: E402
 from openpyxl import Workbook  # noqa: E402
 from openpyxl.styles import Font, PatternFill  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 STATE = HERE.parent / ".state"
-OUT = Path(r"D:\AccuKnox\help\drafts\competitor-signal")
+OUT = HERE.parents[3] / "drafts" / "competitor-signal"
 STATE.mkdir(exist_ok=True)
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -220,10 +224,15 @@ def main():
     for c in new.values():
         d = L.treg_call("treg.people.search", body={"company_domain": c["domain"], "title": "security", "limit": 25}, max_cost=0.05)
         for p in (output(d) or {}).get("people", []) if d else []:
-            if p.get("first_name") and p.get("title") and p.get("employee_linkedin"):
-                people[p["employee_linkedin"]] = {
-                    "name": f'{p["first_name"]} {p["last_name"]}'.strip(), "first": p["first_name"], "last": p["last_name"],
-                    "title": p["title"], "linkedin": p["employee_linkedin"], "company": c["name"], "domain": c["domain"],
+            # treg returns "name" and "profile_url" (a LinkedIn slug). Older runs returned first_name, last_name, employee_linkedin.
+            full = (p.get("name") or f'{p.get("first_name", "")} {p.get("last_name", "")}').strip()
+            first, _, last = full.partition(" ")
+            slug = p.get("employee_linkedin") or p.get("profile_url") or ""
+            link = slug if slug.startswith("http") else (f"https://www.linkedin.com/in/{slug}" if slug else "")
+            if first and last and p.get("title") and link:
+                people[link] = {
+                    "name": full, "first": first, "last": last,
+                    "title": p["title"], "linkedin": link, "company": c["name"], "domain": c["domain"],
                     "employees": c["employees"], "industry": c["industry"], "tool": ", ".join(sorted(c["tools"])),
                     "job": c["job"], "job_url": c["job_url"]}
 
