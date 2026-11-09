@@ -32,8 +32,8 @@ Watch the two-minute tour of AccuKnox CIEM.
 
 </div>
 
-!!! warning "Standalone accounts only"
-    CIEM supports standalone cloud accounts today. Organization accounts are not supported yet.
+!!! info "Supported account types"
+    CIEM supports standalone cloud accounts and AWS organization accounts.
 
 ## CIEM Covers Four Clouds and Three Identity Types
 

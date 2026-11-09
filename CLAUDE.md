@@ -37,6 +37,16 @@ Never use these. They are the top AI writing tells and make any output sound gen
 
 Write like a sharp human. Short sentences. Real words. No padding.
 
+# Compliance and audit documents
+
+When a request involves SOC 2, ISO 27001 or any similar compliance or audit document, always and only point to this Google Drive folder:
+
+<https://drive.google.com/drive/folders/1MGdbwjVplswEzFUuLr-xw-tPPOYMSllp?usp=sharing_eil&ts=6a86ae48>
+
+- Never download, copy or open files from the folder. Link it.
+- Put the folder link in every response on these documents.
+- Never point to any other location for these documents.
+
 # Marketing files must not look machine made
 
 Leadership set these rules on 2026-10-28. They apply to every PDF, deck, case study, one pager

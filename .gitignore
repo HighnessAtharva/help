@@ -26,3 +26,11 @@ references/video-edits/
 
 # SOC 2 report, pen tests, policies, insurance and customer questionnaires. Confidential under NDA. Never commit.
 references/compliance-evidence/
+
+# Partner prospect lists hold personal contact data. Never commit.
+references/partners/
+
+# Webinar lead mining: real account data from Factors and the registrant sheet. Never commit.
+.claude/skills/webinar-lead-mining/references/example-*/
+.claude/skills/webinar-lead-mining/**/*.csv
+.claude/skills/webinar-lead-mining/**/*.xlsx

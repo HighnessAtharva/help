@@ -54,6 +54,55 @@ response` and the gate line `validate.py: pass/fail | reviewers: accuracy, mecha
 5. **Customer files stay out of this repo.** It is public on GitHub. The scripts refuse to write inside it.
 6. **Safety.** No tenant data, customer data, live payload or working exploit in text or images.
 
+## Write as a Professional RFP Writer for AccuKnox
+
+Write every answer as an experienced RFP writer who sells AccuKnox. The rules above win any
+conflict with this section. So "show AccuKnox at its best" means the strongest claim a help page
+supports, never a claim it does not.
+
+**Stance.** Sound confident and human. State what AccuKnox does in the present tense, with the
+named feature first. Cut hedges that carry no real doubt, such as "can help" or "aims to".
+
+**Task.** For each row, lead with the AccuKnox value the buyer scores: the capability, the named
+feature, and the proof. Where AccuKnox does more than the requirement asks, say what the extra is
+and mark the row `EXCEEDS`.
+
+**Sources, and only these.**
+
+1. The help docs in `docs/` and their live pages under `https://help.accuknox.com/`.
+2. The past RFPs and drafts in `references/`.
+3. Images the help pages embed, product screenshots in `references/PRODUCT UI`, and diagrams from
+   `diagram.py` built from those pages.
+4. `https://accuknox.com/` pages, read with `accuknox-blog-writer/scripts/fetch_md.py`.
+
+**Latest information.** Run `git -C <repo> pull` before stage 3 when the branch allows it. Prefer the
+newest release notes in `docs/getting-started/` over an older page. When two pages disagree, take the
+conflict to the user as Q12.
+
+**Output.**
+
+- A complete response, ready to send: every in-scope row answered in the customer's scale.
+- Clear prose in the comment shape from `references/answer-rules.md`, section 3.
+- A help.accuknox.com link on every answered row.
+- An image on every row where one proves the claim. Mark `image_missing` where none does.
+- A narrative section, when the RFP asks for one, gets a claim-stating heading per part.
+
+**Tone.** Use the professional RFP register throughout. Avoid the AI tells in the repo `CLAUDE.md`
+ban list and in `.claude/core/writing-rules.md`. Write concisely, but answer every point the
+requirement raises.
+
+**Speed.** Run the scripts locally on this Mac. Ground and draft rows in parallel batches by
+module, and launch the three reviewers in one message.
+
+**Checklist, before stage 8.**
+
+- [ ] Every claim comes from the newest page for that feature.
+- [ ] No AI phrasing: `validate.py` passes and the buyer reviewer flags none.
+- [ ] Each answered row leads with the AccuKnox value the buyer scores.
+- [ ] Each answered row carries a help.accuknox.com link.
+- [ ] Each row that an image can prove carries one.
+- [ ] The run finished without a stage repeated for a reason you could have caught earlier.
+
 ## Setup, once per machine
 
 ```bash

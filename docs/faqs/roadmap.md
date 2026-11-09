@@ -8,7 +8,7 @@ hide:
 # Roadmap
 
 ??? "**1. Is there support for CIEM?**"
-    **Yes.** Identity Security (CIEM) is a new AccuKnox module. It lists the users, groups and roles in your AWS, GCP, Azure and Oracle cloud accounts, shows the policies attached to each one, and draws the access chain as a graph. See [CIEM Overview](../getting-started/ciem-overview.md) and [CIEM Onboarding](../getting-started/ciem-onboarding.md).
+    **Yes.** Identity Security (CIEM) is a new AccuKnox module. It is generally available and supports AWS organization accounts. It lists the users, groups and roles in your AWS, GCP, Azure and Oracle cloud accounts, shows the policies attached to each one, and draws the access chain as a graph. See [CIEM Overview](../getting-started/ciem-overview.md) and [CIEM Onboarding](../getting-started/ciem-onboarding.md).
 
     For Kubernetes identities, use **KIEM** (Kubernetes Identity & Entitlement Management). KIEM is part of the Kubernetes Security (KSPM) module, which also handles cluster misconfiguration detection and CIS K8s benchmark findings.
 

@@ -16,7 +16,7 @@ Run AccuKnox as SaaS, in your own cloud account, on premises, or in an air-gappe
 
 ## SaaS
 
-![AccuKnox SaaS deployment. Cloud accounts, Kubernetes, VMs and bare metal, and AI models feed an agentless scan, which connects over read-only cloud APIs to the AccuKnox Control Plane hosted by AccuKnox](images/deployment/saas-deployment-diagram.svg)
+![AccuKnox SaaS deployment. Cloud accounts, Kubernetes, VMs, and AI models feed an agentless scan, which connects over read-only cloud APIs to the AccuKnox Control Plane hosted by AccuKnox](images/deployment/saas-deployment-diagram.svg)
 
 AccuKnox hosts the control plane, so you install nothing. An agentless scan reads your environment over read-only cloud APIs and sends the results to the AccuKnox Control Plane. The control plane returns findings, policies and an AI-BOM, and the first findings arrive the same day.
 
@@ -24,7 +24,7 @@ The agentless scan covers four source types.
 
 - **Cloud accounts.** AWS, Azure, GCP and OCI.
 - **Kubernetes.** OpenShift, EKS and AKS.
-- **VMs and bare metal.** VMware and Nutanix.
+- **VMs.** Cloud VMs on AWS, GCP and Azure, and OpenShift virtual machines. Nutanix and OCI VMs use the agent-based scan.
 - **AI models and agents.** vLLM and Hugging Face.
 
 | Control plane | Setup | Best for |

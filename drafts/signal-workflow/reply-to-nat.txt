@@ -1,0 +1,23 @@
+Subject: Re: Fwd: Danaher
+To: nat@accuknox.com
+Attach: AccuKnox-hiring-signal-leads-2026-10-28.xlsx, workflow-graph.png
+
+Nat,
+
+We can do this ourselves with treg, the pay-as-you-go data tool I have installed. I ran the same signal Aaron used: a security job post from the last 30 days about cloud-native, container, CI/CD or AI security.
+
+Result: 28 qualified leads at 12 companies, each with a verified work email and the job post to open the email with. The sheet is attached. Example: Andy Losey, Director, Cloud Security at Warner Bros. Discovery, which is hiring a Cloud Security Architect.
+
+Why run it ourselves:
+
+1. No flat rate. This run cost about $0.73.
+2. It runs inside Claude Code agents, so we put our own workflow on top.
+3. A daily routine can mine new signals like this one.
+
+If one data provider misses an email, treg tries the next. The attached graph shows the 7 steps. For another signal, we change step 1 only: a new CISO, a funding round, a CVE, a compliance deadline.
+
+The sheet has personal emails, so keep it internal.
+
+Should I schedule it daily and send you the new leads?
+
+Atharva

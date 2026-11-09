@@ -16,7 +16,7 @@ Turn on CIEM when you onboard a cloud account, then open **Identities > CIEM** t
 
 | Item | Requirement |
 |---|---|
-| Account type | A standalone AWS, GCP, Azure or OCI account. CIEM does not support organization accounts yet |
+| Account type | A standalone AWS, GCP, Azure or OCI account, or an AWS organization account. The steps below cover a standalone account |
 | Cloud-side setup | The prerequisites for your cloud in [AWS](../how-to/aws-onboarding.md), [GCP](../how-to/gcp-onboarding.md), [Azure](../how-to/azure-onboarding.md) or [Oracle](../how-to/oracle-onboarding.md) onboarding |
 | Terraform | Terraform on your workstation, for the AWS script step |
 

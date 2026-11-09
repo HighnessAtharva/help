@@ -80,6 +80,46 @@
         "D:/AccuKnox/help-dspm/site"
       ],
       "port": 8018
+    },
+    {
+      "name": "help-site",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8030",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "D:\\AccuKnox\\help\\site"
+      ],
+      "port": 8030
+    },
+    {
+      "name": "help-live-mac",
+      "runtimeExecutable": "/private/tmp/claude-501/-Users-atharva--claude-spares-spare-lqB4nk/f75d2ec2-21a1-45cd-81e4-d564b84cd082/scratchpad/venv/bin/mkdocs",
+      "runtimeArgs": [
+        "serve",
+        "-f",
+        "/Users/atharva/Atharva/AccuKnox/help/mkdocs.yml",
+        "--dirty",
+        "-a",
+        "127.0.0.1:8040"
+      ],
+      "port": 8040
+    },
+    {
+      "name": "help-banner-mac",
+      "runtimeExecutable": "/private/tmp/claude-501/-Users-atharva--claude-spares-spare-lqB4nk/f75d2ec2-21a1-45cd-81e4-d564b84cd082/scratchpad/venv/bin/mkdocs",
+      "runtimeArgs": [
+        "serve",
+        "-f",
+        "/Users/atharva/Atharva/AccuKnox/help-banner-wt/mkdocs.yml",
+        "--dirty",
+        "-a",
+        "127.0.0.1:8041"
+      ],
+      "port": 8041
     }
   ]
 }

@@ -376,13 +376,14 @@ def body_versus(job):
     v = job["vendor"]
     name = VENDORS[v]
     lead, par, trail = tally(0, v)
-    strengths = "".join(f"<li><b>{E(a)}</b> {E(b)}</li>" for a, b in S["strengths"][v])
+    strengths = "".join(f"<li><b>{E(a)}</b> {E(b)}</li>" for a, b in S.get("strengths", {}).get(v, []))
+    strong_box = f'<div class="strong"><h4>Where {E(name)} is strong</h4><ul>{strengths}</ul></div>' if strengths else ""
     b = [
         f'<div class="eyebrow">Summary</div><h2 class="big">{TOTAL} capabilities compared</h2>'
         f'<p class="lede">AccuKnox leads on {lead} rows, matches {E(name)} on {par} and trails on {trail}.</p>'
         f"{board([0, v])}{legend()}"
         f'<h3 class="band">Where AccuKnox is different</h3>{diff_rows([0, v])}'
-        f'<div class="strong"><h4>Where {E(name)} is strong</h4><ul>{strengths}</ul></div>'
+        f"{strong_box}"
     ]
     for sec in SECTIONS:
         rows = []

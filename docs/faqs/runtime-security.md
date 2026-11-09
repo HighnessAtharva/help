@@ -92,6 +92,18 @@ hide:
 
     These flags mark the operator as Red Hat certified. The operator then meets OpenShift's SCC requirements and deploys.
 
+??? "**10. How much CPU and memory does KubeArmor use on each node?**"
+    KubeArmor sets these resource values:
+
+    | Resource | Request | Limit |
+    | --- | --- | --- |
+    | CPU | 200m | 500m |
+    | Memory | 300 MiB | 500 MiB |
+
+    Plan this headroom on every node that runs KubeArmor. Inline enforcement does not slow your workloads. See FAQ 7.
+
+    On VMs, the agent-based scan service has its own cap. By default it uses at most 2 GB of memory and 10% of CPU. See [Linux agent-based scanning](../how-to/vm-security/agent-based/linux.md).
+
 ---
 
 [SCHEDULE DEMO](https://www.accuknox.com/contact-us){ .md-button .md-button--primary }

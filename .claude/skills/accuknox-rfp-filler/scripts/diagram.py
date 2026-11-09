@@ -46,10 +46,17 @@ MONO_STACK = "Consolas, 'Courier New', monospace"
 def _font(size, bold=False, mono=False):
     names = (["consolab.ttf"] if bold else ["consola.ttf"]) if mono else \
             (["Inter-Bold.ttf", "segoeuib.ttf", "arialbd.ttf"] if bold else ["Inter-Regular.ttf", "segoeui.ttf", "arial.ttf"])
+    if mono:
+        names = names + ["Menlo.ttc"]
+    font_dirs = [r"C:\Windows\Fonts", os.path.expanduser("~/Library/Fonts"), "/Library/Fonts",
+                 "/System/Library/Fonts",
+                 os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              "..", "..", "accuknox-gated-content", "assets", "fonts")]
     for n in names:
-        p = os.path.join(r"C:\Windows\Fonts", n)
-        if os.path.isfile(p):
-            return ImageFont.truetype(p, size)
+        for d in font_dirs:
+            p = os.path.join(d, n)
+            if os.path.isfile(p):
+                return ImageFont.truetype(p, size)
     return ImageFont.load_default()
 
 

@@ -68,7 +68,7 @@
 
     <rect x="48.5" y="256.5" width="251" height="63" rx="12" fill="#fff" stroke="#A8BFF3"/>
     <rect x="64" y="271" width="34" height="34" rx="8" fill="#E3EBFD"/><use href="#i-server" x="72" y="279" width="18" height="18"/>
-    <text class="ct" x="111" y="285">VMs &amp; bare metal</text><text class="cs" x="111" y="303">VMware · Nutanix</text>
+    <text class="ct" x="111" y="285">VMs</text><text class="cs" x="111" y="303">AWS · GCP · Azure · OpenShift</text>
 
     <rect x="48.5" y="332.5" width="251" height="63" rx="12" fill="#fff" stroke="#A8BFF3"/>
     <rect x="64" y="347" width="34" height="34" rx="8" fill="#E3EBFD"/><use href="#i-chip" x="72" y="355" width="18" height="18"/>
