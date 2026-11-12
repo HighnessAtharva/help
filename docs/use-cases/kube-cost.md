@@ -5,7 +5,7 @@ description: What Kube-Cost can do. Kubernetes cost by cluster, node, namespace 
 
 # Kubernetes cost visibility with Kube-Cost
 
-Kube-Cost tells you what a Kubernetes cluster costs, which node, namespace and workload spent the money, and whether the capacity you pay for is used. It shows CPU, memory, GPU and network cost beside the usage, request and limit of the same resource, so every cost figure comes with the evidence to act on it. Cost allocation follows the [OpenCost allocation rules](#kube-cost-allocates-cost-by-the-rules).
+Kube-Cost tells you what a Kubernetes cluster costs, which node, namespace and workload spent the money, and whether the capacity you pay for is used. It shows CPU, memory, GPU and network cost beside the usage, request and limit of the same resource, so every cost figure comes with the evidence to act on it. Cost allocation follows the [Allocation Rules](#kube-cost-allocates-cost-by-the-rules).
 
 ## What Kube-Cost can do
 
