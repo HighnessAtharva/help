@@ -692,6 +692,7 @@ nav:
       - "Network Micro-segmentation" : "use-cases/network-segmentation.md"
       - "Cluster Misconfiguration Scan" : "use-cases/cluster-misconfiguration-scanning.md"
       - "Mitigate Supply Chain Attacks with KnoxGuard" : "use-cases/knoxguard-supply-chain.md"
+    - "Kubernetes Cost Visibility (Kube-Cost)": "use-cases/kube-cost.md"
     - "VM Security":
         - "Introduction" : "use-cases/vm-overview.md"
         - "Host Vulnerability / Malware Scan": "use-cases/vm-host-scan.md"

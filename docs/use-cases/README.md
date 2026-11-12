@@ -46,6 +46,7 @@ Use-case walkthroughs that show AccuKnox capabilities applied to real security s
 | [kiem.md](kiem.md) | Manage Kubernetes permissions, detect events, and enhance security with AccuKnox’s centralized identity management. |
 | [knoxguard-supply-chain.md](knoxguard-supply-chain.md) | Learn how to mitigate supply chain attacks with KnoxGuard by blocking deployments that use images from untrusted registries. |
 | [kspm.md](kspm.md) | KSPM provides a security framework for Kubernetes, continuously assessing configurations and detecting misconfigurations to prevent security breaches. |
+| [kube-cost.md](kube-cost.md) | What Kube-Cost can do. Kubernetes cost by cluster, node, namespace and workload, with usage, efficiency, idle cost, data coverage and a month-end forecast. |
 | [mfa-dast.md](mfa-dast.md) | Run a DAST scan on MFA-enabled apps with GitHub CI/CD, using OWASP Juice Shop to detect vulnerabilities and analyze security risks. |
 | [modelarmor-adverserial-attacks.md](modelarmor-adverserial-attacks.md) | Understand how attackers manipulate AI models with imperceptible input changes to cause incorrect predictions and security risks. |
 | [modelarmor-deploy-pytorch.md](modelarmor-deploy-pytorch.md) | ModelArmor is a security solution that helps you secure your machine learning models by enforcing security policies and best practices. |
