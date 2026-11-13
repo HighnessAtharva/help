@@ -23,6 +23,30 @@ at the very top of the page, before the header.
 
 
 {#
+Algolia DocSearch v5 replaces the built-in Material search.
+The search button renders into #docsearch (see partials/search.html).
+The Ask AI sidepanel renders into #docsearch-sidepanel.
+The API key is a public search-only key, safe to ship in the page.
+Logic lives in docs/javascripts/algolia-search.js.
+#}
+{% block extrahead %}
+  {{ super() }}
+  <link rel="preconnect" href="https://ycpzkrylsm-dsn.algolia.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@5.2.0/dist/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@5.2.0/dist/sidepanel.css">
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <div id="docsearch-sidepanel"></div>
+  {# Loads first: it reroutes Ask AI calls before DocSearch keeps a copy of fetch. #}
+  <script src="{{ 'javascripts/algolia-search.js' | url }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@5.2.0/dist/umd/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@docsearch/sidepanel-js@5.2.0/dist/umd/index.js"></script>
+{% endblock %}
+
+
+{#
 Page titles. The theme default appends " - {site_name}", and site_name is
 empty, so every tab title ended in a stray " -". Use the brand instead.
 #}

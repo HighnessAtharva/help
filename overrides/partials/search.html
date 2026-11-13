@@ -1,0 +1,10 @@
+{#
+Algolia DocSearch replaces the built-in Material search box.
+docs/javascripts/algolia-search.js mounts the search button into #docsearch.
+The DocSearch scripts load at the end of <body> in overrides/main.html.
+
+The built-in search box stays in the page, hidden. If Algolia fails to load
+or does not answer, the script switches the page to the built-in search.
+#}
+<div id="docsearch" class="ak-docsearch"></div>
+{% include "partials/search-local.html" %}
