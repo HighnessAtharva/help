@@ -293,6 +293,9 @@ nav:
     - "AI Security (AI-SPM)":
       - "Overview": "how-to/aiml-overview.md"
       - "Architecture": "getting-started/ai-security-arch.md"
+      - "AI Gateway":
+        - "Overview": "getting-started/ai-gateway-overview.md"
+        - "Onboarding": "getting-started/ai-gateway-onboarding.md"
       - "SaaS vs On-Prem": "how-to/aiml-saas-vs-onprem.md"
       - "SDK LLM Defense": "how-to/llm-defense-app-onboard.md"
       - "Runtime Defense (API Method)": "how-to/aiml-runtime-onboard.md"
@@ -626,6 +629,7 @@ nav:
       - "AI-DR (AI Detection and Response)": "use-cases/aidr.md"
       - "Shadow AI Discovery": "use-cases/shadow-ai-discovery.md"
       - "Prompt Firewall": "use-cases/prompt-firewall-overview.md"
+      - "AI Gateway": "use-cases/ai-gateway.md"
       - "Red Teaming": "use-cases/red-teaming.md"
       - "Jupyter Notebook": "use-cases/jupyter-notebook.md"
       - "ModelArmor":
