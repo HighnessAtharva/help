@@ -7,7 +7,7 @@ description: Connect Microsoft Copilot Studio to AgentZ so your Prompt Firewall 
 
 AgentZ checks every tool call a Microsoft Copilot Studio agent makes, before the tool runs. Copilot Studio sends the conversation and the tool call to AgentZ. AgentZ runs your Prompt Firewall guardrails and answers allow or block. A blocked call never reaches the tool, and the user sees that the action was blocked.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LmMvT-rI_Dk" title="Prompt Firewall for Copilot Studio Agents With AgentZ" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" style="aspect-ratio: 16 / 9" src="https://www.youtube.com/embed/LmMvT-rI_Dk" title="Prompt Firewall for Copilot Studio Agents With AgentZ" frameborder="0" allowfullscreen></iframe>
 
 ## AgentZ Answers Before the Tool Runs
 
@@ -26,7 +26,7 @@ A tool call is anything the agent does beyond its own reasoning: a web search, a
 
 Start in AgentZ. Go to **External agents** > **Add external agent** > **Microsoft Copilot Studio**. The panel lists every command below with your values filled in. Copy the commands from the panel.
 
-![The AgentZ Add external agent panel lists the Sign in, Create an app and Add AgentZ commands](./images/copilot-studio-agentz/step-03-agentz-panel.png)
+![The AgentZ Add external agent panel lists the Sign in, Create an app and Add AgentZ commands](./images/copilot-studio-agentz/step-03-agentz-panel.png){ width="520" }
 
 ### Step 1: Sign In to Azure
 
@@ -72,7 +72,7 @@ A message that the service principal already exists is fine. The app is register
 
 Check that the three IDs are filled in. Click **Add connection**.
 
-![The AgentZ form with the tenant ID, client ID and environment ID filled in](./images/copilot-studio-agentz/step-05-add-connection.png)
+![The AgentZ form with the tenant ID, client ID and environment ID filled in](./images/copilot-studio-agentz/step-05-add-connection.png){ width="480" }
 
 ### Step 6: Add the Federated Credential
 
@@ -101,22 +101,22 @@ az ad app federated-credential create --id <your application client ID> --parame
 5. Paste the Azure Entra App ID and the endpoint link from AgentZ.
 6. Set the error behavior to **Block the query** and click **Save**.
 
-    ![The setup panel with data sharing on and the App ID and endpoint fields](./images/copilot-studio-agentz/step-07b-set-up-panel.png)
+    ![The setup panel with data sharing on and the App ID and endpoint fields](./images/copilot-studio-agentz/step-07b-set-up-panel.png){ width="720" }
 
 AgentZ shows **Validated by Microsoft** when the link works.
 
-![The AgentZ panel shows Validated by Microsoft](./images/copilot-studio-agentz/step-07c-validated.png)
+![The AgentZ panel shows Validated by Microsoft](./images/copilot-studio-agentz/step-07c-validated.png){ width="480" }
 
 ### Step 8: Add a Guardrail
 
 1. In AgentZ, open the Copilot Studio connection and go to **Policies**.
 2. Add a check. For a first test, block phone numbers with a regular expression.
 
-    ![A check named Block phone numbers that uses a regular expression and blocks on a match](./images/copilot-studio-agentz/step-08a-guardrail-check.png)
+    ![A check named Block phone numbers that uses a regular expression and blocks on a match](./images/copilot-studio-agentz/step-08a-guardrail-check.png){ width="520" }
 
 3. Pick the policy for the agent and click **Save guardrails**.
 
-    ![The Policies tab with the policy picked for the Copilot Studio agent](./images/copilot-studio-agentz/step-08b-policy-on-agent.png)
+    ![The Policies tab with the policy picked for the Copilot Studio agent](./images/copilot-studio-agentz/step-08b-policy-on-agent.png){ width="480" }
 
 ### Step 9: Test the Agent
 
