@@ -95,7 +95,8 @@ Run every command from the repo root.
    `vedit.py <project> qc B05:3 B12:7 ...` renders chosen frames into
    `output/qc_grid_N.jpg`. Read every grid for a label that covers UI text, a box that misses
    its target, or a frozen frame with an overlay in it. Check the hook with
-   `qc HOOK:0.5 HOOK:2 HOOK:3.5 HOOK:5` before any voice credit is spent.
+   `qc HOOK:0.5 HOOK:1.4 HOOK:2.2 HOOK:3.4 HOOK:4.5` before any voice credit is spent. The hook
+   is calm by default: two shots, dissolves, no flash. Read the hook rules in the playbook.
 
     Render a 20 s preview first and run the hook test on it. `qc.py hook` exits 1 on any fail.
     A preview writes `<name>_preview.mp4` and never overwrites the full render.

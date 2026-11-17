@@ -48,16 +48,17 @@ FP = find_tool("ffprobe")
 
 def first_font(*names):
     for n in names:
-        for d in (r"C:\Windows\Fonts", "/usr/share/fonts/truetype/dejavu", "/Library/Fonts"):
+        for d in (r"C:\Windows\Fonts", "/usr/share/fonts/truetype/dejavu", "/Library/Fonts",
+                  os.path.expanduser("~/Library/Fonts"), "/System/Library/Fonts/Supplemental"):
             p = os.path.join(d, n)
             if os.path.exists(p):
                 return p
     return None
 
 
-FONT_B = first_font("segoeuib.ttf", "DejaVuSans-Bold.ttf", "Arial Bold.ttf")
-FONT_SB = first_font("seguisb.ttf", "DejaVuSans-Bold.ttf", "Arial Bold.ttf")
-FONT_R = first_font("segoeui.ttf", "DejaVuSans.ttf", "Arial.ttf")
+FONT_B = first_font("segoeuib.ttf", "DejaVuSans-Bold.ttf", "Inter-Bold.ttf", "Arial Bold.ttf")
+FONT_SB = first_font("seguisb.ttf", "DejaVuSans-Bold.ttf", "Inter-SemiBold.ttf", "Arial Bold.ttf")
+FONT_R = first_font("segoeui.ttf", "DejaVuSans.ttf", "Inter-Regular.ttf", "Arial.ttf")
 ACCENT = (255, 176, 32)   # amber highlight
 INK = (17, 24, 39)        # label background
 
@@ -566,7 +567,10 @@ def hook_ctx(src, dur):
         st = sh["t"] if "t" in sh else sh["a"] + p * (sh["b"] - sh["a"])
         v = sh.get("view") or P.default_view
         if isinstance(v[0], tuple):
-            v = tuple(v[0][j] + (v[1][j] - v[0][j]) * p for j in range(3))
+            # Steady hook: frame on the target view and drift only the last 20% of the way in,
+            # so the fact is readable from the first frame. Punchy: the full push.
+            k = 0.8 + 0.2 * p if brand.is_calm(P.hook) else p
+            v = tuple(v[0][j] + (v[1][j] - v[0][j]) * k for j in range(3))
         return warp(redact(src.get(st), st), v)
     return dict(K=brand.kit(P.W, P.H), cfg=P.hook, dur=dur, screen=screen)
 
@@ -589,15 +593,23 @@ def frames(beats, total, wanted=None, until=None):
     flash_to = -1
     end = min(total, until) if until else total
     stop = int(round(end * P.fps))
+    after_hook, xbase = False, None
     for b in beats:
         sec = b["section"]
         beat_t = 0.0
         for ci, c in enumerate(b["clips"]):
             n = int(round(clip_len(c) * P.fps))
             hold = "hold" in c
+            # The first product clip after a steady hook dissolves in over 0.8 s, so the dark logo
+            # never cuts hard to a bright screen. Every other clip keeps the short XFADE.
+            long_in = after_hook and not card(c)
+            xf = int(0.8 * P.fps) if long_in else P.xfade
+            if not card(c):
+                after_hook = False
             if "hook" in c:
                 ctx = hook_ctx(src, clip_len(c))
-                flash_to = fi + n + (0 if (P.hook or {}).get("calm") else 5)   # calm: crossfade, no flash
+                flash_to = fi + n + (0 if brand.is_calm(P.hook or {}) else 5)   # steady: crossfade, no flash
+                after_hook = brand.is_calm(P.hook or {})
             elif "outro" in c:
                 ctx = outro_ctx(src, clip_len(c))
             for k in range(n):
@@ -620,8 +632,13 @@ def frames(beats, total, wanted=None, until=None):
                             st, sp, rng = c["a"] + lt * c["speed"], c["speed"], (c["a"], c["b"])
                         v = view_at(c["view"], lt)
                         fr = warp(redact(src.get(st), st), v)
-                        if wanted is None and k < P.xfade and prev is not None and not hold and fi >= flash_to:
-                            al = (k + 1) / (P.xfade + 1)
+                        if long_in and k == 0:
+                            xbase = prev            # the logo's last frame, held under the dissolve
+                        if wanted is None and long_in and k < xf and xbase is not None:
+                            al = brand.ease_io((k + 1) / (xf + 1))
+                            fr = cv2.addWeighted(fr, al, xbase, 1 - al, 0)
+                        elif wanted is None and k < xf and prev is not None and not hold and fi >= flash_to:
+                            al = (k + 1) / (xf + 1)
                             fr = cv2.addWeighted(fr, al, prev, 1 - al, 0)
                         title = (sec, P.sections[sec], beat_t) if sec else None
                         fr = overlay(fr, c["ann"], v, st, rng, title, sp, t_now)

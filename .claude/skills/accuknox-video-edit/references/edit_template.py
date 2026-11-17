@@ -32,9 +32,11 @@ JEV = "narration"
 # Voice: Alice, British female, on eleven_v4, the skill default. Set VOICE = dict(...) only
 # to change it.
 
-# The first 5 s. 2 or 3 shots of the strongest proof in the recording, then the logo slam.
-# Each shot: t= a still second, or a= b= a range played across the shot. view= one view or a
-# (FROM, TO) pair the camera pushes through. The headline names what that frame shows.
+# The first 5 s: two calm shots of the strongest proof in the recording, then the logo.
+# The steady style is the default: a flat panel, a slow drift, dissolves, no whips or flashes.
+# Each shot: t= a still second, or a= b= a range played across the shot. view= one view, or a
+# (FROM, TO) pair. The camera starts 80% of the way to TO, so frame TO on the fact.
+# The headline names what that frame shows. style="punchy" only when someone asks for it.
 HOOK = dict(
     line="[about ten words that end by 4.5 s, no audio tag]",
     shots=[
