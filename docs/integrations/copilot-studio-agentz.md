@@ -24,54 +24,111 @@ A tool call is anything the agent does beyond its own reasoning: a web search, a
 
 ## Connect Copilot Studio in 10 Steps
 
-Start in AgentZ. Open **External agents**, click **Add external agent** and pick **Microsoft Copilot Studio**. The panel shows every command below with your values filled in, so copy the commands from the panel.
+Start in AgentZ. Go to **External agents** > **Add external agent** > **Microsoft Copilot Studio**. The panel lists every command below with your values filled in. Copy the commands from the panel.
 
-### Connect Azure
+![The AgentZ Add external agent panel lists the Sign in, Create an app and Add AgentZ commands](./images/copilot-studio-agentz/step-03-agentz-panel.png)
 
-1. Sign in to Azure and copy your tenant ID. Paste the ID into **Directory tenant ID**.
+### Step 1: Sign In to Azure
 
-    ```bash
-    az login --tenant YOUR_TENANT_ID --allow-no-subscriptions
-    az account show --query tenantId -o tsv
-    ```
+Run the sign-in commands. Paste the tenant ID they print into **Directory tenant ID**.
 
-2. Create one Entra app for your organization. Paste the ID the command returns into **Application client ID**.
+```bash
+az login --tenant YOUR_TENANT_ID --allow-no-subscriptions
+az account show --query tenantId -o tsv
+```
 
-    ```bash
-    CALLER_APP_ID=$(az ad app create --display-name "AgentZ Microsoft Copilot Studio" --sign-in-audience AzureADMyOrg --query appId -o tsv)
-    az ad sp create --id "$CALLER_APP_ID" --query appId -o tsv
-    ```
+![Azure CLI prints the tenant ID after sign-in](./images/copilot-studio-agentz/step-01-sign-in.png)
 
-3. Register the AgentZ app in your tenant. Copy this command from the **Add AgentZ** box in the panel, because it carries the AgentZ application ID. A message that the service principal already exists means the app is registered.
+### Step 2: Create the Entra App
 
-    ```bash
-    az ad sp create --id <AgentZ application ID from the panel>
-    ```
+Run the command to create one Entra app for your organization. Paste the ID it returns into **Application client ID**.
 
-### Connect AgentZ
+```bash
+CALLER_APP_ID=$(az ad app create --display-name "AgentZ Microsoft Copilot Studio" --sign-in-audience AzureADMyOrg --query appId -o tsv)
+az ad sp create --id "$CALLER_APP_ID" --query appId -o tsv
+```
 
-4. In the Power Platform admin center, open **Manage**, then **Environments**, then your environment. Copy the **Environment ID** into **Power Platform environment ID** in AgentZ.
-5. Click **Add connection**.
-6. Run the federated credential command that AgentZ shows next. The credential lets Copilot Studio sign in as your app with a token from Microsoft, so there is no client secret to store.
+![Azure CLI creates the Entra app and its service principal](./images/copilot-studio-agentz/step-02-create-app.png)
 
-    ```bash
-    az ad app federated-credential create --id <your application client ID> --parameters '{
-      "name": "<name from the panel>",
-      "issuer": "https://login.microsoftonline.com/<your tenant ID>/v2.0",
-      "subject": "<subject from the panel>",
-      "audiences": ["api://AzureADTokenExchange"]
-    }'
-    ```
+### Step 3: Register the AgentZ App
 
-### Connect Power Platform
+Copy the command from the **Add AgentZ** box in the panel. It carries the AgentZ application ID. Run it.
 
-7. In the Power Platform admin center, open **Security**, then **Threat detection**, then **Additional threat detection and protection for Copilot Studio agents**. Pick your environment and click **Set up**. Turn on **Allow Copilot Studio to share data with a threat detection partner**. Paste the **Azure Entra App ID** and the **Endpoint link** from AgentZ. Set the error behavior to **Block the query**, then click **Save**. AgentZ shows **Validated by Microsoft** when the link works.
+```bash
+az ad sp create --id <AgentZ application ID from the panel>
+```
 
-### Add a guardrail and test it
+A message that the service principal already exists is fine. The app is registered.
 
-8. In AgentZ, open the Copilot Studio connection, go to **Policies** and add a guardrail. For a first test, add a check that blocks phone numbers with a regular expression.
-9. In Copilot Studio, ask the agent to search the web for a phone number, such as `+91 9999999999`. The reply says the action was blocked by threat detection tools.
-10. In AgentZ, open **Guardrails**, then **Events**. The blocked call is at the top, with the check that fired.
+### Step 4: Copy the Environment ID
+
+1. Open the Power Platform admin center.
+2. Go to **Manage** > **Environments** and pick your environment.
+3. Copy the environment ID into **Power Platform environment ID** in AgentZ.
+
+![The environment details page in the Power Platform admin center](./images/copilot-studio-agentz/step-04-environment-id.png)
+
+### Step 5: Add the Connection
+
+Check that the three IDs are filled in. Click **Add connection**.
+
+![The AgentZ form with the tenant ID, client ID and environment ID filled in](./images/copilot-studio-agentz/step-05-add-connection.png)
+
+### Step 6: Add the Federated Credential
+
+Run the credential command that AgentZ shows next. Copilot Studio then signs in as your app with a token from Microsoft. You store no client secret.
+
+```bash
+az ad app federated-credential create --id <your application client ID> --parameters '{
+  "name": "<name from the panel>",
+  "issuer": "https://login.microsoftonline.com/<your tenant ID>/v2.0",
+  "subject": "<subject from the panel>",
+  "audiences": ["api://AzureADTokenExchange"]
+}'
+```
+
+![Azure CLI adds the federated credential with the values from AgentZ](./images/copilot-studio-agentz/step-06-federated-credential.png)
+
+### Step 7: Turn On Threat Detection
+
+1. In the Power Platform admin center, go to **Security** > **Threat detection**.
+2. Open **Additional threat detection and protection for Copilot Studio agents**.
+
+    ![The Threat detection page lists Additional threat detection and protection for Copilot Studio agents](./images/copilot-studio-agentz/step-07a-threat-detection.png)
+
+3. Pick your environment and click **Set up**.
+4. Turn on data sharing with a threat detection partner.
+5. Paste the Azure Entra App ID and the endpoint link from AgentZ.
+6. Set the error behavior to **Block the query** and click **Save**.
+
+    ![The setup panel with data sharing on and the App ID and endpoint fields](./images/copilot-studio-agentz/step-07b-set-up-panel.png)
+
+AgentZ shows **Validated by Microsoft** when the link works.
+
+![The AgentZ panel shows Validated by Microsoft](./images/copilot-studio-agentz/step-07c-validated.png)
+
+### Step 8: Add a Guardrail
+
+1. In AgentZ, open the Copilot Studio connection and go to **Policies**.
+2. Add a check. For a first test, block phone numbers with a regular expression.
+
+    ![A check named Block phone numbers that uses a regular expression and blocks on a match](./images/copilot-studio-agentz/step-08a-guardrail-check.png)
+
+3. Pick the policy for the agent and click **Save guardrails**.
+
+    ![The Policies tab with the policy picked for the Copilot Studio agent](./images/copilot-studio-agentz/step-08b-policy-on-agent.png)
+
+### Step 9: Test the Agent
+
+In Copilot Studio, ask the agent to search the web for a phone number, such as `+91 9999999999`. The reply says the action was blocked by threat detection tools.
+
+![Copilot Studio shows that the tool call was blocked by threat detection tools](./images/copilot-studio-agentz/step-09-blocked.png)
+
+### Step 10: See the Block in AgentZ
+
+In AgentZ, go to **Guardrails** > **Events**. The blocked call is at the top, with the check that fired.
+
+![AgentZ Guardrails Events lists the blocked call and the Block phone numbers check](./images/copilot-studio-agentz/step-10-events.png)
 
 ## Five Caveats to Know Before You Roll Out
 
