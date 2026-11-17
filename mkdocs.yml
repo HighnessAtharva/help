@@ -445,6 +445,7 @@ nav:
       - "Prompt Firewall":
         - "SDK Method": "how-to/llm-defense-app-onboard.md"
         - "Apigee Proxy": "integrations/apigee-integration.md"
+        - "Copilot Studio (AgentZ)": "integrations/copilot-studio-agentz.md"
         - "GenAI Browser Plugin":
           - "Chrome": "integrations/chrome-browser-integration.md"
           - "Edge": "integrations/edge-browser-integration.md"

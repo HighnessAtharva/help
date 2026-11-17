@@ -34,16 +34,17 @@ NAVY = (7, 9, 22)
 def _font_path(*names):
     for n in names:
         for d in (r"C:\Windows\Fonts", os.path.expanduser(r"~\AppData\Local\Microsoft\Windows\Fonts"),
-                  "/usr/share/fonts/truetype/dejavu", "/Library/Fonts"):
+                  "/usr/share/fonts/truetype/dejavu", "/Library/Fonts", os.path.expanduser("~/Library/Fonts"),
+                  "/System/Library/Fonts/Supplemental"):
             p = os.path.join(d, n)
             if os.path.exists(p):
                 return p
     return None
 
 
-F_DISPLAY = _font_path("Montserrat-Bold.ttf", "segoeuib.ttf", "DejaVuSans-Bold.ttf")
-F_MEDIUM = _font_path("Montserrat-Medium.ttf", "seguisb.ttf", "DejaVuSans.ttf")
-F_REGULAR = _font_path("Montserrat-Regular.ttf", "segoeui.ttf", "DejaVuSans.ttf")
+F_DISPLAY = _font_path("Montserrat-Bold.ttf", "segoeuib.ttf", "DejaVuSans-Bold.ttf", "Inter-Bold.ttf", "Arial Bold.ttf")
+F_MEDIUM = _font_path("Montserrat-Medium.ttf", "seguisb.ttf", "DejaVuSans.ttf", "Inter-Medium.ttf", "Arial.ttf")
+F_REGULAR = _font_path("Montserrat-Regular.ttf", "segoeui.ttf", "DejaVuSans.ttf", "Inter-Regular.ttf", "Arial.ttf")
 _fonts = {}
 
 
@@ -322,13 +323,44 @@ def ring(K, canvas, cx, cy, radius, width, alpha):
 
 
 # ---------------------------------------------------------------- hook
+def is_calm(cfg):
+    """The steady hook is the default. HOOK["style"] = "punchy" brings back whips, flashes and the
+    3D push. Atharva rejected the punchy hook on 2026-11-17 as flashy and confusing."""
+    if cfg.get("style") == "punchy":
+        return False
+    return cfg.get("calm", True)
+
+
+CALM_SHOTS = 2       # a steady hook shows at most two shots, each held long enough to read
+CALM_XFADE = 0.45    # seconds of crossfade between two shots
+CALM_LOGO_XFADE = 0.8   # the bright panel to the dark logo field needs a longer dissolve
+CALM_SCALE = 0.68    # the panel, centred and flat, sits above the headline
+CALM_CY = 0.36       # panel bottom at 70% of the height, clear of the headline
+
+
 def hook_layout(cfg, dur):
     """Split the hook into shot windows plus the logo slam. Returns ([(t0, t1)], logo_t0)."""
     n = max(1, len(cfg["shots"]))
-    slam = float(cfg.get("slam", 1.6))
+    if is_calm(cfg):
+        n = min(n, CALM_SHOTS)
+    slam = float(cfg.get("slam", 1.8 if is_calm(cfg) else 1.6))
     shot_total = max(1.8, dur - slam)
     step = shot_total / n
     return [(i * step, (i + 1) * step) for i in range(n)], shot_total
+
+
+def calm_shot(ctx, wins, i, at):
+    """One steady-hook shot at time `at`: a flat, centred panel with a slow drift, and its
+    headline. The headline stays up until the dissolve, so nothing pops out of view."""
+    K, cfg = ctx["K"], ctx["cfg"]
+    a, b = wins[i]
+    sl, sd = at - a, b - a
+    img = field(K, at)
+    float_screen(K, img, ctx["screen"](i, ease_io(min(1.0, max(0.0, sl / sd)))), 0.0, 0.0, CALM_SCALE,
+                 0.5, CALM_CY, sweep=None, glow=0.7)
+    sh = cfg["shots"][i]
+    kinetic(K, img, sh.get("kicker", ""), sh.get("text", ""), sl, sd + 10.0, calm=True)
+    return img
 
 
 def hook_frame(ctx, lt):
@@ -337,6 +369,14 @@ def hook_frame(ctx, lt):
     W, H = K.W, K.H
     wins, t_logo = hook_layout(cfg, dur)
     canvas = field(K, lt)
+    if lt < t_logo and is_calm(cfg):
+        i = next(k for k, (a, b) in enumerate(wins) if lt < b or k == len(wins) - 1)
+        a, b = wins[i]
+        canvas = calm_shot(ctx, wins, i, lt)
+        if i + 1 < len(wins) and b - lt < CALM_XFADE:          # dissolve into the next shot
+            w = ease_io(1 - (b - lt) / CALM_XFADE)
+            canvas = canvas * (1 - w) + calm_shot(ctx, wins, i + 1, b) * w
+        return np.clip(canvas, 0, 255).astype(np.uint8)
     if lt < t_logo:
         i = next(k for k, (a, b) in enumerate(wins) if lt < b or k == len(wins) - 1)
         a, b = wins[i]
@@ -345,7 +385,7 @@ def hook_frame(ctx, lt):
         p = ease_io(sl / sd)
         side = -1 if i % 2 == 0 else 1
         shot = cfg["shots"][i]
-        calm = cfg.get("calm", False)   # no whips, no flashes, a near-flat panel: for viewers prone to motion sickness
+        calm = False   # only the punchy style reaches this branch
         yaw = side * (2.0 if calm else (17 - 10 * p))     # calm: a fixed angle and size, no push or zoom
         pitch = 1.0 if calm else (9 - 4 * p)
         scale = 0.80 if calm else (0.70 + 0.12 * p)
@@ -371,7 +411,7 @@ def hook_frame(ctx, lt):
         q = lt - t_logo
         L = dur - t_logo
         cx, cy = W / 2, H * 0.44
-        calm = cfg.get("calm", False)
+        calm = is_calm(cfg)
         k = back_out(q / 0.45, 1.2)
         width = W * 0.40 * (1.0 if calm else (1.22 - 0.22 * k))
         if not calm:
@@ -393,9 +433,11 @@ def hook_frame(ctx, lt):
             items.append((cfg["footer"], F_REGULAR, H * 0.019, (cx, H * 0.93), (165, 172, 195, int(255 * tc)), "mm"))
         lay, sh = text_layer(K, items)
         comp_layer(canvas, lay, sh)
-        if calm:   # fade in from the field and hand over without a flash
-            if q < 0.2:
-                canvas = field(K, lt) * (1 - q / 0.2) + canvas * (q / 0.2)
+        if calm:   # dissolve from the last shot into the logo, then hand over without a flash
+            if q < CALM_LOGO_XFADE and wins:
+                w = ease_io(q / CALM_LOGO_XFADE)
+                prev = calm_shot(ctx, wins, len(wins) - 1, wins[-1][1])
+                canvas = prev * (1 - w) + canvas * w
         else:
             if q < 0.12:
                 canvas = whip(canvas, 1 - q / 0.12, 1)
@@ -597,7 +639,7 @@ def sfx_track(events, total, path, gain_db=-14.0):
 def hook_sfx(t0, cfg, dur):
     """Sound events for a hook that starts at t0 seconds."""
     wins, t_logo = hook_layout(cfg, dur)
-    if cfg.get("calm"):   # the pad and one soft shimmer on the logo, no hits or whooshes
+    if is_calm(cfg):   # the pad and one soft shimmer on the logo, no hits or whooshes
         return [(t0, "pad", dur + 0.8), (t0 + t_logo + 0.2, "shimmer", None)]
     ev = [(t0, "pad", dur + 0.8), (t0, "impact", None)]
     for a, _ in wins[1:]:

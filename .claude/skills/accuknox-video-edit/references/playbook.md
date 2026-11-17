@@ -4,39 +4,56 @@ The detail behind each step in `SKILL.md`. Every rule here came from a real edit
 customer onboarding review in October 2026. That project stays on the local machine and out
 of git, because it holds customer data.
 
-## The First 5 Seconds Decide Whether Anyone Watches
+## The First 5 Seconds Hook the Viewer With Two Calm, Readable Shots
 
 The old cuts opened on a title card and a 25-word intro line, so the product appeared at
-0:15. Viewers leave before that. Every video now opens on `HOOK`, and `qc.py hook` fails the
-render when it does not hold.
+0:15. Viewers leave before that, so every video opens on `HOOK`. On 2026-11-17 Atharva
+rejected the next version, three whip-cut 3D shots with flashes, as flashy and confusing.
+A hook earns attention with one clear fact on screen, read in a calm voice. Motion does not
+earn it.
 
-1. Open on product, never on black or a title. Shot 1 starts at 0.0 s on a flash.
-2. Use 2 or 3 shots of about 1.2 s each. Each floats the product screen in 3D, pushes the
-   camera toward one fact, and punches that fact in as a 2 to 3 word headline.
-3. Pick the most striking proof in the recording: a big number, a blocked attack, a success
-   toast, a synced value. The headline names what the frame shows. "637 roles" sat over a
-   ROLE node with a 637 badge. Never put a claim in a headline that the frame does not prove.
-4. Zoom past the 1.5x body limit when the fact needs it. A shot lasts about a second, so 2.6x
-   on a badge reads. Keep the fact clear of the lower-left third, where the headline sits.
-5. Keep the hook line to about 10 words, so it ends by 4.5 s. A 15-word CIEM line ran 6.6 s
-   and pushed the walkthrough to 7 s. Write it with no v4 audio tag.
-6. End on the logo slam with the product name and a 3 to 5 word tagline. That replaces the
-   old intro card, so set `INTRO = None`. Put any legal footer in `HOOK["footer"]`.
-7. The walkthrough starts by 6.5 s, on a white flash out of the logo.
+The steady hook is the default. Set `HOOK["style"] = "punchy"` only when someone asks for
+whips, flashes and the 3D push by name.
+
+1. Open on product, never on black or a title. Shot 1 is on screen at 0.0 s.
+2. Show two shots. The steady hook shows at most two. A third shot in `shots` is ignored.
+   Each shot holds for about 1.6 s.
+3. Keep the panel flat, centred and still. The only motion is a slow drift into the target
+   view. The camera covers the last 20% of a `(FROM, TO)` view pair across the whole shot.
+   Pick the `TO` view so the fact is readable on the first frame.
+4. Move between shots with a 0.45 s dissolve. Never whip, flash or hard-cut. A bright panel
+   into the dark logo field needs 0.8 s, and the logo into the first product screen needs
+   0.8 s too. At 0.45 s, that change jumped 47 between frames 0.1 s apart and read as a flash.
+5. Fade each headline in once, as one line, and hold it until the dissolve. Words never
+   bounce in one by one. The panel bottom sits at 70% of the frame height, so the headline
+   never covers the product.
+6. Pick the most striking proof in the recording: a blocked attack, a big number, a success
+   toast. The headline names what the frame shows, in 2 to 3 words. "Tool call blocked" sat
+   over a Copilot Studio reply that said the action was blocked. Never put a claim in a
+   headline that the frame does not prove.
+7. Keep the hook line to about 10 words, so it ends by 4.5 s. Write it with no v4 audio tag.
+8. End on the logo with the product name and a 3 to 5 word tagline. The logo fades in, with
+   no ring and no shine sweep. That replaces the old intro card, so set `INTRO = None`. Put
+   any legal footer in `HOOK["footer"]`.
+9. The walkthrough starts by 6.5 s.
+
+Check the hook as stills before any voice credit is spent:
+`qc HOOK:0.5 HOOK:1.4 HOOK:2.2 HOOK:3.4 HOOK:4.5`. Read every still. Each must show one
+readable fact or the logo, and nothing half-faded except during a dissolve.
 
 `OUTRO` adds the end card: the logo, a one-line title, a call-to-action pill and the closing
 voice line. `BRAND = dict(watermark="br")` puts the colour logo on a white pill in the corner
 of every product frame. The speed badge moves beside it.
 
-The sound design is synthesized in `brand.py`: a low pad, a sub hit on the first frame,
-whooshes on cuts, a riser and a hit on the logo. It sits about 9 dB under the voice. At
-5 dB under, it masked the hook line.
+The sound design is synthesized in `brand.py`. The steady hook plays a low pad and one soft
+shimmer on the logo. The punchy hook adds a sub hit, whooshes, a riser and a hit on the logo.
+The sound sits about 9 dB under the voice. At 5 dB under, it masked the hook line.
 
 | Test | Pass when |
 |---|---|
 | H1 opens bright | The first frame has mean luma above 40 |
 | H2 product by 0.5 s | A hook shot or a product frame is on screen by 0.5 s |
-| H3 motion | The median frame-to-frame change in the first 5 s is above 3, with 2 or more cuts |
+| H3 steady motion | Something moves (median change above 0.3) and no jump between frames 0.1 s apart is above 40, so there is no flash, whip or hard cut. The punchy style keeps the old test: median above 3 with 2 or more cuts |
 | H4 voice by 0.8 s | Speech-band energy starts by 0.8 s |
 | H5 body by 6.5 s | The walkthrough starts by 6.5 s |
 | H6 logo in the hook | The white logo matches above 0.5 in the hook's last second |

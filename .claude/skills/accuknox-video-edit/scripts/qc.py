@@ -21,6 +21,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import vedit  # noqa: E402
+import brand  # noqa: E402
 
 
 def whisper():
@@ -113,7 +114,9 @@ def hook(P):
 
     H1 opens bright         the first frame is not black (mean luma > 40)
     H2 product by 0.5 s     a hook shot or a product frame is on screen by 0.5 s
-    H3 motion               the first 5 s change on every step (median frame diff > 3) with 2+ cuts
+    H3 motion               steady hook (default): something moves (median diff > 0.3), and no jump between
+                            two frames 0.1 s apart is above 40, so no flash, whip or hard cut.
+                            punchy hook: median diff > 3 with 2+ cuts
     H4 voice by 0.8 s       narration starts within 0.8 s
     H5 body by 6.5 s        the hook hands over to the walkthrough by 6.5 s
     H6 logo in the hook     the AccuKnox logo is found in the hook's last second
@@ -144,7 +147,8 @@ def hook(P):
     rows.append(("H2 product by 0.5 s", bool(hk) or first_body <= 0.5,
                  "hook shot 1 starts at 0.0 s" if hk else f"first product frame at {first_body:.2f} s"))
     diffs, prev = [], None
-    for k in range(int(min(5.0, dur) * 10)):
+    span = 6.2 if brand.is_calm(P.hook or {}) else 5.0   # steady: include the hand-over into the walkthrough
+    for k in range(int(min(span, dur) * 10)):
         fr = frame(k / 10)
         g = cv2.cvtColor(cv2.resize(fr, (320, 180)), cv2.COLOR_BGR2GRAY).astype(np.float32)
         if prev is not None:
@@ -152,7 +156,12 @@ def hook(P):
         prev = g
     med = float(np.median(diffs)) if diffs else 0.0
     cuts = sum(d > 25 for d in diffs)
-    rows.append(("H3 motion", med > 3 and cuts >= 2, f"median diff {med:.1f}, {cuts} cuts in 5 s"))
+    peak = max(diffs) if diffs else 0.0
+    if brand.is_calm(P.hook or {}):
+        rows.append(("H3 steady motion", med > 0.3 and peak < 40,
+                     f"median diff {med:.1f}, largest jump {peak:.0f} (limit 40)"))
+    else:
+        rows.append(("H3 motion", med > 3 and cuts >= 2, f"median diff {med:.1f}, {cuts} cuts in 5 s"))
     pcm = subprocess.run([vedit.FF, "-v", "error", "-i", v, "-t", "3", "-ac", "1", "-ar", "16000", "-f", "s16le",
                           "-"], capture_output=True).stdout
     a = np.frombuffer(pcm, np.int16).astype(np.float32) / 32768
