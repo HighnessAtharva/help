@@ -1,0 +1,231 @@
+#logo_light_mode {
+    display: var(--md-header-logo-light-mode);
+}
+
+#logo_dark_mode {
+    display: var(--md-header-logo-dark-mode);
+}
+
+/* LIGHT MODE */
+[data-md-color-scheme="default"] {
+    --md-header-logo-dark-mode: none;
+    --md-header-logo-light-mode: block;
+
+
+    .md-typeset h1 {
+        color: #000000 !important;
+        font-weight: bolder;
+    }
+
+    .md-typeset h2 {
+        color: #000000 !important;
+        font-weight: bolder;
+    }
+
+
+    .ticket_tab {
+        background: white;
+        color: black;
+    }
+
+    .contact_tab {
+        background: white;
+        color: black;
+    }
+
+}
+
+
+/* DARK MODE */
+[data-md-color-scheme="slate"] {
+    --md-header-logo-dark-mode: block;
+    --md-header-logo-light-mode: none;
+
+    .md-typeset h1 {
+        color: #f1f5f9 !important;
+        font-weight: bolder;
+    }
+
+    .md-typeset h2 {
+        color: #e2e8f0 !important;
+        font-weight: bolder;
+    }
+
+    .ticket_tab {
+        background: #1e293b;
+        color: #e2e8f0;
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        transition: all 0.2s ease;
+    }
+
+    .ticket_tab:hover {
+        background: #334155;
+        border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .contact_tab {
+        background: #1e293b;
+        color: #e2e8f0;
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        transition: all 0.2s ease;
+    }
+
+    .contact_tab:hover {
+        background: #334155;
+        border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .home-card-heading {
+        color: #f1f5f9;
+    }
+
+    .use-cases-container {
+        background-color: #0b0f19;
+    }
+
+    .home-section-7 {
+        background-color: #0b0f19;
+    }
+}
+
+.contact_tab {
+    float: right;
+    margin-right: 0.3rem;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-weight: 700;
+}
+
+.ticket_tab {
+    float: right;
+    margin-right: 5em;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-weight: 700;
+}
+
+.home-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+body .gist .gist-meta {
+    display: none;
+}
+/* Left nav: give the sidebar its own height and scroll, so it never runs
+   under the footer. Material sizes the scroll area with JavaScript and
+   assumes a sticky header. This site's header scrolls away (banner.css),
+   so that sizing was unreliable and the nav overflowed the footer.
+   A sticky box cannot leave its container, which ends above the footer. */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary {
+    top: 0.6rem !important;
+    height: calc(100vh - 1.2rem);
+  }
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    height: 100% !important;
+    max-height: 100%;
+  }
+}
+
+/* Keep the hover permalink on page titles from wrapping onto its own line and
+   adding a blank line under a long H1. */
+.md-typeset h1 .headerlink {
+    position: absolute;
+}
+
+/* ---------------------------------------------------------------
+   Algolia DocSearch in the header (overrides/partials/search.html)
+   --------------------------------------------------------------- */
+
+/* The built-in Material search stays in the page as a fallback. Hide it
+   while Algolia works. algolia-search.js adds .ak-search-fallback to <html>
+   when Algolia fails, which swaps the two. */
+html:not(.ak-search-fallback) .md-header__button[for="__search"],
+html:not(.ak-search-fallback) .md-search {
+  display: none;
+}
+
+.ak-search-fallback .ak-docsearch,
+.ak-search-fallback #docsearch-sidepanel,
+.ak-search-fallback .DocSearch-SidepanelButton {
+  display: none;
+}
+
+.ak-docsearch {
+  flex-grow: 4;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0.8rem;
+  min-width: 0;
+}
+
+/* Wide search bar on desktop. */
+.ak-docsearch .DocSearch-Button {
+  width: 100%;
+  max-width: 34rem;
+  height: 2.2rem;
+  margin: 0;
+  justify-content: space-between;
+  border-radius: 0.4rem;
+}
+
+.ak-docsearch .DocSearch-Button-Placeholder {
+  font-size: 0.75rem;
+}
+
+/* Tablet and phone: keep the bar but let it shrink. */
+@media screen and (max-width: 76.234375em) {
+  .ak-docsearch .DocSearch-Button {
+    max-width: 24rem;
+  }
+}
+
+@media screen and (max-width: 44.984375em) {
+  .ak-docsearch {
+    flex-grow: 0;
+    margin: 0 0.2rem;
+  }
+}
+
+/* Material sets body text to 0.5rem (10px), and DocSearch sizes its text
+   relative to that, so the modal text came out tiny. Reset the base size. */
+.DocSearch-Container,
+.DocSearch-Sidepanel-Container,
+.DocSearch-SidepanelButton {
+  font-size: 16px;
+}
+
+/* 1rem is 20px on this site, so 0.8rem is 16px and 0.65rem is 13px. */
+.DocSearch-Hit-title {
+  font-size: 0.8rem;
+}
+
+.DocSearch-Hit-path {
+  font-size: 0.65rem;
+}
+
+/* DocSearch modal and sidepanel sit above the Material header. */
+.DocSearch-Container,
+.DocSearch-Sidepanel-Container {
+  z-index: 1000;
+}
+
+/* Ask AI button, bottom right. DocSearch sizes it in rem, and 1rem is 20px
+   on this site, so it came out 80px. Fix it at 44px. */
+html body .DocSearch-SidepanelButton.floating {
+  width: 44px;
+  height: 44px;
+  min-width: 0;
+  padding: 0;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 12px;
+}
+
+html body .DocSearch-SidepanelButton.floating svg {
+  width: 20px;
+  height: 20px;
+}

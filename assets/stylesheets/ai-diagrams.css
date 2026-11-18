@@ -1,0 +1,180 @@
+/* ===================================================================
+   AI Security diagrams
+   Theme-aware tokens for the inline SVG diagrams on the AI Security
+   pages. Every diagram is inline <svg> inside .ak-dia so it reads the
+   variables below and repaints with the light/dark toggle. An external
+   <img src="*.svg"> cannot do that, which is why these are inline.
+   =================================================================== */
+
+.ak-dia {
+  --ak-ink: #1b223b;
+  --ak-mute: #5a637d;
+  --ak-line: #c4ccde;
+  --ak-panel: #f4f6fc;
+  --ak-panel-2: #ececfb;
+  --ak-accent: #0046ff;
+  --ak-accent-soft: #e4ebff;
+  --ak-plane: #11206d;
+  --ak-plane-ink: #ffffff;
+  --ak-danger: #c80019;
+  --ak-danger-soft: #fdeaec;
+  /* Darker than the brand green #16a55c, which only reaches 2.88:1 on the
+     soft fill below and fails WCAG AA for text. This reads 4.88:1. */
+  --ak-ok: #0f7a43;
+  --ak-ok-soft: #e7f7ef;
+
+  margin: 1.4rem 0;
+  overflow-x: auto;
+}
+
+[data-md-color-scheme="slate"] .ak-dia {
+  --ak-ink: #e2e8f0;
+  --ak-mute: #94a3b8;
+  --ak-line: #2f3a55;
+  --ak-panel: #151b2b;
+  --ak-panel-2: #1b2237;
+  --ak-accent: #6c9bff;
+  --ak-accent-soft: #17233f;
+  --ak-plane: #1d2a55;
+  --ak-plane-ink: #eef2ff;
+  --ak-danger: #f2647a;
+  --ak-danger-soft: #2a1720;
+  --ak-ok: #45d493;
+  --ak-ok-soft: #12271e;
+}
+
+.ak-dia svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Shape roles. Fill and stroke come from the tokens above so a single
+   markup tree serves both colour schemes. */
+.ak-dia .p { fill: var(--ak-panel); stroke: var(--ak-line); }
+.ak-dia .p2 { fill: var(--ak-panel-2); stroke: var(--ak-line); }
+.ak-dia .plane { fill: var(--ak-plane); stroke: var(--ak-plane); }
+.ak-dia .acc { fill: var(--ak-accent-soft); stroke: var(--ak-accent); }
+.ak-dia .bad { fill: var(--ak-danger-soft); stroke: var(--ak-danger); }
+.ak-dia .good { fill: var(--ak-ok-soft); stroke: var(--ak-ok); }
+.ak-dia .hollow { fill: none; stroke: var(--ak-line); }
+
+/* Text roles. */
+.ak-dia text { fill: var(--ak-ink); }
+.ak-dia .t-h { font-size: 13px; font-weight: 700; letter-spacing: .01em; }
+.ak-dia .t-b { font-size: 12px; font-weight: 400; }
+.ak-dia .t-s { font-size: 11px; fill: var(--ak-mute); }
+.ak-dia .t-plane { fill: var(--ak-plane-ink); font-weight: 700; font-size: 13px; }
+.ak-dia .t-acc { fill: var(--ak-accent); font-weight: 600; }
+.ak-dia .t-bad { fill: var(--ak-danger); font-weight: 600; }
+.ak-dia .t-ok { fill: var(--ak-ok); font-weight: 600; }
+.ak-dia .t-mono { font-family: "Fira Code", ui-monospace, monospace; font-size: 11px; }
+
+/* Connectors. */
+.ak-dia .ln { stroke: var(--ak-line); stroke-width: 1.5; fill: none; }
+.ak-dia .ln-acc { stroke: var(--ak-accent); stroke-width: 1.5; fill: none; }
+.ak-dia .ln-bad { stroke: var(--ak-danger); stroke-width: 1.5; fill: none; }
+.ak-dia .ln-dash { stroke: var(--ak-line); stroke-width: 1.5; fill: none; stroke-dasharray: 4 4; }
+.ak-dia .head { fill: var(--ak-line); }
+.ak-dia .head-acc { fill: var(--ak-accent); }
+.ak-dia .head-bad { fill: var(--ak-danger); }
+
+.ak-dia rect, .ak-dia circle, .ak-dia path.box { stroke-width: 1; }
+
+/* Pills that sit inside the filled control-plane band. */
+.ak-dia .plane-pill { fill: none; stroke: var(--ak-plane-ink); stroke-opacity: .45; }
+.ak-dia .t-pill { fill: var(--ak-plane-ink); font-size: 11px; font-weight: 600; }
+
+/* Step badges in the CI/CD flow. */
+.ak-dia .step { fill: var(--ak-accent); stroke: none; }
+.ak-dia .t-step { fill: #ffffff; font-size: 11px; font-weight: 700; }
+
+[data-md-color-scheme="slate"] .ak-dia .t-step { fill: #0b0f19; }
+
+/* Caption under a diagram. */
+.md-typeset .ak-dia-cap {
+  margin: .4rem 0 0;
+  font-size: .72rem;
+  color: var(--md-default-fg-color--light);
+  text-align: center;
+}
+
+/* Narrow screens: let a wide diagram scroll inside its own box rather
+   than squashing the labels below legibility. */
+@media screen and (max-width: 55em) {
+  .ak-dia svg { min-width: 620px; }
+}
+
+/* Large-type roles for the AI Gateway pages: bigger labels, line icons. */
+.ak-dia .t-xl { font-size: 22px; font-weight: 700; }
+.ak-dia .t-lg { font-size: 18px; font-weight: 700; }
+.ak-dia .t-md { font-size: 15px; font-weight: 400; }
+.ak-dia .t-sm { font-size: 13px; fill: var(--ak-mute); }
+.ak-dia .t-plane.t-xl { font-size: 24px; }
+.ak-dia .t-pill.t-md { font-size: 15px; }
+.ak-dia .ico {
+  fill: none;
+  stroke: var(--ak-plane-ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Next-step link cards at the foot of the AI Gateway pages. */
+.md-typeset .ak-next {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: .8rem;
+  margin: 1rem 0 1.6rem;
+}
+.md-typeset .ak-next a {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .85rem 1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 12px;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  text-decoration: none;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.md-typeset .ak-next a:hover {
+  border-color: #0046ff;
+  box-shadow: 0 4px 14px rgba(0, 70, 255, .12);
+  transform: translateY(-1px);
+}
+.md-typeset .ak-next-ico {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #11206d;
+}
+[data-md-color-scheme="slate"] .md-typeset .ak-next-ico { background: #1d2a55; }
+.md-typeset .ak-next-ico svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.md-typeset .ak-next-txt { display: flex; flex-direction: column; line-height: 1.3; }
+.md-typeset .ak-next-txt b { font-size: .8rem; font-weight: 700; }
+.md-typeset .ak-next-txt small { font-size: .68rem; color: var(--md-default-fg-color--light); }
+.md-typeset .ak-next-go { margin-left: auto; color: #0046ff; font-size: 1.1rem; }
+[data-md-color-scheme="slate"] .md-typeset .ak-next-go { color: #6c9bff; }
+
+/* Helper classes so the diagram markup carries no inline multi-part styles. */
+.ak-dia .ln-acc.w { stroke-width: 2.5; }
+.ak-dia .logo-tile { fill: #ffffff; stroke: var(--ak-line); }
+.ak-dia .caps { letter-spacing: .1em; }
+.ak-dia .caps-s { letter-spacing: .08em; }
+.ak-dia .fw6 { font-weight: 600; }
+.ak-dia .fw7 { font-weight: 700; }
